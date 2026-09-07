@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id               String         @id @default(cuid())
+  studentId        String         @unique
+  name             String
+  email            String         @unique
+  passwordHash     String
+  branch           String         // "DSAI", "CSE", "ECE"
+  year             String         // "1st Year", "2nd Year", "3rd Year", "4th Year", "M.Tech", "Ph.D."
+  avatarUrl        String         @default("")
+  rating           Float          @default(5.0)
+  reliabilityScore Float          @default(100.0)
+  role             String         @default("STUDENT") // "STUDENT" | "ADMIN"
+  isSuspended      Boolean        @default(false)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  items                Item[]
+  lentTransactions     Transaction[]  @relation("OwnerTransactions")
+  borrowedTransactions Transaction[]  @relation("BorrowerTransactions")
+  ratingsGiven         Rating[]       @relation("ReviewerRatings")
+  ratingsReceived      Rating[]       @relation("RevieweeRatings")
+  notifications        Notification[]
+  sentMessages         Message[]      @relation("SentMessages")
+  receivedMessages     Message[]      @relation("ReceivedMessages")
+  raisedDisputes       Dispute[]      @relation("RaisedDisputes")
+}
+
+model Item {
+  id              String        @id @default(cuid())
+  ownerId         String
+  owner           User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name            String
+  category        String        // "Electronics", "Books", "Academic Equipment", "Project Equipment", "Sports", "Accessories", "Daily-use Items", "Other"
+  description     String
+  imageUrl        String
+  condition       String        // "Brand New", "Like New", "Good", "Fair"
+  mode            String        @default("BORROW") // "BORROW", "RENT", "BOTH"
+  rentalPrice     Float?        // ₹ per day
+  declaredValue   Float         @default(1000.0) // base value for simulated penalty
+  securityDeposit Float?
+  maxDuration     Int           @default(7) // in days
+  availability    String        @default("AVAILABLE") // "AVAILABLE", "BORROWED", "RESERVED", "MAINTENANCE"
+  campusLocation  String        @default("Hostel Ramanujan")
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  transactions    Transaction[]
+}
+
+model Transaction {
+  id               String        @id @default(cuid())
+  itemId           String
+  item             Item          @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  ownerId          String
+  owner            User          @relation("OwnerTransactions", fields: [ownerId], references: [id], onDelete: Cascade)
+  borrowerId       String
+  borrower         User          @relation("BorrowerTransactions", fields: [borrowerId], references: [id], onDelete: Cascade)
+  requestDate      DateTime      @default(now())
+  approvalDate     DateTime?
+  startDate        DateTime?
+  deadline         DateTime
+  actualReturnDate DateTime?
+  mode             String        @default("BORROW") // "BORROW" | "RENT"
+  status           String        @default("REQUESTED") // "REQUESTED", "ACTIVE", "RETURN_PENDING", "RETURNED", "OVERDUE", "CANCELLED", "REJECTED", "DISPUTED"
+  overdueDays      Int           @default(0)
+  penalty          Float         @default(0.0)
+  penaltyRate      Float         @default(0.05) // 5% per day
+  maxPenaltyCap    Float         @default(0.50) // 50% max cap
+  ratingChange     Float         @default(0.0)
+  borrowerNotes    String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  ratings          Rating[]
+  messages         Message[]
+  disputes         Dispute[]
+}
+
+model Rating {
+  id            String       @id @default(cuid())
+  transactionId String
+  transaction   Transaction  @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  reviewerId    String
+  reviewer      User         @relation("ReviewerRatings", fields: [reviewerId], references: [id], onDelete: Cascade)
+  revieweeId    String
+  reviewee      User         @relation("RevieweeRatings", fields: [revieweeId], references: [id], onDelete: Cascade)
+  rating        Int          // 1 to 5
+  comment       String
+  criteria      String?
+  createdAt     DateTime     @default(now())
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String    // "REQUEST", "ACCEPTED", "REJECTED", "DUE_SOON", "OVERDUE", "RETURN_PENDING", "RETURNED", "PENALTY", "DISPUTE", "RATING", "SYSTEM"
+  link      String?
+  read      Boolean   @default(false)
+  createdAt DateTime  @default(now())
+}
+
+model Message {
+  id            String       @id @default(cuid())
+  transactionId String
+  transaction   Transaction  @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  senderId      String
+  sender        User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiverId    String
+  receiver      User         @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  content       String
+  createdAt     DateTime     @default(now())
+}
+
+model Dispute {
+  id              String       @id @default(cuid())
+  transactionId   String
+  transaction     Transaction  @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  raisedById      String
+  raisedBy        User         @relation("RaisedDisputes", fields: [raisedById], references: [id], onDelete: Cascade)
+  reason          String
+  status          String       @default("OPEN") // "OPEN", "UNDER_REVIEW", "RESOLVED"
+  resolutionNotes String?
+  createdAt       DateTime     @default(now())
+  resolvedAt      DateTime?
+}
+
+model PlatformConfig {
+  id                      String   @id @default("global")
+  penaltyRateDaily        Float    @default(0.05)
+  penaltyMaxPercent       Float    @default(0.50)
+  simulatedTimeOffsetHours Int     @default(0)
+  updatedAt               DateTime @updatedAt
+}
