@@ -7,7 +7,6 @@ import {
   Laptop,
   Tent,
   Cpu,
-  Bike,
   ShieldCheck,
   Sparkles,
   ArrowRight,
@@ -16,6 +15,10 @@ import {
   Users,
   Star,
   MapPin,
+  Building2,
+  Calendar,
+  AlertCircle,
+  ShieldAlert,
 } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -74,18 +77,18 @@ export default async function HomePage() {
   ];
 
   return (
-    <div className="space-y-12 sm:space-y-16 pb-8">
-      {/* 1. Hero Section (matches the desktop monitor mockup) */}
-      <section className="relative rounded-4xl bg-white border border-slate-200/80 p-6 sm:p-12 lg:p-16 overflow-hidden shadow-xs">
-        {/* Subtle mint/teal gradient accent */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-mint-100/60 to-transparent pointer-events-none -z-0" />
+    <div className="space-y-10 sm:space-y-14 pb-12">
+      {/* 1. IIIT-NR Campus Hero Banner with Real Campus Photo */}
+      <section className="relative rounded-4xl bg-white border border-slate-200/80 p-6 sm:p-10 lg:p-14 overflow-hidden shadow-xs">
+        {/* Mint gradient highlight */}
+        <div className="absolute top-0 right-0 w-3/5 h-full bg-gradient-to-l from-mint-100/70 via-mint-50/40 to-transparent pointer-events-none -z-0" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-          {/* Left Hero Content */}
+          {/* Left: Headline & Action Points */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 bg-mint-100 border border-teal-200 px-3.5 py-1.5 rounded-full text-xs font-bold text-teal-800">
+            <div className="inline-flex items-center gap-2 bg-mint-100 border border-teal-200/80 px-4 py-1.5 rounded-full text-xs font-bold text-teal-800 shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-teal-600" />
-              <span>International Institute of Information Technology, Naya Raipur</span>
+              <span>Dr. SPM IIIT-Naya Raipur Official Campus Network</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-[1.15]">
@@ -97,7 +100,8 @@ export default async function HomePage() {
               Borrow calculators, chargers, lab equipment, cycles, and books across Ramanujan &amp; Bose hostels.
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center gap-3">
+            {/* Quick Action Buttons */}
+            <div className="pt-1 flex flex-wrap items-center gap-3">
               <a
                 href="/explore"
                 className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 active:scale-95 text-white text-sm font-bold px-7 py-3.5 rounded-full shadow-md shadow-teal-700/20 transition"
@@ -108,37 +112,101 @@ export default async function HomePage() {
 
               <a
                 href="/items/new"
-                className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold px-6 py-3.5 rounded-full transition"
+                className="inline-flex items-center gap-2 bg-mint-100 hover:bg-mint-200 border border-teal-200 text-teal-900 text-sm font-bold px-6 py-3.5 rounded-full transition"
               >
                 <span>+ List an Item</span>
               </a>
             </div>
+
+            {/* Important Highlights for IIIT-NR Students */}
+            <div className="pt-3 grid grid-cols-2 gap-3 text-xs">
+              <div className="flex items-center gap-2 text-slate-700 font-semibold bg-slate-50 p-2.5 rounded-2xl border border-slate-100">
+                <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0" />
+                <span>Verified @iiitnr.edu.in Only</span>
+              </div>
+              <div className="flex items-center gap-2 text-slate-700 font-semibold bg-slate-50 p-2.5 rounded-2xl border border-slate-100">
+                <MapPin className="w-4 h-4 text-teal-600 shrink-0" />
+                <span>Hostels &amp; Library Handover</span>
+              </div>
+            </div>
           </div>
 
-          {/* Right Hero Image Collage (students sharing on campus) */}
+          {/* Right: Actual IIIT-Naya Raipur Campus Photo Banner Card */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] bg-slate-100">
+            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] bg-slate-100 group">
               <img
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80"
-                alt="Students collaborating on campus"
-                className="w-full h-full object-cover"
+                src="/images/iiitnr-campus-banner.jpg"
+                alt="Dr. Shyama Prasad Mukherjee IIIT Naya Raipur campus building and students"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-xs p-3.5 rounded-2xl border border-slate-100 flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold text-slate-900">Campus Sharing Network</p>
-                  <p className="text-[10px] text-teal-700 font-semibold">100% Verified IIIT-NR Students</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/20 to-transparent" />
+
+              {/* Banner Badge overlay with institutional name */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-xs p-3.5 rounded-2xl border border-slate-100 shadow-lg space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold text-teal-800 uppercase tracking-wider bg-mint-100 px-2 py-0.5 rounded-full">
+                    Campus Landmark
+                  </span>
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                    100% Safe Returns
+                  </span>
                 </div>
-                <span className="text-xs font-black text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
-                  Zero Lost Items
-                </span>
+                <p className="text-xs font-extrabold text-slate-900">
+                  Dr. SPM IIIT-Naya Raipur Main Campus
+                </p>
+                <p className="text-[11px] text-slate-500">
+                  Connected across Hostel Ramanujan (Boys) &amp; Hostel Bose (Girls)
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Integrated Floating Search Bar (matches mockup search bar directly below hero) */}
-        <div className="mt-10 pt-6 border-t border-slate-100">
+        {/* 2. Key Institutional Highlights Strip on Hero Banner */}
+        <div className="mt-8 pt-6 border-t border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
+            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
+              <Building2 className="w-4 h-4 text-teal-600" />
+              <span>Campus Locations</span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-snug">
+              Meetups outside Ramanujan, Bose, Central Library, SAC, and IoT Labs.
+            </p>
+          </div>
+
+          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
+            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
+              <CheckCircle2 className="w-4 h-4 text-teal-600" />
+              <span>Two-Step Return</span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-snug">
+              Borrower marks returned $\rightarrow$ Owner physically inspects &amp; confirms.
+            </p>
+          </div>
+
+          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
+            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
+              <AlertCircle className="w-4 h-4 text-teal-600" />
+              <span>Overdue Protection</span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-snug">
+              Automated 5%/day simulated penalty protects owners from unreturned gear.
+            </p>
+          </div>
+
+          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
+            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
+              <Star className="w-4 h-4 text-amber-500 fill-amber-400" />
+              <span>Trust &amp; Reliability</span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-snug">
+              Dual ratings: peer review score + behavior-based reliability index.
+            </p>
+          </div>
+        </div>
+
+        {/* 3. Integrated Floating Search Bar in Banner */}
+        <div className="mt-6 pt-4">
           <form
             action="/explore"
             method="GET"
@@ -149,7 +217,7 @@ export default async function HomePage() {
               <input
                 type="text"
                 name="q"
-                placeholder="Search for textbooks, calculators, chargers, camping gear..."
+                placeholder="Search for calculators, chargers, Arduino kits, textbooks, cycles..."
                 className="w-full bg-transparent text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none py-1.5"
               />
             </div>
@@ -160,6 +228,41 @@ export default async function HomePage() {
               Search
             </button>
           </form>
+
+          {/* Quick Search Chips */}
+          <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-500 flex-wrap">
+            <span className="font-semibold text-slate-400">Popular on campus:</span>
+            <a
+              href="/explore?q=Calculator"
+              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
+            >
+              Casio Calculator
+            </a>
+            <a
+              href="/explore?q=Arduino"
+              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
+            >
+              Arduino Starter Kit
+            </a>
+            <a
+              href="/explore?q=Charger"
+              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
+            >
+              Dell 65W Charger
+            </a>
+            <a
+              href="/explore?q=Physics"
+              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
+            >
+              Physics Textbook
+            </a>
+            <a
+              href="/explore?q=Bicycle"
+              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
+            >
+              Geared Bicycle
+            </a>
+          </div>
         </div>
       </section>
 
@@ -277,7 +380,7 @@ export default async function HomePage() {
                 <Users className="w-4 h-4 text-teal-600" />
                 <span>Top Campus Borrowers &amp; Lenders</span>
               </h4>
-              <span className="text-[11px] font-bold text-teal-700 bg-mint-100 px-2 py-0.5 rounded-full">
+              <span className="text-[11px] font-bold text-teal-700 bg-mint-100 px-2.5 py-0.5 rounded-full">
                 Active Cohort
               </span>
             </div>
