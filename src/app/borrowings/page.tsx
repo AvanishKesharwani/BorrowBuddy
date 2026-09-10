@@ -53,7 +53,7 @@ export default function MyBorrowingsPage() {
       const res = await fetch(`/api/transactions/${txId}/return`, { method: 'POST' });
       const data = await res.json();
       if (data.success) {
-        setFeedback('Item marked as returned! Owner has been notified to physically confirm.');
+        setFeedback('Item marked as returned! Owner has been notified to physically confirm receipt.');
         setTimeout(() => setFeedback(null), 4000);
         fetchBorrowings();
       } else {
@@ -77,37 +77,40 @@ export default function MyBorrowingsPage() {
   });
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 max-w-5xl mx-auto pb-10">
       {/* Page Title */}
-      <div className="flex items-center justify-between flex-wrap gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-blue-50 text-blue-700 rounded-2xl">
+      <div className="flex items-center justify-between flex-wrap gap-4 bg-white p-6 sm:p-8 rounded-4xl border border-slate-200/80 shadow-xs">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 bg-mint-100 text-teal-700 rounded-2xl">
             <Package className="w-6 h-6" />
           </div>
           <div>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700">
+              BorrowBuddy Activity
+            </span>
             <h1 className="text-xl sm:text-2xl font-black text-slate-900">My Borrowed Items</h1>
             <p className="text-xs text-slate-500">
-              Track items you have borrowed, return deadlines, penalties, and return confirmations.
+              Track items you have borrowed, return deadlines, simulated penalties, and returns.
             </p>
           </div>
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-2xl text-xs font-semibold">
+        <div className="flex items-center gap-1 bg-slate-100 p-1.5 rounded-full text-xs font-bold">
           <button
             onClick={() => setActiveTab('active')}
-            className={`px-3.5 py-1.5 rounded-xl transition ${
-              activeTab === 'active' ? 'bg-white text-blue-700 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+            className={`px-4 py-2 rounded-full transition ${
+              activeTab === 'active' ? 'bg-white text-teal-800 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Active & Overdue (
+            Active &amp; Overdue (
             {transactions.filter((t) => ['ACTIVE', 'OVERDUE', 'RETURN_PENDING', 'DISPUTED'].includes(t.status)).length}
             )
           </button>
           <button
             onClick={() => setActiveTab('pending')}
-            className={`px-3.5 py-1.5 rounded-xl transition ${
-              activeTab === 'pending' ? 'bg-white text-blue-700 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+            className={`px-4 py-2 rounded-full transition ${
+              activeTab === 'pending' ? 'bg-white text-teal-800 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Requests Sent (
@@ -116,11 +119,11 @@ export default function MyBorrowingsPage() {
           </button>
           <button
             onClick={() => setActiveTab('returned')}
-            className={`px-3.5 py-1.5 rounded-xl transition ${
-              activeTab === 'returned' ? 'bg-white text-blue-700 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+            className={`px-4 py-2 rounded-full transition ${
+              activeTab === 'returned' ? 'bg-white text-teal-800 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Returned History (
+            History (
             {transactions.filter((t) => t.status === 'RETURNED').length}
             )
           </button>
@@ -128,8 +131,8 @@ export default function MyBorrowingsPage() {
       </div>
 
       {feedback && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold rounded-2xl flex items-center gap-2 animate-in fade-in">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-4 bg-mint-100 border border-teal-200 text-teal-900 text-xs font-bold rounded-2xl flex items-center gap-2 animate-in fade-in">
+          <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
           <span>{feedback}</span>
         </div>
       )}
@@ -137,11 +140,11 @@ export default function MyBorrowingsPage() {
       {/* Transactions List */}
       {loading ? (
         <div className="py-20 text-center text-slate-400">
-          <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <div className="w-8 h-8 border-2 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
           <p className="text-xs">Loading borrowings...</p>
         </div>
       ) : filteredTransactions.length === 0 ? (
-        <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs space-y-3">
+        <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-3">
           <Package className="w-10 h-10 text-slate-300 mx-auto" />
           <h3 className="text-base font-bold text-slate-800">No items found in this section</h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
@@ -151,7 +154,7 @@ export default function MyBorrowingsPage() {
           </p>
           <a
             href="/explore"
-            className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition"
+            className="inline-flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold px-5 py-2.5 rounded-full transition shadow-xs"
           >
             <span>Explore Campus Items</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -172,10 +175,10 @@ export default function MyBorrowingsPage() {
                 key={tx.id}
                 className={`bg-white rounded-3xl border p-5 sm:p-6 transition shadow-xs space-y-4 ${
                   isOverdue
-                    ? 'border-rose-300 bg-rose-50/20'
+                    ? 'border-rose-300 bg-rose-50/25'
                     : isDisputed
                     ? 'border-orange-300'
-                    : 'border-slate-200'
+                    : 'border-slate-200/80'
                 }`}
               >
                 {/* Header row */}
@@ -204,7 +207,7 @@ export default function MyBorrowingsPage() {
 
                       <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
                         <span>Owned by:</span>
-                        <strong className="text-slate-700">{tx.owner.name}</strong>
+                        <strong className="text-slate-800">{tx.owner.name}</strong>
                         <span>({tx.owner.studentId || 'IIIT-NR'}, {tx.owner.branch})</span>
                       </p>
                     </div>
@@ -226,13 +229,13 @@ export default function MyBorrowingsPage() {
 
                 {/* Overdue Penalty Banner */}
                 {isOverdue && (
-                  <div className="p-4 bg-rose-100 border border-rose-300 rounded-2xl text-xs text-rose-900 space-y-1">
+                  <div className="p-4 bg-rose-100/90 border border-rose-300 rounded-2xl text-xs text-rose-900 space-y-1">
                     <div className="flex items-center justify-between">
                       <span className="font-bold flex items-center gap-1.5 text-rose-800 text-sm">
                         <AlertTriangle className="w-4 h-4 text-rose-600" />
                         OVERDUE NOTICE — Return Item Immediately!
                       </span>
-                      <span className="font-black text-rose-700 text-sm bg-rose-200/80 px-2.5 py-0.5 rounded-lg">
+                      <span className="font-black text-rose-700 text-sm bg-rose-200 px-2.5 py-0.5 rounded-lg">
                         Penalty: {formatINR(tx.penalty)}
                       </span>
                     </div>
@@ -271,9 +274,9 @@ export default function MyBorrowingsPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setChatTx(tx)}
-                      className="inline-flex items-center gap-1 text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-xl font-semibold transition"
+                      className="inline-flex items-center gap-1 text-teal-800 bg-mint-100 hover:bg-mint-200 px-3.5 py-2 rounded-full font-bold transition"
                     >
-                      <MessageCircle className="w-3.5 h-3.5" />
+                      <MessageCircle className="w-3.5 h-3.5 text-teal-600" />
                       <span>Chat with {tx.owner.name.split(' ')[0]}</span>
                     </button>
 
@@ -294,7 +297,7 @@ export default function MyBorrowingsPage() {
                       <button
                         onClick={() => handleMarkReturned(tx.id)}
                         disabled={actionLoading === tx.id}
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl shadow-xs transition flex items-center gap-1.5"
+                        className="bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5"
                       >
                         <CheckCircle2 className="w-4 h-4" />
                         <span>{actionLoading === tx.id ? 'Submitting...' : 'Mark as Returned'}</span>
@@ -304,16 +307,16 @@ export default function MyBorrowingsPage() {
                     {isReturned && !hasRated && (
                       <button
                         onClick={() => setRateTx(tx)}
-                        className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-xl shadow-xs transition flex items-center gap-1.5"
+                        className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-full shadow-xs transition flex items-center gap-1.5"
                       >
                         <Star className="w-4 h-4 fill-white" />
-                        <span>Rate Owner & Handover</span>
+                        <span>Rate Owner &amp; Handover</span>
                       </button>
                     )}
 
                     {isReturned && hasRated && (
-                      <span className="text-emerald-700 font-semibold bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span className="text-teal-800 font-bold bg-mint-100 border border-teal-200 px-3.5 py-1.5 rounded-full flex items-center gap-1">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
                         <span>Rating Submitted</span>
                       </span>
                     )}
@@ -325,7 +328,7 @@ export default function MyBorrowingsPage() {
         </div>
       )}
 
-      {/* Transaction Handover Chat Modal */}
+      {/* Handover Chat Modal */}
       {chatTx && (
         <TransactionChatModal
           transactionId={chatTx.id}

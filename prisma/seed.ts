@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding IIIT-Naya Raipur CampusBorrow database...');
+  console.log('Seeding IIIT-Naya Raipur BorrowBuddy database...');
 
   // Clear existing
   await prisma.dispute.deleteMany();
@@ -306,19 +306,19 @@ async function main() {
     data: [
       {
         userId: arjun.id,
-        title: 'Welcome to CampusBorrow IIIT-NR!',
+        title: 'Welcome to BorrowBuddy IIIT-NR!',
         message: 'Your institutional profile has been verified for IIIT-NR. Start exploring or listing items.',
         type: 'SYSTEM',
       },
       {
         userId: priya.id,
-        title: 'Welcome to CampusBorrow IIIT-NR!',
-        message: 'Your Casio Calculator is live and available for borrowing by peers.',
+        title: 'Welcome to BorrowBuddy IIIT-NR!',
+        message: 'Your Casio Calculator is live and available for borrowing by peers on BorrowBuddy.',
         type: 'SYSTEM',
       },
       {
         userId: rohan.id,
-        title: 'Welcome to CampusBorrow IIIT-NR!',
+        title: 'Welcome to BorrowBuddy IIIT-NR!',
         message: 'You have 3 active campus listings in Academic & Project equipment.',
         type: 'SYSTEM',
       },

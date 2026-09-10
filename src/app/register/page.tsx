@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { UserPlus, ArrowRight, ShieldCheck, Mail, Lock, User, Hash } from 'lucide-react';
+import { UserPlus, ArrowRight, ShieldCheck, Mail, Lock, User, Hash, BookOpen } from 'lucide-react';
 import { BRANCHES, YEARS } from '@/lib/utils';
 
 export default function RegisterPage() {
@@ -50,15 +50,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto my-6 space-y-6">
-      <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+    <div className="max-w-md mx-auto my-6 space-y-6 pb-12">
+      <div className="bg-white p-8 rounded-4xl border border-slate-200/80 shadow-xs space-y-5">
         <div className="text-center space-y-1.5">
-          <div className="w-12 h-12 rounded-2xl bg-blue-700 text-white flex items-center justify-center font-black text-xl mx-auto shadow-md shadow-blue-600/20">
-            CB
+          <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center font-black text-xl mx-auto shadow-md shadow-teal-700/20">
+            <BookOpen className="w-6 h-6" />
           </div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Student Registration</h1>
           <p className="text-xs text-slate-500">
-            Join the IIIT-Naya Raipur peer sharing & borrowing network
+            Join BorrowBuddy — exclusive to IIIT-Naya Raipur students
           </p>
         </div>
 
@@ -70,61 +70,61 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+            <label className="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
             <div className="relative">
-              <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Arjun Mehta"
-                className="w-full pl-9 pr-3 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 focus:bg-white transition"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-slate-700 mb-1">
               Student ID (Roll Number)
             </label>
             <div className="relative">
-              <Hash className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Hash className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 required
                 value={studentId}
                 onChange={(e) => setStudentId(e.target.value)}
                 placeholder="IIITNR-2026-001"
-                className="w-full pl-9 pr-3 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono uppercase"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 font-mono uppercase bg-slate-50 focus:bg-white transition"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-slate-700 mb-1">
               Institutional Email (@iiitnr.edu.in)
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="arjun@iiitnr.edu.in"
-                className="w-full pl-9 pr-3 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 focus:bg-white transition"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Branch</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1">Branch</label>
               <select
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)}
-                className="w-full py-2.5 px-3 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                className="w-full py-3 px-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 font-semibold text-slate-800"
               >
                 {BRANCHES.map((b) => (
                   <option key={b} value={b}>
@@ -135,11 +135,11 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Year</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1">Year</label>
               <select
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                className="w-full py-2.5 px-3 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                className="w-full py-3 px-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 font-semibold text-slate-800"
               >
                 {YEARS.map((y) => (
                   <option key={y} value={y}>
@@ -151,9 +151,9 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+            <label className="block text-xs font-bold text-slate-700 mb-1">Password</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 required
@@ -161,7 +161,7 @@ export default function RegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Minimum 6 characters"
-                className="w-full pl-9 pr-3 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 focus:bg-white transition"
               />
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition active:scale-98 disabled:bg-slate-300 flex items-center justify-center gap-1.5"
+            className="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-full shadow-md shadow-teal-700/20 transition active:scale-98 disabled:bg-slate-300 flex items-center justify-center gap-1.5"
           >
             <span>{loading ? 'Creating Student Profile...' : 'Complete Registration'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -178,7 +178,7 @@ export default function RegisterPage() {
 
         <div className="pt-2 text-center text-xs text-slate-500">
           Already registered?{' '}
-          <a href="/login" className="text-blue-600 font-bold hover:underline">
+          <a href="/login" className="text-teal-700 font-bold hover:underline">
             Log In
           </a>
         </div>

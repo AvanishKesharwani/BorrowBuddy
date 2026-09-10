@@ -3,14 +3,36 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 15, 23, 42;
-  --background-start-rgb: 248, 250, 252;
-  --background-end-rgb: 255, 255, 255;
+  --primary-teal: #0D7A75;
+  --primary-teal-dark: #0A615D;
+  --mint-bg: #E8F6F5;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: #f8fafc;
+  color: #1E293B;
+  background-color: #F8FAFB;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom smooth transitions for cards and interactive elements */
+.card-hover {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(13, 122, 117, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
+}
+
+.btn-teal {
+  background-color: #0D7A75;
+  color: #FFFFFF;
+  transition: all 0.15s ease-in-out;
+}
+.btn-teal:hover {
+  background-color: #0A615D;
+}
+.btn-teal:active {
+  transform: scale(0.98);
 }

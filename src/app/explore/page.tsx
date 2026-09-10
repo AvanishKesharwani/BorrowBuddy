@@ -53,30 +53,33 @@ export default function ExplorePage() {
   return (
     <div className="space-y-6">
       {/* Header & Search Bar */}
-      <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-4">
+      <div className="bg-white p-6 sm:p-8 rounded-4xl border border-slate-200/80 shadow-xs space-y-4">
         <div>
+          <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700 bg-mint-100 px-3 py-1 rounded-full inline-block mb-1.5">
+            Campus Marketplace Catalog
+          </span>
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Explore Campus Borrowings & Rentals
+            Browse All Campus Items
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Browse physical items available from students across IIIT-NR hostels and departments.
+            Physical equipment available across IIIT-NR hostels, labs, and academic blocks.
           </p>
         </div>
 
         {/* Search Input */}
         <div className="relative">
-          <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search items by name, model, keyword (e.g. 'Calculator', 'Arduino', 'Charger', 'Physics')..."
-            className="w-full pl-11 pr-4 py-3 text-sm bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+            className="w-full pl-12 pr-4 py-3 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-full focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-600 transition"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-600"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-600"
             >
               Clear
             </button>
@@ -91,10 +94,10 @@ export default function ExplorePage() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`text-xs px-3.5 py-1.5 rounded-xl font-semibold whitespace-nowrap transition ${
+                className={`text-xs px-4 py-2 rounded-full font-bold whitespace-nowrap transition ${
                   isSelected
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+                    ? 'bg-teal-600 text-white shadow-xs'
+                    : 'bg-slate-100 hover:bg-mint-100 text-slate-600 hover:text-teal-800'
                 }`}
               >
                 {cat}
@@ -104,10 +107,10 @@ export default function ExplorePage() {
         </div>
 
         {/* Filter controls row */}
-        <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5 text-slate-500 font-semibold">
-              <Filter className="w-3.5 h-3.5 text-blue-600" />
+              <Filter className="w-3.5 h-3.5 text-teal-600" />
               <span>Filters:</span>
             </div>
 
@@ -115,9 +118,9 @@ export default function ExplorePage() {
             <select
               value={selectedMode}
               onChange={(e) => setSelectedMode(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none"
+              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 font-medium text-slate-700 focus:outline-none"
             >
-              <option value="ALL">All Modes (Borrow & Rent)</option>
+              <option value="ALL">All Modes (Borrow &amp; Rent)</option>
               <option value="BORROW">Free Borrow Only</option>
               <option value="RENT">Rental Only</option>
             </select>
@@ -126,7 +129,7 @@ export default function ExplorePage() {
             <select
               value={selectedAvailability}
               onChange={(e) => setSelectedAvailability(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none"
+              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 font-medium text-slate-700 focus:outline-none"
             >
               <option value="ALL">All Availability</option>
               <option value="AVAILABLE">Available Now Only</option>
@@ -136,7 +139,7 @@ export default function ExplorePage() {
             <select
               value={minRating}
               onChange={(e) => setMinRating(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none"
+              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 font-medium text-slate-700 focus:outline-none"
             >
               <option value="0">Any Owner Rating</option>
               <option value="4.0">⭐ 4.0+ Stars</option>
@@ -146,9 +149,9 @@ export default function ExplorePage() {
 
           <button
             onClick={resetFilters}
-            className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 font-semibold px-2 py-1 rounded transition"
+            className="inline-flex items-center gap-1 text-slate-500 hover:text-teal-700 font-semibold px-2 py-1 rounded-lg transition"
           >
-            <RotateCcw className="w-3 h-3" />
+            <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Filters</span>
           </button>
         </div>
@@ -157,28 +160,28 @@ export default function ExplorePage() {
       {/* Grid of Results */}
       {loading ? (
         <div className="py-20 text-center text-slate-400">
-          <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <div className="w-8 h-8 border-2 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
           <p className="text-xs">Searching campus listings...</p>
         </div>
       ) : items.length === 0 ? (
-        <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs space-y-3">
+        <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-3">
           <p className="text-base font-bold text-slate-800">No matching items found</p>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
-            Try adjusting your search keywords, category, or filter criteria. Or be the first student to list this item!
+            Try adjusting your search query, category, or filter criteria. Or list this item yourself!
           </p>
           <button
             onClick={resetFilters}
-            className="bg-blue-50 text-blue-700 text-xs font-semibold px-4 py-2 rounded-xl hover:bg-blue-100 transition"
+            className="bg-mint-100 text-teal-800 text-xs font-bold px-5 py-2.5 rounded-full hover:bg-mint-200 transition"
           >
             Clear All Filters
           </button>
         </div>
       ) : (
         <div>
-          <p className="text-xs text-slate-500 mb-4 font-medium">
-            Showing <span className="font-bold text-slate-800">{items.length}</span> items across IIIT-NR campus
+          <p className="text-xs text-slate-500 mb-4 font-semibold">
+            Showing <span className="font-bold text-slate-900">{items.length}</span> items across IIIT-NR campus
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {items.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}

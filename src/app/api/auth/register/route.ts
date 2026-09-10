@@ -55,8 +55,8 @@ export async function POST(req: NextRequest) {
     await prisma.notification.create({
       data: {
         userId: user.id,
-        title: 'Welcome to CampusBorrow!',
-        message: 'Your institutional IIIT-NR student profile is active. You can now borrow or list campus items.',
+        title: 'Welcome to BorrowBuddy!',
+        message: 'Your institutional IIIT-NR student profile is active. You can now borrow or list campus items on BorrowBuddy.',
         type: 'SYSTEM',
       },
     });

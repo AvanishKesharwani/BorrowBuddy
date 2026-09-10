@@ -44,7 +44,7 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
   if (loading) {
     return (
       <div className="py-24 text-center">
-        <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+        <div className="w-8 h-8 border-2 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
         <p className="text-xs text-slate-500">Loading student profile...</p>
       </div>
     );
@@ -54,7 +54,7 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
     return (
       <div className="bg-white p-12 rounded-3xl border border-slate-200 text-center space-y-3">
         <h2 className="text-base font-bold text-slate-800">Student Profile Not Found</h2>
-        <a href="/explore" className="text-xs font-semibold text-blue-600">
+        <a href="/explore" className="text-xs font-semibold text-teal-700">
           Back to Explore
         </a>
       </div>
@@ -62,31 +62,31 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
   }
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 max-w-5xl mx-auto pb-12">
       {/* Profile Header Card */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs">
+      <div className="bg-white rounded-4xl p-6 sm:p-10 border border-slate-200/80 shadow-xs">
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-5">
             <img
               src={profile.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120'}
               alt={profile.name}
-              className="w-24 h-24 rounded-3xl object-cover border-4 border-blue-50 shadow-md"
+              className="w-24 h-24 rounded-3xl object-cover border-4 border-mint-100 shadow-md"
             />
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
                 <h1 className="text-2xl font-black text-slate-900">{profile.name}</h1>
-                <span className="text-[11px] font-mono font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">
+                <span className="text-[11px] font-mono font-bold bg-mint-100 text-teal-800 px-2.5 py-0.5 rounded-full">
                   {profile.studentId}
                 </span>
               </div>
               <p className="text-xs font-semibold text-slate-600 flex items-center justify-center sm:justify-start gap-1.5">
-                <GraduationCap className="w-4 h-4 text-blue-600" />
+                <GraduationCap className="w-4 h-4 text-teal-600" />
                 <span>
                   {profile.branch} • {profile.year}
                 </span>
               </p>
               <p className="text-xs text-slate-400">
-                Member of IIIT-NR CampusBorrow since {new Date(profile.createdAt).toLocaleDateString()}
+                Verified IIIT-NR BorrowBuddy student since {new Date(profile.createdAt).toLocaleDateString()}
               </p>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
           {/* Trust Scores: Peer Rating & Reliability Score */}
           <div className="flex items-center gap-3">
             {/* Peer Rating */}
-            <div className="bg-amber-50 border border-amber-200/80 p-4 rounded-2xl text-center min-w-[110px]">
+            <div className="bg-amber-50 border border-amber-200/80 p-4 rounded-3xl text-center min-w-[115px]">
               <div className="flex items-center justify-center gap-1 text-amber-500 font-black text-xl">
                 <Star className="w-5 h-5 fill-amber-400" />
                 {profile.rating?.toFixed(1) || '5.0'}
@@ -106,36 +106,36 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
             </div>
 
             {/* Reliability Score */}
-            <div className="bg-emerald-50 border border-emerald-200/80 p-4 rounded-2xl text-center min-w-[110px]">
-              <div className="flex items-center justify-center gap-1 text-emerald-700 font-black text-xl">
-                <ShieldCheck className="w-5 h-5 text-emerald-600" />
+            <div className="bg-mint-100/70 border border-teal-200/80 p-4 rounded-3xl text-center min-w-[115px]">
+              <div className="flex items-center justify-center gap-1 text-teal-800 font-black text-xl">
+                <ShieldCheck className="w-5 h-5 text-teal-600" />
                 {profile.reliabilityScore?.toFixed(0) || '100'}%
               </div>
-              <span className="text-[11px] font-bold text-emerald-900 block mt-0.5">Reliability</span>
-              <span className="text-[10px] text-emerald-700/80 block">Behavior Score</span>
+              <span className="text-[11px] font-bold text-teal-900 block mt-0.5">Reliability</span>
+              <span className="text-[10px] text-teal-700 block">Behavior Score</span>
             </div>
           </div>
         </div>
 
         {/* Accountability Stats Bar */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-6 mt-6 border-t border-slate-100 text-center">
-          <div className="p-3 bg-slate-50 rounded-2xl">
+          <div className="p-3.5 bg-slate-50 rounded-2xl">
             <span className="text-xl font-black text-slate-900 block">{stats?.totalBorrowed || 0}</span>
-            <span className="text-[11px] font-semibold text-slate-500">Items Borrowed</span>
+            <span className="text-[11px] font-bold text-slate-500">Items Borrowed</span>
           </div>
-          <div className="p-3 bg-slate-50 rounded-2xl">
-            <span className="text-xl font-black text-emerald-600 block">
+          <div className="p-3.5 bg-slate-50 rounded-2xl">
+            <span className="text-xl font-black text-teal-700 block">
               {stats?.successfullyReturned || 0}
             </span>
-            <span className="text-[11px] font-semibold text-slate-500">Returned On-Time</span>
+            <span className="text-[11px] font-bold text-slate-500">Returned On-Time</span>
           </div>
-          <div className="p-3 bg-slate-50 rounded-2xl">
+          <div className="p-3.5 bg-slate-50 rounded-2xl">
             <span className="text-xl font-black text-blue-600 block">
               {stats?.currentlyBorrowed || 0}
             </span>
-            <span className="text-[11px] font-semibold text-slate-500">Currently Borrowed</span>
+            <span className="text-[11px] font-bold text-slate-500">Currently Borrowed</span>
           </div>
-          <div className="p-3 bg-slate-50 rounded-2xl">
+          <div className="p-3.5 bg-slate-50 rounded-2xl">
             <span
               className={`text-xl font-black block ${
                 (stats?.overdueReturns || 0) > 0 ? 'text-rose-600' : 'text-slate-900'
@@ -143,11 +143,11 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
             >
               {stats?.overdueReturns || 0}
             </span>
-            <span className="text-[11px] font-semibold text-slate-500">Overdue Returns</span>
+            <span className="text-[11px] font-bold text-slate-500">Overdue Returns</span>
           </div>
-          <div className="p-3 bg-slate-50 rounded-2xl col-span-2 sm:col-span-1">
+          <div className="p-3.5 bg-slate-50 rounded-2xl col-span-2 sm:col-span-1">
             <span className="text-xl font-black text-purple-600 block">{stats?.totalLent || 0}</span>
-            <span className="text-[11px] font-semibold text-slate-500">Items Lent to Peers</span>
+            <span className="text-[11px] font-bold text-slate-500">Items Lent</span>
           </div>
         </div>
       </div>
@@ -156,9 +156,9 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
       <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
         <button
           onClick={() => setActiveTab('listings')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+          className={`px-5 py-2.5 rounded-full text-xs font-bold transition ${
             activeTab === 'listings'
-              ? 'bg-blue-600 text-white shadow-xs'
+              ? 'bg-teal-600 text-white shadow-xs'
               : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
@@ -166,20 +166,20 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
         </button>
         <button
           onClick={() => setActiveTab('reputation')}
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+          className={`px-5 py-2.5 rounded-full text-xs font-bold transition ${
             activeTab === 'reputation'
-              ? 'bg-blue-600 text-white shadow-xs'
+              ? 'bg-teal-600 text-white shadow-xs'
               : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
-          Reputation & Peer Reviews ({profile.ratingsReceived?.length || 0})
+          Peer Reviews &amp; Feedback ({profile.ratingsReceived?.length || 0})
         </button>
       </div>
 
       {/* Tab Content */}
       {activeTab === 'listings' ? (
         profile.items?.length === 0 ? (
-          <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
+          <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
             <p className="text-sm font-bold text-slate-800">No Listings Yet</p>
             <p className="text-xs text-slate-500">This student hasn&apos;t listed items on campus yet.</p>
           </div>
@@ -209,7 +209,7 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
         /* Reputation & Reviews */
         <div className="space-y-4">
           {profile.ratingsReceived?.length === 0 ? (
-            <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
+            <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
               <Star className="w-10 h-10 text-slate-300 mx-auto" />
               <p className="text-sm font-bold text-slate-800">No Peer Reviews Yet</p>
               <p className="text-xs text-slate-500">
@@ -220,7 +220,7 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
             profile.ratingsReceived.map((r: any) => (
               <div
                 key={r.id}
-                className="bg-white rounded-3xl p-5 border border-slate-200 shadow-xs space-y-2"
+                className="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs space-y-2"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
@@ -248,7 +248,7 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
                     {r.criteria.split(',').map((c: string) => (
                       <span
                         key={c}
-                        className="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full"
+                        className="text-[10px] font-bold bg-mint-100 text-teal-800 px-2.5 py-0.5 rounded-full"
                       >
                         {c.trim()}
                       </span>

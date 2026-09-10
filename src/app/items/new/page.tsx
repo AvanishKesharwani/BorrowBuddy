@@ -76,16 +76,19 @@ export default function NewItemPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs">
-        <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-          <div className="p-2.5 bg-blue-50 text-blue-700 rounded-xl">
+    <div className="max-w-3xl mx-auto space-y-6 pb-12">
+      <div className="bg-white p-6 sm:p-10 rounded-4xl border border-slate-200/80 shadow-xs">
+        <div className="flex items-center gap-3.5 border-b border-slate-100 pb-5">
+          <div className="p-3 bg-mint-100 text-teal-700 rounded-2xl">
             <PlusCircle className="w-6 h-6" />
           </div>
           <div>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700">
+              BorrowBuddy Listing
+            </span>
             <h1 className="text-xl sm:text-2xl font-black text-slate-900">List an Item on Campus</h1>
             <p className="text-xs text-slate-500">
-              Share physical gear with IIIT-NR students across Ramanujan & Bose hostels.
+              Share physical equipment with verified students across Ramanujan &amp; Bose hostels.
             </p>
           </div>
         </div>
@@ -100,7 +103,7 @@ export default function NewItemPage() {
           {/* Name & Category */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1">
                 Item Name *
               </label>
               <input
@@ -109,18 +112,18 @@ export default function NewItemPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Casio Scientific Calculator FX-991ES"
-                className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 font-medium"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1">
                 Category *
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-white"
               >
                 {CATEGORIES.filter((c) => c !== 'All').map((c) => (
                   <option key={c} value={c}>
@@ -133,8 +136,8 @@ export default function NewItemPage() {
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Description & Accessories Included *
+            <label className="block text-xs font-bold text-slate-700 mb-1">
+              Description &amp; Accessories Included *
             </label>
             <textarea
               rows={3}
@@ -142,20 +145,20 @@ export default function NewItemPage() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Detail the item condition, included cables/cases, key features, or ideal course use..."
-              className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600"
             />
           </div>
 
           {/* Condition & Campus Handover Location */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1">
                 Physical Condition
               </label>
               <select
                 value={condition}
                 onChange={(e) => setCondition(e.target.value)}
-                className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-white"
               >
                 {ITEM_CONDITIONS.map((cond) => (
                   <option key={cond} value={cond}>
@@ -166,13 +169,13 @@ export default function NewItemPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1">
                 Campus Meetup / Handover Spot
               </label>
               <select
                 value={campusLocation}
                 onChange={(e) => setCampusLocation(e.target.value)}
-                className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-white"
               >
                 {CAMPUS_LOCATIONS.map((loc) => (
                   <option key={loc} value={loc}>
@@ -186,13 +189,13 @@ export default function NewItemPage() {
           {/* Mode & Pricing */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1">
                 Borrow / Rent Mode
               </label>
               <select
                 value={mode}
                 onChange={(e) => setMode(e.target.value)}
-                className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white font-semibold text-blue-700"
+                className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-white font-bold text-teal-800"
               >
                 <option value="BORROW">Free Borrowing</option>
                 <option value="RENT">Rental</option>
@@ -201,7 +204,7 @@ export default function NewItemPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1">
                 Rental Price (₹ / day) {mode === 'BORROW' && '(N/A)'}
               </label>
               <input
@@ -210,12 +213,12 @@ export default function NewItemPage() {
                 value={rentalPrice}
                 onChange={(e) => setRentalPrice(e.target.value)}
                 placeholder="e.g. 20"
-                className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-slate-100"
+                className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 disabled:bg-slate-100"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 mb-1">
                 Max Borrow Duration (Days)
               </label>
               <input
@@ -226,7 +229,7 @@ export default function NewItemPage() {
                 value={maxDuration}
                 onChange={(e) => setMaxDuration(e.target.value)}
                 placeholder="7"
-                className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600"
               />
             </div>
           </div>
@@ -237,7 +240,7 @@ export default function NewItemPage() {
               <label className="block text-xs font-bold text-slate-800">
                 Declared Item Replacement Value (₹)
               </label>
-              <span className="text-[11px] text-blue-700 font-semibold">
+              <span className="text-[11px] text-teal-800 font-bold bg-mint-100 px-2.5 py-0.5 rounded-full">
                 Penalty: 5% / overdue day (₹{((parseFloat(declaredValue) || 0) * 0.05).toFixed(0)}/day)
               </span>
             </div>
@@ -248,18 +251,18 @@ export default function NewItemPage() {
               value={declaredValue}
               onChange={(e) => setDeclaredValue(e.target.value)}
               placeholder="1000"
-              className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+              className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-white"
             />
             <p className="text-[11px] text-slate-500">
-              This declared value serves as the base for the platform&apos;s simulated 5% per day overdue penalty calculation.
+              This declared value serves as the base for BorrowBuddy&apos;s simulated 5% per day overdue penalty calculation.
             </p>
           </div>
 
           {/* Image Presets & Custom URL */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
+            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
               <span>Item Photo (Click a preset or enter URL)</span>
-              <span className="text-blue-600 font-normal">Quick presets</span>
+              <span className="text-teal-700 font-semibold">Quick presets</span>
             </label>
             <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 mb-2">
               {PRESET_IMAGES.map((img) => (
@@ -268,7 +271,7 @@ export default function NewItemPage() {
                   key={img.name}
                   onClick={() => setImageUrl(img.url)}
                   className={`relative rounded-xl overflow-hidden h-14 border-2 transition ${
-                    imageUrl === img.url ? 'border-blue-600 scale-95 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'
+                    imageUrl === img.url ? 'border-teal-600 scale-95 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'
                   }`}
                   title={img.name}
                 >
@@ -284,7 +287,7 @@ export default function NewItemPage() {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               placeholder="https://images.unsplash.com/..."
-              className="w-full text-xs p-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-slate-50 font-mono"
+              className="w-full text-xs p-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 font-mono"
             />
           </div>
 
@@ -293,14 +296,14 @@ export default function NewItemPage() {
             <button
               type="button"
               onClick={() => router.back()}
-              className="px-5 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition"
+              className="px-5 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-full transition"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-98 disabled:bg-slate-300 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
+              className="px-7 py-3 bg-teal-600 hover:bg-teal-700 active:scale-98 disabled:bg-slate-300 text-white font-bold text-xs rounded-full shadow-md shadow-teal-700/20 transition flex items-center gap-1.5"
             >
               <PlusCircle className="w-4 h-4" />
               <span>{loading ? 'Publishing Listing...' : 'Publish Item Listing'}</span>

@@ -16,6 +16,7 @@ import {
   Trash2,
   Lock,
   Unlock,
+  BookOpen,
 } from 'lucide-react';
 import { formatCustomDate, formatINR, getStatusBadgeStyle } from '@/lib/utils';
 
@@ -118,61 +119,61 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="py-24 text-center">
-        <div className="w-8 h-8 border-2 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+        <div className="w-8 h-8 border-2 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
         <p className="text-xs text-slate-500">Loading campus admin console...</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto">
+    <div className="space-y-6 max-w-6xl mx-auto pb-12">
       {/* Top Banner */}
-      <div className="bg-gradient-to-r from-purple-900 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-md flex items-center justify-between flex-wrap gap-4">
+      <div className="bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 text-white p-6 sm:p-8 rounded-4xl shadow-sm flex items-center justify-between flex-wrap gap-4 border border-slate-800">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-purple-800 rounded-2xl border border-purple-700">
-            <Shield className="w-7 h-7 text-purple-300" />
+          <div className="p-3 bg-teal-800 rounded-2xl border border-teal-700">
+            <Shield className="w-7 h-7 text-teal-300" />
           </div>
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider bg-purple-950/80 border border-purple-700 px-2 py-0.5 rounded text-purple-200">
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-teal-950 border border-teal-700 px-2.5 py-0.5 rounded-full text-teal-200">
               Institutional Authority
             </span>
-            <h1 className="text-xl sm:text-2xl font-black mt-1">IIIT-NR Platform Administration</h1>
-            <p className="text-xs text-purple-200">
-              Oversee campus safety, student accountability, item moderation, and penalty policies.
+            <h1 className="text-xl sm:text-2xl font-black mt-1">BorrowBuddy Administration</h1>
+            <p className="text-xs text-teal-200">
+              Oversee campus safety, student accountability, item moderation, and penalty policies at IIIT-NR.
             </p>
           </div>
         </div>
 
         {/* Tab switcher */}
-        <div className="flex items-center gap-1 bg-purple-950/60 p-1 rounded-2xl border border-purple-800 text-xs font-semibold">
+        <div className="flex items-center gap-1 bg-slate-800/80 p-1.5 rounded-full border border-slate-700 text-xs font-bold">
           <button
             onClick={() => setActiveTab('overview')}
-            className={`px-3 py-1.5 rounded-xl transition ${
-              activeTab === 'overview' ? 'bg-purple-700 text-white' : 'text-purple-300 hover:text-white'
+            className={`px-4 py-2 rounded-full transition ${
+              activeTab === 'overview' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
             }`}
           >
-            Overview & KPIs
+            Overview &amp; KPIs
           </button>
           <button
             onClick={() => setActiveTab('students')}
-            className={`px-3 py-1.5 rounded-xl transition ${
-              activeTab === 'students' ? 'bg-purple-700 text-white' : 'text-purple-300 hover:text-white'
+            className={`px-4 py-2 rounded-full transition ${
+              activeTab === 'students' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
             }`}
           >
             Students ({users.length})
           </button>
           <button
             onClick={() => setActiveTab('items')}
-            className={`px-3 py-1.5 rounded-xl transition ${
-              activeTab === 'items' ? 'bg-purple-700 text-white' : 'text-purple-300 hover:text-white'
+            className={`px-4 py-2 rounded-full transition ${
+              activeTab === 'items' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
             }`}
           >
             Items ({items.length})
           </button>
           <button
             onClick={() => setActiveTab('config')}
-            className={`px-3 py-1.5 rounded-xl transition ${
-              activeTab === 'config' ? 'bg-purple-700 text-white' : 'text-purple-300 hover:text-white'
+            className={`px-4 py-2 rounded-full transition ${
+              activeTab === 'config' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
             }`}
           >
             Penalty Rules
@@ -181,8 +182,8 @@ export default function AdminDashboardPage() {
       </div>
 
       {feedback && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-2xl flex items-center gap-2 animate-in fade-in">
-          <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-4 bg-mint-100 border border-teal-200 text-teal-900 text-xs font-bold rounded-2xl flex items-center gap-2 animate-in fade-in">
+          <CheckCircle className="w-4 h-4 text-teal-600 shrink-0" />
           <span>{feedback}</span>
         </div>
       )}
@@ -191,38 +192,38 @@ export default function AdminDashboardPage() {
       {activeTab === 'overview' && (
         <div className="space-y-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Total Students</span>
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Total Students</span>
               <span className="text-2xl font-black text-slate-900 mt-1 block">
                 {stats?.totalStudents || 0}
               </span>
-              <span className="text-[11px] text-blue-600 font-medium">Verified IIIT-NR</span>
+              <span className="text-[11px] text-teal-700 font-semibold">Verified IIIT-NR</span>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Campus Listings</span>
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Campus Listings</span>
               <span className="text-2xl font-black text-slate-900 mt-1 block">{stats?.totalItems || 0}</span>
-              <span className="text-[11px] text-emerald-600 font-medium">Active gear</span>
+              <span className="text-[11px] text-teal-700 font-semibold">Active gear</span>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Active Borrowings</span>
-              <span className="text-2xl font-black text-blue-600 mt-1 block">
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Active Borrowings</span>
+              <span className="text-2xl font-black text-teal-700 mt-1 block">
                 {stats?.activeBorrowings || 0}
               </span>
               <span className="text-[11px] text-slate-500 font-medium">Currently in use</span>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Completed Borrows</span>
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Completed Borrows</span>
               <span className="text-2xl font-black text-emerald-600 mt-1 block">
                 {stats?.completedReturns || 0}
               </span>
-              <span className="text-[11px] text-emerald-600 font-medium">Safely returned</span>
+              <span className="text-[11px] text-emerald-600 font-semibold">Safely returned</span>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Overdue Items</span>
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Overdue Items</span>
               <span
                 className={`text-2xl font-black mt-1 block ${
                   (stats?.overdueTransactions || 0) > 0 ? 'text-rose-600' : 'text-slate-900'
@@ -233,16 +234,16 @@ export default function AdminDashboardPage() {
               <span className="text-[11px] text-rose-500 font-medium">Action pending</span>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Total Simulated Penalties</span>
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Total Simulated Penalties</span>
               <span className="text-2xl font-black text-amber-600 mt-1 block">
                 {formatINR(stats?.totalSimulatedPenalties || 0)}
               </span>
-              <span className="text-[11px] text-amber-700 font-medium">5% / overdue day</span>
+              <span className="text-[11px] text-amber-700 font-semibold">5% / overdue day</span>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Average Peer Rating</span>
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Average Peer Rating</span>
               <span className="text-2xl font-black text-slate-900 mt-1 block flex items-center gap-1">
                 <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
                 {stats?.averageStudentRating?.toFixed(1) || '5.0'}
@@ -250,13 +251,13 @@ export default function AdminDashboardPage() {
               <span className="text-[11px] text-slate-500 font-medium">Out of 5.0</span>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-              <span className="text-xs text-slate-400 font-semibold block">Average Reliability</span>
-              <span className="text-2xl font-black text-emerald-700 mt-1 block flex items-center gap-1">
-                <ShieldCheck className="w-5 h-5 text-emerald-600" />
+            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
+              <span className="text-xs text-slate-400 font-bold block">Average Reliability</span>
+              <span className="text-2xl font-black text-teal-800 mt-1 block flex items-center gap-1">
+                <ShieldCheck className="w-5 h-5 text-teal-600" />
                 {stats?.averageReliability?.toFixed(0) || '100'}%
               </span>
-              <span className="text-[11px] text-emerald-700 font-medium">Accountability index</span>
+              <span className="text-[11px] text-teal-700 font-semibold">Accountability index</span>
             </div>
           </div>
         </div>
@@ -264,18 +265,18 @@ export default function AdminDashboardPage() {
 
       {/* Tab: Students Directory */}
       {activeTab === 'students' && (
-        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs">
+        <div className="bg-white rounded-4xl border border-slate-200/80 overflow-hidden shadow-xs">
           <div className="p-5 border-b border-slate-100 flex items-center justify-between">
             <h3 className="font-bold text-slate-900 text-base">Registered Students Directory</h3>
             <span className="text-xs text-slate-500">{users.length} enrolled students</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-600">
-              <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
                 <tr>
                   <th className="p-3.5">Student</th>
                   <th className="p-3.5">Student ID</th>
-                  <th className="p-3.5">Branch & Year</th>
+                  <th className="p-3.5">Branch &amp; Year</th>
                   <th className="p-3.5">Rating</th>
                   <th className="p-3.5">Reliability</th>
                   <th className="p-3.5">Role</th>
@@ -308,16 +309,16 @@ export default function AdminDashboardPage() {
                       </span>
                     </td>
                     <td className="p-3.5">
-                      <span className="font-bold text-emerald-700">
+                      <span className="font-bold text-teal-800">
                         {u.reliabilityScore?.toFixed(0)}%
                       </span>
                     </td>
                     <td className="p-3.5">
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                           u.role === 'ADMIN'
                             ? 'bg-purple-100 text-purple-800'
-                            : 'bg-slate-100 text-slate-700'
+                            : 'bg-mint-100 text-teal-800'
                         }`}
                       >
                         {u.role}
@@ -325,11 +326,11 @@ export default function AdminDashboardPage() {
                     </td>
                     <td className="p-3.5">
                       {u.isSuspended ? (
-                        <span className="text-rose-600 bg-rose-50 px-2 py-0.5 rounded text-[10px] font-bold">
+                        <span className="text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full text-[10px] font-bold">
                           Suspended
                         </span>
                       ) : (
-                        <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[10px] font-bold">
+                        <span className="text-teal-800 bg-mint-100 px-2 py-0.5 rounded-full text-[10px] font-bold">
                           Active
                         </span>
                       )}
@@ -338,9 +339,9 @@ export default function AdminDashboardPage() {
                       {u.role !== 'ADMIN' && (
                         <button
                           onClick={() => handleToggleSuspend(u.id, u.isSuspended)}
-                          className={`text-xs px-2.5 py-1 rounded-lg font-semibold transition ${
+                          className={`text-xs px-3 py-1 rounded-full font-bold transition ${
                             u.isSuspended
-                              ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                              ? 'bg-mint-100 text-teal-800 hover:bg-mint-200'
                               : 'bg-rose-50 text-rose-700 hover:bg-rose-100'
                           }`}
                         >
@@ -358,14 +359,14 @@ export default function AdminDashboardPage() {
 
       {/* Tab: Items Moderation */}
       {activeTab === 'items' && (
-        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs">
+        <div className="bg-white rounded-4xl border border-slate-200/80 overflow-hidden shadow-xs">
           <div className="p-5 border-b border-slate-100 flex items-center justify-between">
             <h3 className="font-bold text-slate-900 text-base">Campus Item Listings Moderation</h3>
             <span className="text-xs text-slate-500">{items.length} items listed</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-600">
-              <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
                 <tr>
                   <th className="p-3.5">Item</th>
                   <th className="p-3.5">Owner</th>
@@ -392,7 +393,7 @@ export default function AdminDashboardPage() {
                     </td>
                     <td className="p-3.5">{it.category}</td>
                     <td className="p-3.5">
-                      <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                      <span className="font-bold text-teal-800 bg-mint-100 px-2 py-0.5 rounded-full">
                         {it.availability}
                       </span>
                     </td>
@@ -401,7 +402,7 @@ export default function AdminDashboardPage() {
                     <td className="p-3.5 text-right">
                       <button
                         onClick={() => handleDeleteItem(it.id)}
-                        className="text-xs text-rose-600 hover:bg-rose-50 px-2.5 py-1 rounded-lg font-semibold transition"
+                        className="text-xs text-rose-600 hover:bg-rose-50 px-2.5 py-1 rounded-full font-bold transition"
                       >
                         Remove
                       </button>
@@ -416,13 +417,13 @@ export default function AdminDashboardPage() {
 
       {/* Tab: Penalty Rules Configuration */}
       {activeTab === 'config' && (
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs max-w-2xl mx-auto space-y-5">
+        <div className="bg-white p-6 sm:p-8 rounded-4xl border border-slate-200/80 shadow-xs max-w-2xl mx-auto space-y-5">
           <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-            <div className="p-2.5 bg-amber-50 text-amber-700 rounded-xl">
+            <div className="p-2.5 bg-mint-100 text-teal-700 rounded-2xl">
               <Settings className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-lg font-black text-slate-900">Penalty & Overdue Policies</h3>
+              <h3 className="text-lg font-black text-slate-900">Penalty &amp; Overdue Policies</h3>
               <p className="text-xs text-slate-500">
                 Configure simulated daily penalty percentages and maximum allowable caps across campus.
               </p>
@@ -443,7 +444,7 @@ export default function AdminDashboardPage() {
                 onChange={(e) =>
                   setConfig({ ...config, penaltyRateDaily: parseFloat(e.target.value) })
                 }
-                className="w-full accent-blue-600"
+                className="w-full accent-teal-600"
               />
               <p className="text-[11px] text-slate-400 mt-1">
                 Standard rule: 5% per day multiplied by item declared value.
@@ -463,17 +464,17 @@ export default function AdminDashboardPage() {
                 onChange={(e) =>
                   setConfig({ ...config, penaltyMaxPercent: parseFloat(e.target.value) })
                 }
-                className="w-full accent-blue-600"
+                className="w-full accent-teal-600"
               />
               <p className="text-[11px] text-slate-400 mt-1">
-                Prevents simulated penalties from exceeding a reasonable fraction (e.g. 50% max) of the object value.
+                Prevents simulated penalties from exceeding a fraction (default 50% max) of the object value.
               </p>
             </div>
 
             <div className="pt-4 border-t border-slate-100 flex justify-end">
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-xs transition"
+                className="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-6 py-2.5 rounded-full shadow-xs transition"
               >
                 Save Configuration
               </button>

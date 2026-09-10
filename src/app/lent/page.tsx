@@ -6,11 +6,9 @@ import {
   CheckCircle,
   XCircle,
   Clock,
-  AlertCircle,
   MessageCircle,
   Star,
   PlusCircle,
-  Package,
   ShieldCheck,
   AlertTriangle,
 } from 'lucide-react';
@@ -127,16 +125,19 @@ export default function MyLentItemsPage() {
   );
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 max-w-5xl mx-auto pb-10">
       {/* Top Header */}
-      <div className="flex items-center justify-between flex-wrap gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-blue-50 text-blue-700 rounded-2xl">
+      <div className="flex items-center justify-between flex-wrap gap-4 bg-white p-6 sm:p-8 rounded-4xl border border-slate-200/80 shadow-xs">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 bg-mint-100 text-teal-700 rounded-2xl">
             <Layers className="w-6 h-6" />
           </div>
           <div>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700">
+              BorrowBuddy Peer Lending
+            </span>
             <h1 className="text-xl sm:text-2xl font-black text-slate-900">
-              Lending & Request Management
+              Lending &amp; Requests Management
             </h1>
             <p className="text-xs text-slate-500">
               Review borrow requests from students, approve transactions, and confirm safe returns.
@@ -146,27 +147,27 @@ export default function MyLentItemsPage() {
 
         <div className="flex items-center gap-2 flex-wrap">
           {/* Tabs */}
-          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-2xl text-xs font-semibold">
+          <div className="flex items-center gap-1 bg-slate-100 p-1.5 rounded-full text-xs font-bold">
             <button
               onClick={() => setActiveTab('requests')}
-              className={`px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-full transition flex items-center gap-1.5 ${
                 activeTab === 'requests'
-                  ? 'bg-white text-blue-700 shadow-xs'
+                  ? 'bg-white text-teal-800 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <span>Incoming Requests</span>
               {pendingRequests.length > 0 && (
-                <span className="bg-amber-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">
+                <span className="bg-amber-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-black">
                   {pendingRequests.length}
                 </span>
               )}
             </button>
             <button
               onClick={() => setActiveTab('active')}
-              className={`px-3.5 py-1.5 rounded-xl transition ${
+              className={`px-4 py-2 rounded-full transition ${
                 activeTab === 'active'
-                  ? 'bg-white text-blue-700 shadow-xs'
+                  ? 'bg-white text-teal-800 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -174,9 +175,9 @@ export default function MyLentItemsPage() {
             </button>
             <button
               onClick={() => setActiveTab('listings')}
-              className={`px-3.5 py-1.5 rounded-xl transition ${
+              className={`px-4 py-2 rounded-full transition ${
                 activeTab === 'listings'
-                  ? 'bg-white text-blue-700 shadow-xs'
+                  ? 'bg-white text-teal-800 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -186,17 +187,17 @@ export default function MyLentItemsPage() {
 
           <a
             href="/items/new"
-            className="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-xs"
+            className="inline-flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-xs transition"
           >
-            <PlusCircle className="w-3.5 h-3.5" />
-            <span>+ List Item</span>
+            <PlusCircle className="w-4 h-4" />
+            <span>List Item</span>
           </a>
         </div>
       </div>
 
       {feedback && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold rounded-2xl flex items-center gap-2 animate-in fade-in">
-          <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-4 bg-mint-100 border border-teal-200 text-teal-900 text-xs font-bold rounded-2xl flex items-center gap-2 animate-in fade-in">
+          <CheckCircle className="w-4 h-4 text-teal-600 shrink-0" />
           <span>{feedback}</span>
         </div>
       )}
@@ -204,14 +205,14 @@ export default function MyLentItemsPage() {
       {/* Tab Content */}
       {loading ? (
         <div className="py-20 text-center text-slate-400">
-          <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <div className="w-8 h-8 border-2 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
           <p className="text-xs">Loading requests and listings...</p>
         </div>
       ) : activeTab === 'requests' ? (
         /* Incoming Requests Section */
         <div className="space-y-4">
           {pendingRequests.length === 0 ? (
-            <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
+            <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
               <Clock className="w-10 h-10 text-slate-300 mx-auto" />
               <h3 className="text-base font-bold text-slate-800">No Pending Requests</h3>
               <p className="text-xs text-slate-500 max-w-sm mx-auto">
@@ -232,7 +233,7 @@ export default function MyLentItemsPage() {
                       className="w-16 h-16 rounded-2xl object-cover border border-slate-200 shrink-0"
                     />
                     <div>
-                      <span className="bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                      <span className="bg-amber-100 text-amber-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                         New Borrow Request
                       </span>
                       <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-1">
@@ -240,7 +241,7 @@ export default function MyLentItemsPage() {
                       </h3>
                       <p className="text-xs text-slate-600 flex items-center gap-1 mt-0.5">
                         <span>Requested by:</span>
-                        <strong className="text-blue-700">{req.borrower.name}</strong>
+                        <strong className="text-teal-800">{req.borrower.name}</strong>
                         <span>({req.borrower.studentId || 'IIIT-NR'}, {req.borrower.branch})</span>
                       </p>
                     </div>
@@ -257,7 +258,7 @@ export default function MyLentItemsPage() {
                     </div>
                     <div className="border-l border-slate-200 h-6"></div>
                     <div className="text-center px-2">
-                      <div className="flex items-center gap-1 text-emerald-600 font-black text-xs">
+                      <div className="flex items-center gap-1 text-teal-700 font-black text-xs">
                         <ShieldCheck className="w-3.5 h-3.5" />
                         {req.borrower.reliabilityScore.toFixed(0)}%
                       </div>
@@ -267,8 +268,8 @@ export default function MyLentItemsPage() {
                 </div>
 
                 {/* Purpose & Handover note */}
-                <div className="p-3 bg-white border border-slate-200 rounded-2xl text-xs space-y-1">
-                  <p className="text-slate-500 font-medium">Borrower&apos;s Handover Message:</p>
+                <div className="p-3.5 bg-white border border-slate-200 rounded-2xl text-xs space-y-1">
+                  <p className="text-slate-500 font-semibold">Borrower&apos;s Meetup Note:</p>
                   <p className="text-slate-800 italic">
                     &ldquo;{req.borrowerNotes || 'Would like to borrow this item for academic coursework.'}&rdquo;
                   </p>
@@ -287,7 +288,7 @@ export default function MyLentItemsPage() {
                   <button
                     onClick={() => handleRejectRequest(req.id)}
                     disabled={actionLoading === req.id}
-                    className="px-4 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition flex items-center gap-1"
+                    className="px-4 py-2 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-full transition flex items-center gap-1"
                   >
                     <XCircle className="w-4 h-4" />
                     <span>Decline</span>
@@ -296,7 +297,7 @@ export default function MyLentItemsPage() {
                   <button
                     onClick={() => handleAcceptRequest(req.id)}
                     disabled={actionLoading === req.id}
-                    className="px-5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-98 rounded-xl shadow-xs transition flex items-center gap-1.5"
+                    className="px-6 py-2.5 text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 active:scale-98 rounded-full shadow-xs transition flex items-center gap-1.5"
                   >
                     <CheckCircle className="w-4 h-4" />
                     <span>{actionLoading === req.id ? 'Accepting...' : 'Accept Borrow Request'}</span>
@@ -310,7 +311,7 @@ export default function MyLentItemsPage() {
         /* Currently Lent Section */
         <div className="space-y-4">
           {activeLent.length === 0 ? (
-            <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
+            <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
               <Layers className="w-10 h-10 text-slate-300 mx-auto" />
               <h3 className="text-base font-bold text-slate-800">No Items Currently Lent Out</h3>
               <p className="text-xs text-slate-500 max-w-sm mx-auto">
@@ -333,7 +334,7 @@ export default function MyLentItemsPage() {
                       ? 'border-purple-300 bg-purple-50/20'
                       : isOverdue
                       ? 'border-rose-300 bg-rose-50/20'
-                      : 'border-slate-200'
+                      : 'border-slate-200/80'
                   }`}
                 >
                   <div className="flex items-start justify-between flex-wrap gap-3">
@@ -353,7 +354,7 @@ export default function MyLentItemsPage() {
                         </div>
                         <h3 className="text-base font-bold text-slate-900 mt-1">{tx.item.name}</h3>
                         <p className="text-xs text-slate-500">
-                          Possessed by: <strong className="text-slate-700">{tx.borrower.name}</strong> (
+                          Possessed by: <strong className="text-slate-800">{tx.borrower.name}</strong> (
                           {tx.borrower.studentId || 'IIIT-NR'}, {tx.borrower.branch})
                         </p>
                       </div>
@@ -374,16 +375,14 @@ export default function MyLentItemsPage() {
 
                   {/* Return Confirmation Prompt (Two-Step Return!) */}
                   {isReturnPending && (
-                    <div className="p-4 bg-purple-100/80 border border-purple-300 rounded-2xl text-xs text-purple-900 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold flex items-center gap-1.5 text-purple-950">
-                          <CheckCircle className="w-4 h-4 text-purple-700" />
-                          Borrower Marked Item as Returned!
-                        </span>
-                      </div>
+                    <div className="p-4 bg-purple-100/90 border border-purple-300 rounded-2xl text-xs text-purple-900 space-y-2">
+                      <span className="font-bold flex items-center gap-1.5 text-purple-950">
+                        <CheckCircle className="w-4 h-4 text-purple-700" />
+                        Borrower Marked Item as Returned!
+                      </span>
                       <p>
-                        <strong>{tx.borrower.name}</strong> has returned or handed back this item. Please
-                        physically inspect the item&apos;s condition and click <strong>Confirm Return</strong> to close
+                        <strong>{tx.borrower.name}</strong> has returned this item. Please
+                        physically inspect the item&apos;s condition and click <strong>Confirm Return Received</strong> to close
                         this transaction and return the item to Available status.
                       </p>
                     </div>
@@ -411,9 +410,9 @@ export default function MyLentItemsPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setChatTx(tx)}
-                        className="inline-flex items-center gap-1 text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-xl font-semibold transition"
+                        className="inline-flex items-center gap-1 text-teal-800 bg-mint-100 hover:bg-mint-200 px-3.5 py-2 rounded-full font-bold transition"
                       >
-                        <MessageCircle className="w-3.5 h-3.5" />
+                        <MessageCircle className="w-3.5 h-3.5 text-teal-600" />
                         <span>Chat with {tx.borrower.name.split(' ')[0]}</span>
                       </button>
 
@@ -434,7 +433,7 @@ export default function MyLentItemsPage() {
                         <button
                           onClick={() => handleConfirmReturn(tx.id)}
                           disabled={actionLoading === tx.id}
-                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl shadow-xs transition flex items-center gap-1.5"
+                          className="bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5"
                         >
                           <CheckCircle className="w-4 h-4" />
                           <span>{actionLoading === tx.id ? 'Confirming...' : 'Confirm Return Received'}</span>
@@ -444,7 +443,7 @@ export default function MyLentItemsPage() {
                       {isReturned && (
                         <button
                           onClick={() => setRateTx(tx)}
-                          className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-xl shadow-xs transition flex items-center gap-1.5"
+                          className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-full shadow-xs transition flex items-center gap-1.5"
                         >
                           <Star className="w-4 h-4 fill-white" />
                           <span>Rate Borrower</span>
@@ -459,19 +458,19 @@ export default function MyLentItemsPage() {
         </div>
       ) : (
         /* My Listings Tab */
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {myItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs flex flex-col justify-between p-4"
+              className="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-xs flex flex-col justify-between p-5"
             >
               <div>
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="w-full h-36 object-cover rounded-xl mb-3"
+                  className="w-full h-40 object-cover rounded-2xl mb-3"
                 />
-                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">
+                <span className="text-[10px] font-bold text-teal-700 uppercase tracking-wider block">
                   {item.category}
                 </span>
                 <h4 className="font-bold text-slate-900 text-sm mt-0.5 line-clamp-1">{item.name}</h4>
@@ -479,14 +478,14 @@ export default function MyLentItemsPage() {
               </div>
 
               <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                <span className="font-bold text-teal-800 bg-mint-100 px-2.5 py-0.5 rounded-full">
                   {item.availability}
                 </span>
                 <a
                   href={`/items/${item.id}`}
-                  className="text-blue-600 font-bold hover:underline"
+                  className="text-teal-700 font-bold hover:underline"
                 >
-                  View Details &rarr;
+                  View Listing &rarr;
                 </a>
               </div>
             </div>

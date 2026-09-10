@@ -2,12 +2,10 @@ import { format, formatDistanceToNow, isPast } from 'date-fns';
 
 export const CATEGORIES = [
   'All',
-  'Electronics',
-  'Books',
-  'Academic Equipment',
-  'Project Equipment',
-  'Sports',
-  'Accessories',
+  'Textbooks & Academics',
+  'Electronics & Tech',
+  'Outdoor & Sports',
+  'Project & Lab Equipment',
   'Daily-use Items',
   'Other',
 ] as const;
@@ -56,20 +54,20 @@ export function formatRelativeTime(date: Date | string): string {
 export function getStatusBadgeStyle(status: string): { bg: string; text: string; border: string } {
   switch (status.toUpperCase()) {
     case 'AVAILABLE':
-      return { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' };
+      return { bg: 'bg-teal-50', text: 'text-teal-800', border: 'border-teal-200' };
     case 'BORROWED':
     case 'ACTIVE':
-      return { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' };
+      return { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' };
     case 'REQUESTED':
-      return { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' };
+      return { bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200' };
     case 'RETURN_PENDING':
       return { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' };
     case 'RETURNED':
-      return { bg: 'bg-teal-50', text: 'text-teal-700', border: 'border-teal-200' };
+      return { bg: 'bg-teal-100', text: 'text-teal-900', border: 'border-teal-300' };
     case 'OVERDUE':
       return { bg: 'bg-rose-50', text: 'text-rose-700', border: 'border-rose-200' };
     case 'DISPUTED':
-      return { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' };
+      return { bg: 'bg-orange-50', text: 'text-orange-800', border: 'border-orange-200' };
     case 'REJECTED':
     case 'CANCELLED':
       return { bg: 'bg-slate-100', text: 'text-slate-600', border: 'border-slate-300' };

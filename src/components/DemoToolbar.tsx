@@ -95,14 +95,14 @@ export default function DemoToolbar() {
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Left: Demo Badge & Current User */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="inline-flex items-center gap-1.5 bg-blue-600 text-white px-2.5 py-1 rounded-full font-semibold tracking-wide text-[11px] shadow-sm">
+          <span className="inline-flex items-center gap-1.5 bg-teal-600 text-white px-2.5 py-1 rounded-full font-semibold tracking-wide text-[11px] shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
-            IIIT-NR DEMO BAR
+            BORROWBUDDY DEMO BAR
           </span>
           <span className="text-slate-400">Active User:</span>
           {currentUser ? (
             <span className="bg-slate-800 text-slate-100 px-2 py-0.5 rounded font-medium border border-slate-700 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
               {currentUser.name} ({currentUser.studentId || currentUser.role})
             </span>
           ) : (
@@ -119,7 +119,7 @@ export default function DemoToolbar() {
               disabled={loading}
               className={`px-2 py-0.5 rounded transition ${
                 currentUser?.studentId === 'IIITNR-2026-001'
-                  ? 'bg-blue-700 text-white font-semibold'
+                  ? 'bg-teal-700 text-white font-semibold'
                   : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
               }`}
               title="Student A (Borrower Demo)"
@@ -131,7 +131,7 @@ export default function DemoToolbar() {
               disabled={loading}
               className={`px-2 py-0.5 rounded transition ${
                 currentUser?.studentId === 'IIITNR-2025-014'
-                  ? 'bg-blue-700 text-white font-semibold'
+                  ? 'bg-teal-700 text-white font-semibold'
                   : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
               }`}
               title="Student B (Calculator Owner Demo)"
@@ -143,7 +143,7 @@ export default function DemoToolbar() {
               disabled={loading}
               className={`px-2 py-0.5 rounded transition ${
                 currentUser?.studentId === 'IIITNR-2024-089'
-                  ? 'bg-blue-700 text-white font-semibold'
+                  ? 'bg-teal-700 text-white font-semibold'
                   : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
               }`}
               title="Student C (Arduino & Hardware Owner)"
@@ -218,8 +218,8 @@ export default function DemoToolbar() {
 
       {/* Floating feedback alert */}
       {feedback && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-blue-950 text-blue-100 border border-blue-600 px-4 py-1.5 rounded-full shadow-lg font-medium text-xs flex items-center gap-2 animate-bounce">
-          <UserCheck className="w-4 h-4 text-emerald-400" />
+        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-slate-900 text-teal-200 border border-teal-600 px-4 py-1.5 rounded-full shadow-lg font-medium text-xs flex items-center gap-2 animate-bounce">
+          <UserCheck className="w-4 h-4 text-teal-400" />
           <span>{feedback}</span>
         </div>
       )}

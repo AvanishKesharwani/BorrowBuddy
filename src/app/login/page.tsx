@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, Mail, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Lock, Mail, Sparkles, ArrowRight, BookOpen } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -43,15 +43,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto my-6 space-y-6">
-      <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+    <div className="max-w-md mx-auto my-6 space-y-6 pb-12">
+      <div className="bg-white p-8 rounded-4xl border border-slate-200/80 shadow-xs space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-blue-700 text-white flex items-center justify-center font-black text-xl mx-auto shadow-md shadow-blue-600/20">
-            CB
+          <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center font-black text-xl mx-auto shadow-md shadow-teal-700/20">
+            <BookOpen className="w-6 h-6" />
           </div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Institutional Login</h1>
           <p className="text-xs text-slate-500">
-            Sign in with your IIIT-Naya Raipur student email or Student ID
+            Sign in with your IIIT-Naya Raipur student email or Student ID to access BorrowBuddy
           </p>
         </div>
 
@@ -63,35 +63,35 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Student ID or IIIT-NR Email
+            <label className="block text-xs font-bold text-slate-700 mb-1">
+              Student ID or Institutional Email
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="e.g. IIITNR-2026-001 or arjun@iiitnr.edu.in"
-                className="w-full pl-9 pr-3 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 font-medium bg-slate-50 focus:bg-white transition"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-slate-700 mb-1">
               Password
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-9 pr-3 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 focus:bg-white transition"
               />
             </div>
           </div>
@@ -99,16 +99,16 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition active:scale-98 disabled:bg-slate-300 flex items-center justify-center gap-1.5"
+            className="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-full shadow-md shadow-teal-700/20 transition active:scale-98 disabled:bg-slate-300 flex items-center justify-center gap-1.5"
           >
-            <span>{loading ? 'Authenticating...' : 'Sign In to CampusBorrow'}</span>
+            <span>{loading ? 'Authenticating...' : 'Sign In to BorrowBuddy'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </form>
 
         <div className="pt-2 text-center text-xs text-slate-500">
           New to campus?{' '}
-          <a href="/register" className="text-blue-600 font-bold hover:underline">
+          <a href="/register" className="text-teal-700 font-bold hover:underline">
             Register Student Profile
           </a>
         </div>
@@ -116,15 +116,15 @@ export default function LoginPage() {
 
       {/* 1-Click Fast Login for Presentation */}
       <div className="bg-slate-50 p-5 rounded-3xl border border-slate-200 text-xs space-y-3">
-        <div className="flex items-center gap-1.5 text-blue-700 font-bold">
-          <Sparkles className="w-4 h-4" />
-          <span>Demo 1-Click Accounts for Presentation:</span>
+        <div className="flex items-center gap-1.5 text-teal-800 font-bold">
+          <Sparkles className="w-4 h-4 text-teal-600" />
+          <span>Demo 1-Click Presentation Accounts:</span>
         </div>
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => handleQuickLogin('arjun@iiitnr.edu.in', 'password123')}
-            className="p-2.5 text-left bg-white hover:bg-blue-50/70 border border-slate-200 hover:border-blue-300 rounded-xl transition shadow-2xs"
+            className="p-2.5 text-left bg-white hover:bg-mint-50 border border-slate-200 hover:border-teal-300 rounded-2xl transition shadow-2xs"
           >
             <p className="font-bold text-slate-900">Arjun Mehta (Student A)</p>
             <p className="text-[10px] text-slate-500">DSAI 1st Year (Borrower)</p>
@@ -133,7 +133,7 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => handleQuickLogin('priya@iiitnr.edu.in', 'password123')}
-            className="p-2.5 text-left bg-white hover:bg-blue-50/70 border border-slate-200 hover:border-blue-300 rounded-xl transition shadow-2xs"
+            className="p-2.5 text-left bg-white hover:bg-mint-50 border border-slate-200 hover:border-teal-300 rounded-2xl transition shadow-2xs"
           >
             <p className="font-bold text-slate-900">Priya Sharma (Student B)</p>
             <p className="text-[10px] text-slate-500">CSE 2nd Year (Calculator)</p>
@@ -142,7 +142,7 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => handleQuickLogin('rohan@iiitnr.edu.in', 'password123')}
-            className="p-2.5 text-left bg-white hover:bg-blue-50/70 border border-slate-200 hover:border-blue-300 rounded-xl transition shadow-2xs"
+            className="p-2.5 text-left bg-white hover:bg-mint-50 border border-slate-200 hover:border-teal-300 rounded-2xl transition shadow-2xs"
           >
             <p className="font-bold text-slate-900">Rohan Verma (Student C)</p>
             <p className="text-[10px] text-slate-500">ECE 3rd Year (Arduino)</p>
@@ -151,7 +151,7 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => handleQuickLogin('admin@iiitnr.edu.in', 'admin123')}
-            className="p-2.5 text-left bg-purple-50/70 hover:bg-purple-100 border border-purple-200 rounded-xl transition shadow-2xs"
+            className="p-2.5 text-left bg-purple-50/70 hover:bg-purple-100 border border-purple-200 rounded-2xl transition shadow-2xs"
           >
             <p className="font-bold text-purple-900">Dr. S. K. Admin</p>
             <p className="text-[10px] text-purple-600">Faculty In-Charge</p>
