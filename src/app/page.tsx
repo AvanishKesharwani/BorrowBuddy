@@ -78,193 +78,205 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-10 sm:space-y-14 pb-12">
-      {/* 1. IIIT-NR Campus Hero Banner with Real Campus Photo */}
-      <section className="relative rounded-4xl bg-white border border-slate-200/80 p-6 sm:p-10 lg:p-14 overflow-hidden shadow-xs">
-        {/* Mint gradient highlight */}
-        <div className="absolute top-0 right-0 w-3/5 h-full bg-gradient-to-l from-mint-100/70 via-mint-50/40 to-transparent pointer-events-none -z-0" />
+      {/* 1. Panoramic IIIT-NR Campus Hero Banner inspired by reference design */}
+      <section className="relative rounded-4xl overflow-hidden shadow-2xl border border-teal-900/30 text-white min-h-[580px] sm:min-h-[620px] flex flex-col justify-between p-6 sm:p-10 lg:p-12">
+        {/* Background Image: Real IIIT-Naya Raipur Campus */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-100 hover:scale-105"
+          style={{ backgroundImage: `url('/images/iiitnr-campus-banner.jpg')` }}
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-          {/* Left: Headline & Action Points */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 bg-mint-100 border border-teal-200/80 px-4 py-1.5 rounded-full text-xs font-bold text-teal-800 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
-              <span>Dr. SPM IIIT-Naya Raipur Official Campus Network</span>
-            </div>
+        {/* Deep atmospheric overlay with signature Teal / Slate gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-teal-950/80 to-slate-950/95 backdrop-blur-[0.5px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-500/25 via-transparent to-black/60 pointer-events-none" />
 
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-[1.15]">
-              BORROWBUDDY: Your Campus Borrowing &amp; Renting Marketplace
-            </h1>
-
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
-              Save money, share resources, and connect with fellow students at IIIT-Naya Raipur.
-              Borrow calculators, chargers, lab equipment, cycles, and books across Ramanujan &amp; Bose hostels.
-            </p>
-
-            {/* Quick Action Buttons */}
-            <div className="pt-1 flex flex-wrap items-center gap-3">
-              <a
-                href="/explore"
-                className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 active:scale-95 text-white text-sm font-bold px-7 py-3.5 rounded-full shadow-md shadow-teal-700/20 transition"
-              >
-                <span>Browse Items</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-
-              <a
-                href="/items/new"
-                className="inline-flex items-center gap-2 bg-mint-100 hover:bg-mint-200 border border-teal-200 text-teal-900 text-sm font-bold px-6 py-3.5 rounded-full transition"
-              >
-                <span>+ List an Item</span>
-              </a>
-            </div>
-
-            {/* Important Highlights for IIIT-NR Students */}
-            <div className="pt-3 grid grid-cols-2 gap-3 text-xs">
-              <div className="flex items-center gap-2 text-slate-700 font-semibold bg-slate-50 p-2.5 rounded-2xl border border-slate-100">
-                <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0" />
-                <span>Verified @iiitnr.edu.in Only</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-700 font-semibold bg-slate-50 p-2.5 rounded-2xl border border-slate-100">
-                <MapPin className="w-4 h-4 text-teal-600 shrink-0" />
-                <span>Hostels &amp; Library Handover</span>
-              </div>
-            </div>
+        {/* Centered Hero Content */}
+        <div className="relative z-10 text-center space-y-6 max-w-4xl mx-auto my-auto pt-4 sm:pt-8">
+          {/* Institution Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 border border-teal-400/40 text-teal-200 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide backdrop-blur-md shadow-inner transition">
+            <Sparkles className="w-3.5 h-3.5 text-teal-300" />
+            <span>Dr. SPM IIIT-Naya Raipur Official Campus Network</span>
           </div>
 
-          {/* Right: Actual IIIT-Naya Raipur Campus Photo Banner Card */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] bg-slate-100 group">
-              <img
-                src="/images/iiitnr-campus-banner.jpg"
-                alt="Dr. Shyama Prasad Mukherjee IIIT Naya Raipur campus building and students"
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/20 to-transparent" />
+          {/* Big, Bold Typography (matching reference school hero) */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08] drop-shadow-md">
+            Borrow What You Need.
+            <span className="block text-mint-300 bg-gradient-to-r from-mint-300 via-teal-200 to-teal-400 bg-clip-text text-transparent">
+              Lend What You Have.
+            </span>
+          </h1>
 
-              {/* Banner Badge overlay with institutional name */}
-              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-xs p-3.5 rounded-2xl border border-slate-100 shadow-lg space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-teal-800 uppercase tracking-wider bg-mint-100 px-2 py-0.5 rounded-full">
-                    Campus Landmark
-                  </span>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-                    100% Safe Returns
-                  </span>
-                </div>
-                <p className="text-xs font-extrabold text-slate-900">
-                  Dr. SPM IIIT-Naya Raipur Main Campus
-                </p>
-                <p className="text-[11px] text-slate-500">
-                  Connected across Hostel Ramanujan (Boys) &amp; Hostel Bose (Girls)
-                </p>
+          {/* Subtitle */}
+          <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-sm">
+            Empowering students with knowledge, resources, and trust across IIIT-Naya Raipur.
+            Borrow calculators, chargers, lab kits, and cycles across Ramanujan &amp; Bose hostels!
+          </p>
+
+          {/* Centered Action Buttons (matching reference buttons) */}
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <a
+              href="/explore"
+              className="inline-flex items-center gap-2.5 bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-950 text-sm sm:text-base font-black px-8 py-3.5 rounded-full shadow-xl shadow-teal-950/50 hover:shadow-teal-400/30 transition duration-200"
+            >
+              <span>Browse Items</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+            </a>
+
+            <a
+              href="/items/new"
+              className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 active:scale-95 text-white border border-white/30 backdrop-blur-md text-sm sm:text-base font-bold px-8 py-3.5 rounded-full transition duration-200 shadow-lg"
+            >
+              <span>+ List an Item</span>
+            </a>
+          </div>
+
+          {/* Integrated Floating Search Bar inside Hero */}
+          <div className="pt-4 max-w-2xl mx-auto w-full">
+            <form
+              action="/explore"
+              method="GET"
+              className="flex flex-col sm:flex-row items-center gap-2 bg-white/95 backdrop-blur-md p-2 rounded-full border border-white/40 shadow-2xl"
+            >
+              <div className="flex-1 flex items-center px-4 w-full">
+                <Search className="w-5 h-5 text-slate-400 mr-3 shrink-0" />
+                <input
+                  type="text"
+                  name="q"
+                  placeholder="Search calculators, chargers, Arduino kits, textbooks, cycles..."
+                  className="w-full bg-transparent text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none py-1.5"
+                />
               </div>
+              <button
+                type="submit"
+                className="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold px-7 py-2.5 rounded-full transition shadow-md shrink-0"
+              >
+                Search
+              </button>
+            </form>
+
+            {/* Quick Search Chips */}
+            <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-300 flex-wrap">
+              <span className="font-semibold text-slate-400">Popular on campus:</span>
+              <a
+                href="/explore?q=Calculator"
+                className="bg-slate-900/60 hover:bg-teal-900/80 text-teal-200 border border-teal-500/30 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold transition"
+              >
+                Casio Calculator
+              </a>
+              <a
+                href="/explore?q=Arduino"
+                className="bg-slate-900/60 hover:bg-teal-900/80 text-teal-200 border border-teal-500/30 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold transition"
+              >
+                Arduino Starter Kit
+              </a>
+              <a
+                href="/explore?q=Charger"
+                className="bg-slate-900/60 hover:bg-teal-900/80 text-teal-200 border border-teal-500/30 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold transition"
+              >
+                Dell 65W Charger
+              </a>
+              <a
+                href="/explore?q=Physics"
+                className="bg-slate-900/60 hover:bg-teal-900/80 text-teal-200 border border-teal-500/30 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold transition"
+              >
+                Physics Textbook
+              </a>
+              <a
+                href="/explore?q=Bicycle"
+                className="bg-slate-900/60 hover:bg-teal-900/80 text-teal-200 border border-teal-500/30 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold transition"
+              >
+                Geared Bicycle
+              </a>
             </div>
           </div>
         </div>
 
-        {/* 2. Key Institutional Highlights Strip on Hero Banner */}
-        <div className="mt-8 pt-6 border-t border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
-            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
-              <Building2 className="w-4 h-4 text-teal-600" />
+        {/* Institutional Trust Highlights Strip (Frosted Glass Inside Hero) */}
+        <div className="relative z-10 pt-8 mt-6 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 text-left">
+          <div className="bg-slate-950/60 hover:bg-slate-950/75 border border-white/15 backdrop-blur-md p-4 rounded-2xl transition duration-200">
+            <div className="flex items-center gap-2 text-teal-300 font-bold text-xs mb-1">
+              <Building2 className="w-4 h-4 text-teal-400 shrink-0" />
               <span>Campus Locations</span>
             </div>
-            <p className="text-[11px] text-slate-600 leading-snug">
+            <p className="text-[11px] text-slate-300 leading-snug">
               Meetups outside Ramanujan, Bose, Central Library, SAC, and IoT Labs.
             </p>
           </div>
 
-          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
-            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
-              <CheckCircle2 className="w-4 h-4 text-teal-600" />
+          <div className="bg-slate-950/60 hover:bg-slate-950/75 border border-white/15 backdrop-blur-md p-4 rounded-2xl transition duration-200">
+            <div className="flex items-center gap-2 text-teal-300 font-bold text-xs mb-1">
+              <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
               <span>Two-Step Return</span>
             </div>
-            <p className="text-[11px] text-slate-600 leading-snug">
-              Borrower marks returned $\rightarrow$ Owner physically inspects &amp; confirms.
+            <p className="text-[11px] text-slate-300 leading-snug">
+              Borrower marks returned &rarr; Owner physically inspects &amp; confirms.
             </p>
           </div>
 
-          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
-            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
-              <AlertCircle className="w-4 h-4 text-teal-600" />
+          <div className="bg-slate-950/60 hover:bg-slate-950/75 border border-white/15 backdrop-blur-md p-4 rounded-2xl transition duration-200">
+            <div className="flex items-center gap-2 text-teal-300 font-bold text-xs mb-1">
+              <AlertCircle className="w-4 h-4 text-teal-400 shrink-0" />
               <span>Overdue Protection</span>
             </div>
-            <p className="text-[11px] text-slate-600 leading-snug">
+            <p className="text-[11px] text-slate-300 leading-snug">
               Automated 5%/day simulated penalty protects owners from unreturned gear.
             </p>
           </div>
 
-          <div className="bg-mint-50/70 border border-teal-100 p-4 rounded-2xl">
-            <div className="flex items-center gap-2 text-teal-800 font-bold text-xs mb-1">
-              <Star className="w-4 h-4 text-amber-500 fill-amber-400" />
+          <div className="bg-slate-950/60 hover:bg-slate-950/75 border border-white/15 backdrop-blur-md p-4 rounded-2xl transition duration-200">
+            <div className="flex items-center gap-2 text-teal-300 font-bold text-xs mb-1">
+              <Star className="w-4 h-4 text-amber-400 fill-amber-400 shrink-0" />
               <span>Trust &amp; Reliability</span>
             </div>
-            <p className="text-[11px] text-slate-600 leading-snug">
+            <p className="text-[11px] text-slate-300 leading-snug">
               Dual ratings: peer review score + behavior-based reliability index.
             </p>
           </div>
         </div>
+      </section>
 
-        {/* 3. Integrated Floating Search Bar in Banner */}
-        <div className="mt-6 pt-4">
-          <form
-            action="/explore"
-            method="GET"
-            className="flex flex-col sm:flex-row items-center gap-2 max-w-2xl mx-auto bg-slate-50 p-2 rounded-full border border-slate-200 shadow-xs"
-          >
-            <div className="flex-1 flex items-center px-4 w-full">
-              <Search className="w-5 h-5 text-slate-400 mr-3 shrink-0" />
-              <input
-                type="text"
-                name="q"
-                placeholder="Search for calculators, chargers, Arduino kits, textbooks, cycles..."
-                className="w-full bg-transparent text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none py-1.5"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold px-7 py-2.5 rounded-full transition shadow-xs"
-            >
-              Search
-            </button>
-          </form>
-
-          {/* Quick Search Chips */}
-          <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-500 flex-wrap">
-            <span className="font-semibold text-slate-400">Popular on campus:</span>
-            <a
-              href="/explore?q=Calculator"
-              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
-            >
-              Casio Calculator
-            </a>
-            <a
-              href="/explore?q=Arduino"
-              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
-            >
-              Arduino Starter Kit
-            </a>
-            <a
-              href="/explore?q=Charger"
-              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
-            >
-              Dell 65W Charger
-            </a>
-            <a
-              href="/explore?q=Physics"
-              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
-            >
-              Physics Textbook
-            </a>
-            <a
-              href="/explore?q=Bicycle"
-              className="bg-white hover:bg-mint-100 text-teal-800 border border-slate-200 px-3 py-1 rounded-full text-[11px] font-semibold transition"
-            >
-              Geared Bicycle
-            </a>
+      {/* Verified Campus Statistics Ribbon */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border border-slate-200/80 rounded-3xl p-5 shadow-xs">
+        <div className="flex items-center gap-3.5 px-3">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+            <Users className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-xl font-black text-slate-900">{totalStudents}</div>
+            <div className="text-[11px] text-slate-500 font-medium">Verified Students</div>
           </div>
         </div>
-      </section>
+
+        <div className="flex items-center gap-3.5 px-3">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+            <BookOpen className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-xl font-black text-slate-900">{totalItems}</div>
+            <div className="text-[11px] text-slate-500 font-medium">Campus Items Listed</div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3.5 px-3">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-xl font-black text-slate-900">{completedTransactions}</div>
+            <div className="text-[11px] text-slate-500 font-medium">Successful Returns</div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3.5 px-3">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+            <Building2 className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-xl font-black text-slate-900">Ramanujan &amp; Bose</div>
+            <div className="text-[11px] text-slate-500 font-medium">Active Hostels Network</div>
+          </div>
+        </div>
+      </div>
 
       {/* 2. Featured Categories Section (matches the mint cards in mockup) */}
       <section className="space-y-4">

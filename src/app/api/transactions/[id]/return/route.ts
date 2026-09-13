@@ -49,7 +49,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         transactionId: tx.id,
         senderId: user.id,
         receiverId: tx.ownerId,
-        content: `I have handed over/returned your ${tx.item.name}. Please confirm the return in CampusBorrow.`,
+        content: `I have handed over/returned your ${tx.item.name}. Please confirm the return in BorrowBuddy.`,
       },
     });
 
