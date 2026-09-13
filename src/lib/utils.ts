@@ -13,8 +13,8 @@ export const CATEGORIES = [
 export const ITEM_CONDITIONS = ['Brand New', 'Like New', 'Good', 'Fair'] as const;
 
 export const CAMPUS_LOCATIONS = [
-  'Hostel Ramanujan (Boys)',
-  'Hostel Bose (Girls)',
+  'Hostel Raman (Boys)',
+  'Hostel Shabri (Girls)',
   'Central Library',
   'Sports Complex',
   'Student Activity Centre (SAC)',

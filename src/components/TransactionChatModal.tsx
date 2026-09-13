@@ -131,7 +131,7 @@ export default function TransactionChatModal({
             type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Type message (e.g., 'Meet near Ramanujan reception at 5 PM')..."
+            placeholder="Type message (e.g., 'Meet near Raman reception at 5 PM')..."
             className="flex-1 px-3 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
           <button

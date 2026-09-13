@@ -88,7 +88,7 @@ export default function NewItemPage() {
             </span>
             <h1 className="text-xl sm:text-2xl font-black text-slate-900">List an Item on Campus</h1>
             <p className="text-xs text-slate-500">
-              Share physical equipment with verified students across Ramanujan &amp; Bose hostels.
+              Share physical equipment with verified students across Raman &amp; Shabri hostels.
             </p>
           </div>
         </div>

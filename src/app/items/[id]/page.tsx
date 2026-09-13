@@ -536,7 +536,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                     rows={2}
                     value={borrowerNotes}
                     onChange={(e) => setBorrowerNotes(e.target.value)}
-                    placeholder="e.g. 'Can meet at Ramanujan ground floor lobby after 5 PM!'"
+                    placeholder="e.g. 'Can meet at Raman ground floor lobby after 5 PM!'"
                     className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50"
                   />
                 </div>

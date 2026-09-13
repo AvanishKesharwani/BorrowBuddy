@@ -123,7 +123,7 @@ async function main() {
       securityDeposit: 0,
       maxDuration: 7,
       availability: 'AVAILABLE',
-      campusLocation: 'Hostel Bose Block A, Common Room',
+      campusLocation: 'Hostel Shabri Block A, Common Room',
     },
   });
 
@@ -142,7 +142,7 @@ async function main() {
       securityDeposit: 0,
       maxDuration: 14,
       availability: 'AVAILABLE',
-      campusLocation: 'ECE Hardware Lab / Ramanujan Block B',
+      campusLocation: 'ECE Hardware Lab / Raman Block B',
     },
   });
 
@@ -161,7 +161,7 @@ async function main() {
       securityDeposit: 0,
       maxDuration: 3,
       availability: 'AVAILABLE',
-      campusLocation: 'Hostel Ramanujan Ground Floor Study Hall',
+      campusLocation: 'Hostel Raman Ground Floor Study Hall',
     },
   });
 
@@ -218,7 +218,7 @@ async function main() {
       securityDeposit: 200.0,
       maxDuration: 7,
       availability: 'AVAILABLE',
-      campusLocation: 'Hostel Ramanujan Cycle Stand',
+      campusLocation: 'Hostel Raman Cycle Stand',
     },
   });
 
@@ -237,7 +237,7 @@ async function main() {
       securityDeposit: 0,
       maxDuration: 2,
       availability: 'AVAILABLE',
-      campusLocation: 'Hostel Bose B-302 / Admin Block',
+      campusLocation: 'Hostel Shabri B-302 / Admin Block',
     },
   });
 

@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { UserPlus, ArrowRight, ShieldCheck, Mail, Lock, User, Hash, BookOpen } from 'lucide-react';
+import { UserPlus, ArrowRight, ShieldCheck, Mail, Lock, User, Hash } from 'lucide-react';
+import { FancyLogoIcon } from '@/components/BorrowBuddyLogo';
 import { BRANCHES, YEARS } from '@/lib/utils';
 
 export default function RegisterPage() {
@@ -52,10 +53,8 @@ export default function RegisterPage() {
   return (
     <div className="max-w-md mx-auto my-6 space-y-6 pb-12">
       <div className="bg-white p-8 rounded-4xl border border-slate-200/80 shadow-xs space-y-5">
-        <div className="text-center space-y-1.5">
-          <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center font-black text-xl mx-auto shadow-md shadow-teal-700/20">
-            <BookOpen className="w-6 h-6" />
-          </div>
+        <div className="text-center space-y-2.5">
+          <FancyLogoIcon className="w-14 h-14 mx-auto drop-shadow-md" />
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Student Registration</h1>
           <p className="text-xs text-slate-500">
             Join BorrowBuddy — exclusive to IIIT-Naya Raipur students

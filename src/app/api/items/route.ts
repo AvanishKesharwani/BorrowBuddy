@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
         securityDeposit: securityDeposit ? parseFloat(securityDeposit) : null,
         maxDuration: maxDuration ? parseInt(maxDuration) : 7,
         availability: 'AVAILABLE',
-        campusLocation: campusLocation || 'Hostel Ramanujan',
+        campusLocation: campusLocation || 'Hostel Raman',
       },
     });
 

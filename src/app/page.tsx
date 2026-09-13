@@ -109,7 +109,7 @@ export default async function HomePage() {
           {/* Subtitle */}
           <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-sm">
             Empowering students with knowledge, resources, and trust across IIIT-Naya Raipur.
-            Borrow calculators, chargers, lab kits, and cycles across Ramanujan &amp; Bose hostels!
+            Borrow calculators, chargers, lab kits, and cycles across Raman &amp; Shabri hostels!
           </p>
 
           {/* Centered Action Buttons (matching reference buttons) */}
@@ -199,7 +199,7 @@ export default async function HomePage() {
               <span>Campus Locations</span>
             </div>
             <p className="text-[11px] text-slate-300 leading-snug">
-              Meetups outside Ramanujan, Bose, Central Library, SAC, and IoT Labs.
+              Meetups outside Raman, Shabri, Central Library, SAC, and IoT Labs.
             </p>
           </div>
 
@@ -272,7 +272,7 @@ export default async function HomePage() {
             <Building2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-slate-900">Ramanujan &amp; Bose</div>
+            <div className="text-xl font-black text-slate-900">Raman &amp; Shabri</div>
             <div className="text-[11px] text-slate-500 font-medium">Active Hostels Network</div>
           </div>
         </div>
@@ -358,7 +358,7 @@ export default async function HomePage() {
             </div>
             <h4 className="font-bold text-slate-900 text-base">1. Browse items near you</h4>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Search calculators, chargers, or lab kits available from peers across Ramanujan and Bose hostels.
+              Search calculators, chargers, or lab kits available from peers across Raman and Shabri hostels.
             </p>
           </div>
 

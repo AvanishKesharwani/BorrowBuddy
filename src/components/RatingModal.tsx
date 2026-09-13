@@ -168,7 +168,7 @@ export default function RatingModal({
               rows={3}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              placeholder="e.g. 'Very prompt in meeting up outside Ramanujan hostel. Item was in great condition!'"
+              placeholder="e.g. 'Very prompt in meeting up outside Raman hostel. Item was in great condition!'"
               className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
           </div>

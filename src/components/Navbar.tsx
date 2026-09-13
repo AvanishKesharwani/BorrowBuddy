@@ -21,6 +21,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { CATEGORIES } from '@/lib/utils';
+import BorrowBuddyLogo from '@/components/BorrowBuddyLogo';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -68,29 +69,17 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20 gap-4">
-          {/* Logo & University Emblem (matches mockup) */}
-          <a href="/" className="flex items-center gap-3 shrink-0 group">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold shadow-md shadow-teal-700/20 group-hover:bg-teal-700 transition">
-              <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-slate-900 text-lg sm:text-xl tracking-tight leading-none">
-                  BorrowBuddy
-                </span>
-              </div>
-              <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-teal-700 mt-0.5">
-                IIIT-Naya Raipur
-              </p>
-            </div>
+        <div className="flex justify-between items-center h-16 sm:h-20 gap-2 sm:gap-4">
+          {/* Custom Fancy BorrowBuddy Logo (Books + Headphones) */}
+          <a href="/" className="shrink-0">
+            <BorrowBuddyLogo size="md" />
           </a>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-1">
+          {/* Desktop Navigation Links (strictly 1 line with whitespace-nowrap) */}
+          <div className="hidden lg:flex items-center space-x-1 shrink-0">
             <a
               href="/borrowings"
-              className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition ${
+              className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition whitespace-nowrap shrink-0 ${
                 pathname === '/borrowings'
                   ? 'text-teal-700 bg-mint-100'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -100,22 +89,22 @@ export default function Navbar() {
             </a>
             <a
               href="/lent"
-              className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition ${
+              className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition whitespace-nowrap shrink-0 ${
                 pathname === '/lent'
                   ? 'text-teal-700 bg-mint-100'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              Rent & Lend
+              Rent &amp; Lend
             </a>
 
             {/* Categories Dropdown */}
-            <div className="relative">
+            <div className="relative shrink-0">
               <button
                 onClick={() => setCategoriesOpen(!categoriesOpen)}
-                className="px-3 py-1.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition flex items-center gap-1"
+                className="px-3 py-1.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition flex items-center gap-1 whitespace-nowrap shrink-0"
               >
-                <span>Categories</span>
+                <span className="whitespace-nowrap">Categories</span>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
               </button>
 
@@ -128,7 +117,7 @@ export default function Navbar() {
                     <a
                       key={cat}
                       href={`/explore?category=${encodeURIComponent(cat)}`}
-                      className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-mint-50 hover:text-teal-700 transition"
+                      className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-mint-50 hover:text-teal-700 transition whitespace-nowrap"
                     >
                       {cat}
                     </a>
@@ -139,7 +128,7 @@ export default function Navbar() {
 
             <a
               href="/explore"
-              className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition ${
+              className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition whitespace-nowrap shrink-0 ${
                 pathname === '/explore'
                   ? 'text-teal-700 bg-mint-100'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -151,22 +140,22 @@ export default function Navbar() {
             {currentUser?.role === 'ADMIN' && (
               <a
                 href="/admin"
-                className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-xl text-sm font-semibold transition flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
                   pathname === '/admin'
                     ? 'text-purple-700 bg-purple-50'
                     : 'text-purple-700 hover:bg-purple-50'
                 }`}
               >
                 <Shield className="w-4 h-4" />
-                Admin
+                <span>Admin</span>
               </a>
             )}
           </div>
 
-          {/* Search bar inside header (matches mockup desktop view) */}
+          {/* Search bar inside header (flexibly sized to never crowd out text) */}
           <form
             onSubmit={handleSearchSubmit}
-            className="hidden md:flex items-center relative max-w-xs w-full"
+            className="hidden xl:flex items-center relative w-40 2xl:w-56 shrink-1"
           >
             <input
               type="text"
@@ -179,23 +168,23 @@ export default function Navbar() {
           </form>
 
           {/* Right Action Items */}
-          <div className="flex items-center space-x-2.5">
-            {/* List an Item CTA (in signature Teal from mockup) */}
+          <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+            {/* List an Item CTA (strictly single line) */}
             <a
               href="/items/new"
-              className="inline-flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 active:scale-95 text-white text-xs sm:text-sm font-bold px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-xs transition"
+              className="inline-flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 active:scale-95 text-white text-xs sm:text-sm font-bold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-xs transition whitespace-nowrap shrink-0"
             >
-              <PlusCircle className="w-4 h-4" />
-              <span>List an Item</span>
+              <PlusCircle className="w-4 h-4 shrink-0" />
+              <span className="whitespace-nowrap">List an Item</span>
             </a>
 
             {/* Notifications Bell */}
             <a
               href="/notifications"
-              className="relative p-2 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition"
+              className="relative p-2 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition shrink-0"
               title="Notifications"
             >
-              <Bell className="w-5 h-5" />
+              <Bell className="w-5 h-5 shrink-0" />
               {currentUser?.unreadNotifications > 0 && (
                 <span className="absolute top-1 right-1 w-4 h-4 bg-rose-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
                   {currentUser.unreadNotifications > 9 ? '9+' : currentUser.unreadNotifications}
@@ -296,16 +285,16 @@ export default function Navbar() {
                 )}
               </div>
             ) : (
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                 <a
                   href="/login"
-                  className="text-xs sm:text-sm font-bold text-slate-700 hover:text-teal-700 px-3 py-2"
+                  className="text-xs sm:text-sm font-bold text-slate-700 hover:text-teal-700 px-2.5 sm:px-3 py-2 whitespace-nowrap shrink-0"
                 >
                   Log In
                 </a>
                 <a
                   href="/register"
-                  className="text-xs sm:text-sm font-bold bg-mint-100 hover:bg-mint-200 text-teal-800 px-3.5 py-2 rounded-full transition"
+                  className="text-xs sm:text-sm font-bold bg-mint-100 hover:bg-mint-200 text-teal-800 px-3 sm:px-3.5 py-2 rounded-full transition whitespace-nowrap shrink-0 shadow-2xs"
                 >
                   Get Started
                 </a>

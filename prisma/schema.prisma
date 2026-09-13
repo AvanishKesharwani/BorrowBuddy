@@ -49,7 +49,7 @@ model Item {
   securityDeposit Float?
   maxDuration     Int           @default(7) // in days
   availability    String        @default("AVAILABLE") // "AVAILABLE", "BORROWED", "RESERVED", "MAINTENANCE"
-  campusLocation  String        @default("Hostel Ramanujan")
+  campusLocation  String        @default("Hostel Raman")
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
