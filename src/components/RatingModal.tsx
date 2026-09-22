@@ -79,19 +79,19 @@ export default function RatingModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 animate-in fade-in zoom-in-95">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 transition-colors">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <h3 className="font-bold text-slate-900 text-lg">Rate Your Experience</h3>
-            <p className="text-xs text-slate-500">Transaction for: {itemTitle}</p>
+            <h3 className="font-bold text-slate-900 dark:text-white text-lg">Rate Your Experience</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Transaction for: {itemTitle}</p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {error && (
-          <div className="mt-3 p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl">
+          <div className="mt-3 p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs rounded-xl">
             {error}
           </div>
         )}
@@ -99,8 +99,8 @@ export default function RatingModal({
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           {/* Star Rating */}
           <div className="text-center py-2">
-            <label className="block text-xs font-semibold text-slate-700 mb-2">
-              How would you rate your peer, <span className="text-blue-600">{revieweeName}</span>?
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
+              How would you rate your peer, <span className="text-teal-600 dark:text-teal-400">{revieweeName}</span>?
             </label>
             <div className="flex items-center justify-center gap-2">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -116,13 +116,13 @@ export default function RatingModal({
                     className={`w-8 h-8 ${
                       (hoverRating || rating) >= star
                         ? 'fill-amber-400 text-amber-400'
-                        : 'text-slate-200'
+                        : 'text-slate-200 dark:text-slate-700'
                     }`}
                   />
                 </button>
               ))}
             </div>
-            <p className="text-xs text-amber-600 font-semibold mt-1">
+            <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold mt-1">
               {rating === 5
                 ? '5.0 — Outstanding & Reliable!'
                 : rating === 4
@@ -135,7 +135,7 @@ export default function RatingModal({
 
           {/* Quick criteria tags */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
               Select feedback tags:
             </label>
             <div className="flex flex-wrap gap-1.5">
@@ -148,8 +148,8 @@ export default function RatingModal({
                     onClick={() => toggleCriteria(crit)}
                     className={`text-xs px-2.5 py-1 rounded-full font-medium transition ${
                       isSelected
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        ? 'bg-teal-600 text-white'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
                     {crit}
@@ -161,7 +161,7 @@ export default function RatingModal({
 
           {/* Review comment */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Public Comment / Testimonial:
             </label>
             <textarea
@@ -169,7 +169,7 @@ export default function RatingModal({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="e.g. 'Very prompt in meeting up outside Raman hostel. Item was in great condition!'"
-              className="w-full text-xs p-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full text-xs p-3 border border-slate-300 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
             />
           </div>
 
@@ -177,14 +177,14 @@ export default function RatingModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl"
+              className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 rounded-xl shadow-xs"
+              className="px-5 py-2 text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 disabled:bg-slate-300 dark:disabled:bg-slate-700 rounded-xl shadow-xs transition"
             >
               {loading ? 'Submitting...' : 'Submit Rating'}
             </button>
