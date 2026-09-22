@@ -79,28 +79,30 @@ export default function MyBorrowingsPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-10">
       {/* Page Title */}
-      <div className="flex items-center justify-between flex-wrap gap-4 bg-white p-6 sm:p-8 rounded-4xl border border-slate-200/80 shadow-xs">
+      <div className="flex items-center justify-between flex-wrap gap-4 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-4xl border border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-mint-100 text-teal-700 rounded-2xl">
+          <div className="p-3 bg-mint-100 dark:bg-teal-900/60 text-teal-700 dark:text-teal-300 rounded-2xl border border-teal-200/40 dark:border-teal-700/50">
             <Package className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300">
               BorrowBuddy Activity
             </span>
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900">My Borrowed Items</h1>
-            <p className="text-xs text-slate-500">
+            <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">My Borrowed Items</h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Track items you have borrowed, return deadlines, simulated penalties, and returns.
             </p>
           </div>
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center gap-1 bg-slate-100 p-1.5 rounded-full text-xs font-bold">
+        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full text-xs font-bold">
           <button
             onClick={() => setActiveTab('active')}
             className={`px-4 py-2 rounded-full transition ${
-              activeTab === 'active' ? 'bg-white text-teal-800 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              activeTab === 'active'
+                ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Active &amp; Overdue (
@@ -110,7 +112,9 @@ export default function MyBorrowingsPage() {
           <button
             onClick={() => setActiveTab('pending')}
             className={`px-4 py-2 rounded-full transition ${
-              activeTab === 'pending' ? 'bg-white text-teal-800 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              activeTab === 'pending'
+                ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Requests Sent (
@@ -120,7 +124,9 @@ export default function MyBorrowingsPage() {
           <button
             onClick={() => setActiveTab('returned')}
             className={`px-4 py-2 rounded-full transition ${
-              activeTab === 'returned' ? 'bg-white text-teal-800 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              activeTab === 'returned'
+                ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             History (
@@ -144,10 +150,10 @@ export default function MyBorrowingsPage() {
           <p className="text-xs">Loading borrowings...</p>
         </div>
       ) : filteredTransactions.length === 0 ? (
-        <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-3">
-          <Package className="w-10 h-10 text-slate-300 mx-auto" />
-          <h3 className="text-base font-bold text-slate-800">No items found in this section</h3>
-          <p className="text-xs text-slate-500 max-w-sm mx-auto">
+        <div className="bg-white dark:bg-slate-900 rounded-4xl p-12 text-center border border-slate-200 dark:border-slate-800 shadow-xs space-y-3 transition-colors">
+          <Package className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto" />
+          <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">No items found in this section</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
             {activeTab === 'active'
               ? 'You currently have no active borrowings on campus. Find items in the catalog!'
               : 'No transaction history found for this category.'}
@@ -173,12 +179,12 @@ export default function MyBorrowingsPage() {
             return (
               <div
                 key={tx.id}
-                className={`bg-white rounded-3xl border p-5 sm:p-6 transition shadow-xs space-y-4 ${
+                className={`bg-white dark:bg-slate-900 rounded-3xl border p-5 sm:p-6 transition shadow-xs space-y-4 ${
                   isOverdue
-                    ? 'border-rose-300 bg-rose-50/25'
+                    ? 'border-rose-300 dark:border-rose-800/80 bg-rose-50/25 dark:bg-rose-950/20'
                     : isDisputed
-                    ? 'border-orange-300'
-                    : 'border-slate-200/80'
+                    ? 'border-orange-300 dark:border-orange-800/80 bg-orange-50/20 dark:bg-orange-950/20'
+                    : 'border-slate-200/80 dark:border-slate-800'
                 }`}
               >
                 {/* Header row */}
@@ -187,7 +193,7 @@ export default function MyBorrowingsPage() {
                     <img
                       src={tx.item.imageUrl}
                       alt={tx.item.name}
-                      className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-200 shrink-0"
+                      className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-200 dark:border-slate-700 shrink-0"
                     />
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
@@ -196,18 +202,18 @@ export default function MyBorrowingsPage() {
                         >
                           {tx.status}
                         </span>
-                        <span className="text-xs text-slate-500 font-medium">
-                          Mode: <strong className="text-slate-800">{tx.mode}</strong>
+                        <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                          Mode: <strong className="text-slate-800 dark:text-slate-200">{tx.mode}</strong>
                         </span>
                       </div>
 
-                      <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-1">
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mt-1">
                         {tx.item.name}
                       </h3>
 
-                      <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
                         <span>Owned by:</span>
-                        <strong className="text-slate-800">{tx.owner.name}</strong>
+                        <strong className="text-slate-800 dark:text-slate-200">{tx.owner.name}</strong>
                         <span>({tx.owner.studentId || 'IIIT-NR'}, {tx.owner.branch})</span>
                       </p>
                     </div>
@@ -215,10 +221,10 @@ export default function MyBorrowingsPage() {
 
                   {/* Deadline box */}
                   <div className="text-right sm:self-center">
-                    <span className="text-[11px] text-slate-400 font-semibold block">Return Deadline</span>
+                    <span className="text-[11px] text-slate-400 dark:text-slate-500 font-semibold block">Return Deadline</span>
                     <span
                       className={`text-xs sm:text-sm font-bold flex items-center justify-end gap-1 ${
-                        isOverdue ? 'text-rose-600 animate-pulse' : 'text-slate-800'
+                        isOverdue ? 'text-rose-600 dark:text-rose-400 animate-pulse' : 'text-slate-800 dark:text-slate-200'
                       }`}
                     >
                       <Clock className="w-3.5 h-3.5" />
@@ -229,17 +235,17 @@ export default function MyBorrowingsPage() {
 
                 {/* Overdue Penalty Banner */}
                 {isOverdue && (
-                  <div className="p-4 bg-rose-100/90 border border-rose-300 rounded-2xl text-xs text-rose-900 space-y-1">
+                  <div className="p-4 bg-rose-100/90 dark:bg-rose-950/50 border border-rose-300 dark:border-rose-800 rounded-2xl text-xs text-rose-900 dark:text-rose-200 space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold flex items-center gap-1.5 text-rose-800 text-sm">
-                        <AlertTriangle className="w-4 h-4 text-rose-600" />
+                      <span className="font-bold flex items-center gap-1.5 text-rose-800 dark:text-rose-300 text-sm">
+                        <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                         OVERDUE NOTICE — Return Item Immediately!
                       </span>
-                      <span className="font-black text-rose-700 text-sm bg-rose-200 px-2.5 py-0.5 rounded-lg">
+                      <span className="font-black text-rose-700 dark:text-rose-300 text-sm bg-rose-200 dark:bg-rose-900/60 px-2.5 py-0.5 rounded-lg">
                         Penalty: {formatINR(tx.penalty)}
                       </span>
                     </div>
-                    <p className="text-rose-700">
+                    <p className="text-rose-700 dark:text-rose-300/90">
                       This item is overdue by <strong>{tx.overdueDays} day(s)</strong>. Simulated penalty rate of{' '}
                       <strong>5% per day</strong> on base value {formatINR(tx.item.declaredValue)} has been added.
                       Your Reliability Score has been adjusted.
@@ -249,9 +255,9 @@ export default function MyBorrowingsPage() {
 
                 {/* Return Pending Verification Notice */}
                 {isReturnPending && (
-                  <div className="p-3 bg-purple-50 border border-purple-200 rounded-2xl text-xs text-purple-900 flex items-center justify-between gap-3">
+                  <div className="p-3 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 rounded-2xl text-xs text-purple-900 dark:text-purple-200 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-purple-600 shrink-0" />
+                      <Clock className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
                       <span>
                         You marked this item as returned. Waiting for <strong>{tx.owner.name}</strong> to physically inspect and confirm receipt.
                       </span>
@@ -261,8 +267,8 @@ export default function MyBorrowingsPage() {
 
                 {/* Dispute Notice */}
                 {isDisputed && (
-                  <div className="p-3 bg-orange-50 border border-orange-200 rounded-2xl text-xs text-orange-900 flex items-center gap-2">
-                    <ShieldAlert className="w-4 h-4 text-orange-600 shrink-0" />
+                  <div className="p-3 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 rounded-2xl text-xs text-orange-900 dark:text-orange-200 flex items-center gap-2">
+                    <ShieldAlert className="w-4 h-4 text-orange-600 dark:text-orange-400 shrink-0" />
                     <span>
                       A dispute has been raised for this transaction. Campus Admin is reviewing the chat logs and return claim.
                     </span>
@@ -270,20 +276,20 @@ export default function MyBorrowingsPage() {
                 )}
 
                 {/* Bottom Actions Bar */}
-                <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setChatTx(tx)}
-                      className="inline-flex items-center gap-1 text-teal-800 bg-mint-100 hover:bg-mint-200 px-3.5 py-2 rounded-full font-bold transition"
+                      className="inline-flex items-center gap-1 text-teal-800 dark:text-teal-200 bg-mint-100 dark:bg-teal-900/60 hover:bg-mint-200 dark:hover:bg-teal-800 px-3.5 py-2 rounded-full font-bold transition border border-teal-200/40 dark:border-teal-700/50"
                     >
-                      <MessageCircle className="w-3.5 h-3.5 text-teal-600" />
+                      <MessageCircle className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                       <span>Chat with {tx.owner.name.split(' ')[0]}</span>
                     </button>
 
                     {!isDisputed && !isReturned && (
                       <button
                         onClick={() => setDisputeTx(tx)}
-                        className="inline-flex items-center gap-1 text-slate-500 hover:text-rose-600 px-2 py-1.5 font-medium transition"
+                        className="inline-flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 px-2 py-1.5 font-medium transition"
                       >
                         <HelpCircle className="w-3.5 h-3.5" />
                         <span>Raise Dispute</span>

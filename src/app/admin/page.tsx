@@ -76,6 +76,34 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const handleDeleteUser = async (userId: string, userName: string) => {
+    if (
+      !confirm(
+        `Are you sure you want to permanently delete student "${userName}" and all their campus listings and records? This action cannot be undone.`
+      )
+    ) {
+      return;
+    }
+    try {
+      const res = await fetch('/api/admin/users', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFeedback(`Student "${userName}" removed from campus directory.`);
+        setTimeout(() => setFeedback(null), 3000);
+        fetchAdminData();
+      } else {
+        alert(data.error || 'Failed to delete user');
+      }
+    } catch (e) {
+      console.error(e);
+      alert('An error occurred while deleting the user.');
+    }
+  };
+
   const handleDeleteItem = async (itemId: string) => {
     if (!confirm('Are you sure you want to remove this item listing from campus?')) return;
     try {
@@ -336,17 +364,29 @@ export default function AdminDashboardPage() {
                       )}
                     </td>
                     <td className="p-3.5 text-right">
-                      {u.role !== 'ADMIN' && (
-                        <button
-                          onClick={() => handleToggleSuspend(u.id, u.isSuspended)}
-                          className={`text-xs px-3 py-1 rounded-full font-bold transition ${
-                            u.isSuspended
-                              ? 'bg-mint-100 text-teal-800 hover:bg-mint-200'
-                              : 'bg-rose-50 text-rose-700 hover:bg-rose-100'
-                          }`}
-                        >
-                          {u.isSuspended ? 'Reactivate' : 'Suspend'}
-                        </button>
+                      {u.role === 'ADMIN' ? (
+                        <span className="text-[11px] text-slate-400 font-medium italic">Protected</span>
+                      ) : (
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => handleToggleSuspend(u.id, u.isSuspended)}
+                            className={`text-xs px-3 py-1 rounded-full font-bold transition ${
+                              u.isSuspended
+                                ? 'bg-mint-100 text-teal-800 hover:bg-mint-200'
+                                : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+                            }`}
+                          >
+                            {u.isSuspended ? 'Reactivate' : 'Suspend'}
+                          </button>
+                          <button
+                            onClick={() => handleDeleteUser(u.id, u.name)}
+                            className="text-xs text-rose-600 hover:bg-rose-50 hover:text-rose-700 border border-rose-200 hover:border-rose-300 px-2.5 py-1 rounded-full font-bold transition flex items-center gap-1"
+                            title={`Delete ${u.name}`}
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                            <span>Delete</span>
+                          </button>
+                        </div>
                       )}
                     </td>
                   </tr>

@@ -162,12 +162,12 @@ export default function BorrowBuddyLogo({
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex items-center gap-1 leading-none">
-          <span className={`font-extrabold text-slate-900 ${currentSize.text} tracking-tight whitespace-nowrap`}>
+          <span className={`font-extrabold text-slate-900 dark:text-white ${currentSize.text} tracking-tight whitespace-nowrap transition-colors`}>
             BorrowBuddy
           </span>
         </div>
         {showSubtitle && (
-          <p className={`${currentSize.sub} font-bold uppercase tracking-wider text-teal-700 mt-1 whitespace-nowrap`}>
+          <p className={`${currentSize.sub} font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400 mt-1 whitespace-nowrap transition-colors`}>
             IIIT-Naya Raipur
           </p>
         )}

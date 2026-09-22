@@ -202,7 +202,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
       <div className="flex items-center justify-between">
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 transition bg-white px-3.5 py-2 rounded-full border border-slate-200 shadow-2xs"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition bg-white dark:bg-slate-900 px-3.5 py-2 rounded-full border border-slate-200 dark:border-slate-800 shadow-2xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to items</span>
@@ -213,8 +213,8 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
             onClick={() => setBookmarked(!bookmarked)}
             className={`p-2 rounded-full border transition ${
               bookmarked
-                ? 'bg-rose-50 border-rose-200 text-rose-600'
-                : 'bg-white border-slate-200 text-slate-600 hover:text-rose-600'
+                ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400'
+                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400'
             }`}
           >
             <Heart className={`w-4 h-4 ${bookmarked ? 'fill-rose-600' : ''}`} />
@@ -225,8 +225,8 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Image & Overview */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-xs">
-            <div className="relative h-80 sm:h-96 w-full bg-slate-100 overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-xs transition-colors">
+            <div className="relative h-80 sm:h-96 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
               <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
               <div className="absolute top-4 left-4 flex gap-2">
                 <span
@@ -242,43 +242,43 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
 
             <div className="p-6 sm:p-8 space-y-4">
               <div className="flex items-center justify-between flex-wrap gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-mint-100 px-3 py-1 rounded-full">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 bg-mint-100 dark:bg-teal-900/60 border border-teal-200/40 dark:border-teal-700/50 px-3 py-1 rounded-full">
                   {item.category}
                 </span>
-                <span className="text-xs text-slate-500 flex items-center gap-1 font-medium">
-                  <MapPin className="w-3.5 h-3.5 text-teal-600" />
+                <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 font-medium">
+                  <MapPin className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                   {item.campusLocation}
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">
+              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white leading-tight">
                 {item.name}
               </h1>
 
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 {item.description}
               </p>
 
               {/* Item stats row */}
-              <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 text-center">
-                <div className="p-3 bg-slate-50 rounded-2xl">
-                  <span className="text-[11px] text-slate-400 font-semibold block">Max Duration</span>
-                  <span className="text-sm font-bold text-slate-800 flex items-center justify-center gap-1 mt-0.5">
-                    <Clock className="w-3.5 h-3.5 text-teal-600" />
+              <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+                <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 font-semibold block">Max Duration</span>
+                  <span className="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center justify-center gap-1 mt-0.5">
+                    <Clock className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                     {item.maxDuration} Days
                   </span>
                 </div>
 
-                <div className="p-3 bg-slate-50 rounded-2xl">
-                  <span className="text-[11px] text-slate-400 font-semibold block">Declared Base</span>
-                  <span className="text-sm font-bold text-slate-800 mt-0.5 block">
+                <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 font-semibold block">Declared Base</span>
+                  <span className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-0.5 block">
                     {formatINR(item.declaredValue)}
                   </span>
                 </div>
 
-                <div className="p-3 bg-slate-50 rounded-2xl">
-                  <span className="text-[11px] text-slate-400 font-semibold block">Late Penalty</span>
-                  <span className="text-sm font-bold text-rose-600 mt-0.5 block">
+                <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl">
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 font-semibold block">Late Penalty</span>
+                  <span className="text-sm font-bold text-rose-600 dark:text-rose-400 mt-0.5 block">
                     5% / day
                   </span>
                 </div>
@@ -286,9 +286,9 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
             </div>
           </div>
 
-          {/* Owner Trust Card (matches mobile screen owner card from mockup) */}
-          <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">
+          {/* Owner Trust Card */}
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">
               Owner Profile &amp; Trust Index
             </h3>
 
@@ -297,19 +297,19 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                 <img
                   src={item.owner.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'}
                   alt={item.owner.name}
-                  className="w-14 h-14 rounded-2xl object-cover border-2 border-slate-100"
+                  className="w-14 h-14 rounded-2xl object-cover border-2 border-slate-100 dark:border-slate-800"
                 />
                 <div>
                   <div className="flex items-center gap-2">
-                    <h4 className="font-bold text-slate-900 text-base">{item.owner.name}</h4>
-                    <span className="text-[10px] font-bold text-teal-800 bg-mint-100 border border-teal-200 px-2 py-0.5 rounded-full">
+                    <h4 className="font-bold text-slate-900 dark:text-white text-base">{item.owner.name}</h4>
+                    <span className="text-[10px] font-bold text-teal-800 dark:text-teal-200 bg-mint-100 dark:bg-teal-900/60 border border-teal-200 dark:border-teal-700/50 px-2 py-0.5 rounded-full">
                       Primary
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 font-mono">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                     {item.owner.studentId} • {item.owner.branch}, {item.owner.year}
                   </p>
-                  <p className="text-[11px] text-teal-700 font-semibold mt-0.5">
+                  <p className="text-[11px] text-teal-700 dark:text-teal-400 font-semibold mt-0.5">
                     Verified IIIT-Naya Raipur Student
                   </p>
                 </div>
@@ -317,77 +317,77 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
 
               {/* Rating metrics */}
               <div className="flex items-center gap-2.5">
-                <div className="text-center bg-amber-50 border border-amber-200 px-3.5 py-2 rounded-2xl">
-                  <div className="flex items-center justify-center gap-1 text-amber-600 font-black text-sm">
+                <div className="text-center bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 px-3.5 py-2 rounded-2xl">
+                  <div className="flex items-center justify-center gap-1 text-amber-600 dark:text-amber-400 font-black text-sm">
                     <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
                     {item.owner.rating.toFixed(1)}
                   </div>
-                  <span className="text-[10px] text-amber-800 font-semibold block">Peer Rating</span>
+                  <span className="text-[10px] text-amber-800 dark:text-amber-300 font-semibold block">Peer Rating</span>
                 </div>
 
-                <div className="text-center bg-mint-50 border border-teal-200 px-3.5 py-2 rounded-2xl">
-                  <div className="flex items-center justify-center gap-1 text-teal-800 font-black text-sm">
-                    <ShieldCheck className="w-4 h-4 text-teal-600" />
+                <div className="text-center bg-mint-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 px-3.5 py-2 rounded-2xl">
+                  <div className="flex items-center justify-center gap-1 text-teal-800 dark:text-teal-300 font-black text-sm">
+                    <ShieldCheck className="w-4 h-4 text-teal-600 dark:text-teal-400" />
                     {item.owner.reliabilityScore.toFixed(0)}%
                   </div>
-                  <span className="text-[10px] text-teal-800 font-semibold block">Reliability</span>
+                  <span className="text-[10px] text-teal-800 dark:text-teal-300 font-semibold block">Reliability</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Interactive Booking & Calendar (matches mobile mockup) */}
+        {/* Right Column: Interactive Booking & Calendar */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs sticky top-24 space-y-5">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200/80 dark:border-slate-800 shadow-xs sticky top-24 space-y-5 transition-colors">
             {/* Price / Mode header */}
-            <div className="border-b border-slate-100 pb-4">
-              <span className="text-xs text-slate-400 font-bold block uppercase tracking-wider">
+            <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+              <span className="text-xs text-slate-400 dark:text-slate-500 font-bold block uppercase tracking-wider">
                 Availability &amp; Pricing
               </span>
-              <div className="text-2xl font-black text-slate-900 mt-1">
+              <div className="text-2xl font-black text-slate-900 dark:text-white mt-1">
                 {item.mode === 'RENT' ? (
-                  <span className="text-teal-700">{formatINR(item.rentalPrice || 0)} / day</span>
+                  <span className="text-teal-700 dark:text-teal-400">{formatINR(item.rentalPrice || 0)} / day</span>
                 ) : item.mode === 'BOTH' ? (
                   <span>Free Borrow or {formatINR(item.rentalPrice || 0)}/d</span>
                 ) : (
-                  <span className="text-teal-700">Free Peer Borrowing</span>
+                  <span className="text-teal-700 dark:text-teal-400">Free Peer Borrowing</span>
                 )}
               </div>
             </div>
 
             {isOwner ? (
-              <div className="p-5 bg-mint-50 border border-teal-200 rounded-2xl text-xs text-teal-900 space-y-2">
+              <div className="p-5 bg-mint-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 rounded-2xl text-xs text-teal-900 dark:text-teal-200 space-y-2">
                 <p className="font-bold flex items-center gap-1.5">
-                  <Info className="w-4 h-4 text-teal-700" />
+                  <Info className="w-4 h-4 text-teal-700 dark:text-teal-400" />
                   You own this item listing
                 </p>
-                <p className="text-slate-600">
+                <p className="text-slate-600 dark:text-slate-400">
                   Manage requests for this item in your <strong>Rent &amp; Lend</strong> dashboard.
                 </p>
                 <a
                   href="/lent"
-                  className="inline-block mt-2 font-bold text-teal-700 hover:underline"
+                  className="inline-block mt-2 font-bold text-teal-700 dark:text-teal-400 hover:underline"
                 >
                   View Incoming Requests &rarr;
                 </a>
               </div>
             ) : item.availability !== 'AVAILABLE' ? (
-              <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-600 space-y-1">
-                <p className="font-bold text-slate-900 text-sm">Currently Borrowed</p>
+              <div className="p-5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs text-slate-600 dark:text-slate-300 space-y-1">
+                <p className="font-bold text-slate-900 dark:text-white text-sm">Currently Borrowed</p>
                 <p>This item is currently with another student. Check back once returned.</p>
               </div>
             ) : (
               <form onSubmit={handleRequestBorrow} className="space-y-5">
                 {error && (
-                  <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl font-medium">
+                  <div className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs rounded-xl font-medium">
                     {error}
                   </div>
                 )}
 
                 {success && (
-                  <div className="p-3 bg-mint-100 border border-teal-200 text-teal-900 text-xs rounded-xl font-bold flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
+                  <div className="p-3 bg-mint-100 dark:bg-teal-900/60 border border-teal-200/40 dark:border-teal-700/50 text-teal-900 dark:text-teal-200 text-xs rounded-xl font-bold flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0" />
                     <span>Borrow request dispatched to {item.owner.name}!</span>
                   </div>
                 )}
@@ -395,7 +395,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                 {/* Mode Selector if item supports BOTH */}
                 {item.mode === 'BOTH' && (
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                       Choose Mode:
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -404,8 +404,8 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                         onClick={() => setSelectedMode('BORROW')}
                         className={`py-2 px-3 rounded-xl text-xs font-bold border transition ${
                           selectedMode === 'BORROW'
-                            ? 'bg-mint-100 border-teal-600 text-teal-800'
-                            : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                            ? 'bg-mint-100 dark:bg-teal-900/60 border-teal-600 text-teal-800 dark:text-teal-200'
+                            : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                         }`}
                       >
                         Free Borrow
@@ -415,8 +415,8 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                         onClick={() => setSelectedMode('RENT')}
                         className={`py-2 px-3 rounded-xl text-xs font-bold border transition ${
                           selectedMode === 'RENT'
-                            ? 'bg-mint-100 border-teal-600 text-teal-800'
-                            : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                            ? 'bg-mint-100 dark:bg-teal-900/60 border-teal-600 text-teal-800 dark:text-teal-200'
+                            : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                         }`}
                       >
                         Rent ({formatINR(item.rentalPrice || 0)}/d)
@@ -425,22 +425,22 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                   </div>
                 )}
 
-                {/* Interactive Calendar Date Selector (Replicates the mobile mockup directly!) */}
+                {/* Interactive Calendar Date Selector */}
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                      <CalendarIcon className="w-3.5 h-3.5 text-teal-600" />
+                    <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                      <CalendarIcon className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                       <span>Select Return Deadline:</span>
                     </label>
-                    <span className="text-[11px] font-semibold text-teal-700">
+                    <span className="text-[11px] font-semibold text-teal-700 dark:text-teal-400">
                       Max {item.maxDuration} days
                     </span>
                   </div>
 
                   {/* Calendar Widget Box */}
-                  <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl">
+                  <div className="p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl">
                     {/* Month Header with < > Navigation */}
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200/80 text-xs font-bold text-slate-800">
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200/80 dark:border-slate-700 text-xs font-bold text-slate-800 dark:text-slate-200">
                       <span>
                         {monthNames[calendarMonth]} {calendarYear}
                       </span>
@@ -448,14 +448,14 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                         <button
                           type="button"
                           onClick={handlePrevMonth}
-                          className="p-1 rounded-lg hover:bg-white text-slate-600"
+                          className="p-1 rounded-lg hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
                         >
                           <ChevronLeft className="w-4 h-4" />
                         </button>
                         <button
                           type="button"
                           onClick={handleNextMonth}
-                          className="p-1 rounded-lg hover:bg-white text-slate-600"
+                          className="p-1 rounded-lg hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
                         >
                           <ChevronRight className="w-4 h-4" />
                         </button>
@@ -463,7 +463,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                     </div>
 
                     {/* S M T W T F S header */}
-                    <div className="grid grid-cols-7 text-center text-[10px] font-bold text-slate-400 mb-1">
+                    <div className="grid grid-cols-7 text-center text-[10px] font-bold text-slate-400 dark:text-slate-500 mb-1">
                       <span>S</span>
                       <span>M</span>
                       <span>T</span>
@@ -498,8 +498,8 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                               selected
                                 ? 'bg-teal-600 text-white font-bold shadow-sm'
                                 : disabled
-                                ? 'text-slate-300 cursor-not-allowed'
-                                : 'text-slate-700 hover:bg-teal-100 hover:text-teal-800'
+                                ? 'text-slate-300 dark:text-slate-600 cursor-not-allowed'
+                                : 'text-slate-700 dark:text-slate-200 hover:bg-teal-100 dark:hover:bg-teal-900/60 hover:text-teal-800 dark:hover:text-teal-200'
                             }`}
                           >
                             {day}
@@ -509,14 +509,14 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                     </div>
 
                     {/* Selected Date readout & Time selector */}
-                    <div className="mt-3 pt-2 border-t border-slate-200/80 flex items-center justify-between text-xs">
-                      <span className="text-slate-500 font-medium">
-                        Due: <strong className="text-teal-800">{selectedDate ? selectedDate.toLocaleDateString() : 'Select date'}</strong>
+                    <div className="mt-3 pt-2 border-t border-slate-200/80 dark:border-slate-700 flex items-center justify-between text-xs">
+                      <span className="text-slate-500 dark:text-slate-400 font-medium">
+                        Due: <strong className="text-teal-800 dark:text-teal-300">{selectedDate ? selectedDate.toLocaleDateString() : 'Select date'}</strong>
                       </span>
                       <select
                         value={selectedTimeHour}
                         onChange={(e) => setSelectedTimeHour(e.target.value)}
-                        className="bg-white border border-slate-200 rounded-lg px-2 py-1 text-xs font-semibold text-slate-700 focus:outline-none"
+                        className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 text-xs font-semibold text-slate-700 dark:text-slate-200 focus:outline-none"
                       >
                         <option value="10:00">10:00 AM</option>
                         <option value="14:00">2:00 PM</option>
@@ -529,7 +529,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
 
                 {/* Handover Note */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                     Meetup Message for {item.owner.name.split(' ')[0]}:
                   </label>
                   <textarea
@@ -537,14 +537,14 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                     value={borrowerNotes}
                     onChange={(e) => setBorrowerNotes(e.target.value)}
                     placeholder="e.g. 'Can meet at Raman ground floor lobby after 5 PM!'"
-                    className="w-full text-xs p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50"
+                    className="w-full text-xs p-3 border border-slate-300 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                   />
                 </div>
 
                 {/* Overdue Penalty Policy Notice */}
-                <div className="p-3.5 bg-amber-50/80 border border-amber-200 rounded-2xl text-[11px] text-amber-950 space-y-1">
-                  <p className="font-bold flex items-center gap-1 text-amber-900">
-                    <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
+                <div className="p-3.5 bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-2xl text-[11px] text-amber-950 dark:text-amber-200 space-y-1">
+                  <p className="font-bold flex items-center gap-1 text-amber-900 dark:text-amber-300">
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                     Simulated 5%/Day Overdue Penalty
                   </p>
                   <p>
@@ -553,11 +553,11 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                   </p>
                 </div>
 
-                {/* Big Teal CTA Button (matches "Request Booking" in mockup) */}
+                {/* Big Teal CTA Button */}
                 <button
                   type="submit"
                   disabled={requestLoading || success}
-                  className="w-full py-3.5 px-4 bg-teal-600 hover:bg-teal-700 active:scale-98 disabled:bg-slate-300 text-white font-bold text-sm rounded-full shadow-md shadow-teal-700/20 transition flex items-center justify-center gap-2"
+                  className="w-full py-3.5 px-4 bg-teal-600 hover:bg-teal-700 active:scale-98 disabled:bg-slate-300 dark:disabled:bg-slate-700 text-white font-bold text-sm rounded-full shadow-md shadow-teal-700/20 transition flex items-center justify-center gap-2"
                 >
                   <CalendarIcon className="w-4 h-4" />
                   <span>{requestLoading ? 'Requesting...' : 'Request Booking / Borrow'}</span>

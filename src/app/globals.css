@@ -14,6 +14,12 @@ body {
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark body {
+  color: #F1F5F9;
+  background-color: #030712;
 }
 
 /* Custom smooth transitions for cards and interactive elements */

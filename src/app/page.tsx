@@ -236,44 +236,44 @@ export default async function HomePage() {
       </section>
 
       {/* Verified Campus Statistics Ribbon */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border border-slate-200/80 rounded-3xl p-5 shadow-xs">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-5 shadow-xs transition-colors duration-200">
         <div className="flex items-center gap-3.5 px-3">
-          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 dark:bg-teal-950/70 text-teal-700 dark:text-teal-300 flex items-center justify-center shrink-0">
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-slate-900">{totalStudents}</div>
-            <div className="text-[11px] text-slate-500 font-medium">Verified Students</div>
+            <div className="text-xl font-black text-slate-900 dark:text-white">{totalStudents}</div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Verified Students</div>
           </div>
         </div>
 
         <div className="flex items-center gap-3.5 px-3">
-          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 dark:bg-teal-950/70 text-teal-700 dark:text-teal-300 flex items-center justify-center shrink-0">
             <BookOpen className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-slate-900">{totalItems}</div>
-            <div className="text-[11px] text-slate-500 font-medium">Campus Items Listed</div>
+            <div className="text-xl font-black text-slate-900 dark:text-white">{totalItems}</div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Campus Items Listed</div>
           </div>
         </div>
 
         <div className="flex items-center gap-3.5 px-3">
-          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 dark:bg-teal-950/70 text-teal-700 dark:text-teal-300 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-slate-900">{completedTransactions}</div>
-            <div className="text-[11px] text-slate-500 font-medium">Successful Returns</div>
+            <div className="text-xl font-black text-slate-900 dark:text-white">{completedTransactions}</div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Successful Returns</div>
           </div>
         </div>
 
         <div className="flex items-center gap-3.5 px-3">
-          <div className="w-10 h-10 rounded-2xl bg-mint-100 text-teal-700 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-2xl bg-mint-100 dark:bg-teal-950/70 text-teal-700 dark:text-teal-300 flex items-center justify-center shrink-0">
             <Building2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-slate-900">Raman &amp; Shabri</div>
-            <div className="text-[11px] text-slate-500 font-medium">Active Hostels Network</div>
+            <div className="text-xl font-black text-slate-900 dark:text-white">Raman &amp; Shabri</div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Active Hostels Network</div>
           </div>
         </div>
       </div>
@@ -281,10 +281,10 @@ export default async function HomePage() {
       {/* 2. Featured Categories Section (matches the mint cards in mockup) */}
       <section className="space-y-4">
         <div className="text-center space-y-1">
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Featured Categories
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Browse physical equipment listed by category across campus hostels
           </p>
         </div>
@@ -296,16 +296,16 @@ export default async function HomePage() {
               <a
                 key={cat.name}
                 href={`/explore?category=${encodeURIComponent(cat.query)}`}
-                className="bg-mint-100/70 hover:bg-mint-100 border border-teal-200/80 rounded-3xl p-6 text-center card-hover transition duration-200 flex flex-col items-center justify-center space-y-3 group"
+                className="bg-mint-100/70 dark:bg-slate-900 hover:bg-mint-100 dark:hover:bg-slate-850 border border-teal-200/80 dark:border-slate-800 rounded-3xl p-6 text-center card-hover transition duration-200 flex flex-col items-center justify-center space-y-3 group"
               >
-                <div className="w-14 h-14 rounded-2xl bg-white border border-teal-200 flex items-center justify-center text-teal-700 shadow-2xs group-hover:scale-110 transition duration-200">
+                <div className="w-14 h-14 rounded-2xl bg-white dark:bg-slate-800 border border-teal-200 dark:border-slate-700 flex items-center justify-center text-teal-700 dark:text-teal-300 shadow-2xs group-hover:scale-110 transition duration-200">
                   <Icon className="w-7 h-7" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm group-hover:text-teal-800 transition">
+                  <h3 className="font-bold text-slate-900 dark:text-white text-sm group-hover:text-teal-800 dark:group-hover:text-teal-300 transition">
                     {cat.name}
                   </h3>
-                  <p className="text-[11px] text-slate-500 mt-0.5">{cat.count}</p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{cat.count}</p>
                 </div>
               </a>
             );
@@ -317,16 +317,16 @@ export default async function HomePage() {
       <section className="space-y-5">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
               Newest Campus Listings
             </h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Fresh equipment available today for borrowing or rental
             </p>
           </div>
           <a
             href="/explore"
-            className="text-xs sm:text-sm font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1"
+            className="text-xs sm:text-sm font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 flex items-center gap-1"
           >
             <span>View All ({totalItems})</span>
             <ArrowRight className="w-4 h-4" />
@@ -341,64 +341,64 @@ export default async function HomePage() {
       </section>
 
       {/* 4. How It Works Section (matches tablet screen mockup in center) */}
-      <section className="bg-white rounded-4xl p-8 sm:p-12 border border-slate-200/80 shadow-xs space-y-8">
+      <section className="bg-white dark:bg-slate-900 rounded-4xl p-8 sm:p-12 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-8 transition-colors duration-200">
         <div className="text-center space-y-1">
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             How It Works
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             A simple 3-step campus borrowing protocol built around trust and accountability
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-3xl bg-mint-50 border border-teal-100 text-center space-y-3">
+          <div className="p-6 rounded-3xl bg-mint-50 dark:bg-slate-950 border border-teal-100 dark:border-slate-800 text-center space-y-3">
             <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white font-black text-base flex items-center justify-center mx-auto shadow-sm">
               1
             </div>
-            <h4 className="font-bold text-slate-900 text-base">1. Browse items near you</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <h4 className="font-bold text-slate-900 dark:text-white text-base">1. Browse items near you</h4>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Search calculators, chargers, or lab kits available from peers across Raman and Shabri hostels.
             </p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-mint-50 border border-teal-100 text-center space-y-3">
+          <div className="p-6 rounded-3xl bg-mint-50 dark:bg-slate-950 border border-teal-100 dark:border-slate-800 text-center space-y-3">
             <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white font-black text-base flex items-center justify-center mx-auto shadow-sm">
               2
             </div>
-            <h4 className="font-bold text-slate-900 text-base">2. Request to borrow / rent</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <h4 className="font-bold text-slate-900 dark:text-white text-base">2. Request to borrow / rent</h4>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Select your required return deadline and send a request. Owner approves and item is reserved for you.
             </p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-mint-50 border border-teal-100 text-center space-y-3">
+          <div className="p-6 rounded-3xl bg-mint-50 dark:bg-slate-950 border border-teal-100 dark:border-slate-800 text-center space-y-3">
             <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white font-black text-base flex items-center justify-center mx-auto shadow-sm">
               3
             </div>
-            <h4 className="font-bold text-slate-900 text-base">3. Meet up &amp; exchange on campus</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <h4 className="font-bold text-slate-900 dark:text-white text-base">3. Meet up &amp; exchange on campus</h4>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Use in-app chat to coordinate meetup, complete two-step return verification, and exchange peer ratings.
             </p>
           </div>
         </div>
 
         {/* 5. Top Borrowers & Trust / Safety (matches tablet bottom row) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-100 dark:border-slate-800">
           {/* Top Students Card */}
-          <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 space-y-4">
+          <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 space-y-4">
             <div className="flex items-center justify-between">
-              <h4 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <h4 className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
                 <Users className="w-4 h-4 text-teal-600" />
                 <span>Top Campus Borrowers &amp; Lenders</span>
               </h4>
-              <span className="text-[11px] font-bold text-teal-700 bg-mint-100 px-2.5 py-0.5 rounded-full">
+              <span className="text-[11px] font-bold text-teal-700 dark:text-teal-300 bg-mint-100 dark:bg-teal-950/70 px-2.5 py-0.5 rounded-full border border-teal-200/40 dark:border-teal-800/60">
                 Active Cohort
               </span>
             </div>
 
             <div className="space-y-3">
-              <div className="flex items-center justify-between bg-white p-3 rounded-2xl border border-slate-100">
+              <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-3">
                   <img
                     src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100"
@@ -406,20 +406,20 @@ export default async function HomePage() {
                     className="w-9 h-9 rounded-full object-cover"
                   />
                   <div>
-                    <p className="text-xs font-bold text-slate-900">Arjun Mehta</p>
-                    <p className="text-[10px] text-slate-500">DSAI • 8 Borrows</p>
+                    <p className="text-xs font-bold text-slate-900 dark:text-white">Arjun Mehta</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">DSAI • 8 Borrows</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 text-xs font-bold text-amber-500">
                   <Star className="w-3.5 h-3.5 fill-amber-400" />
                   <span>4.8 ★</span>
-                  <span className="ml-2 text-[10px] bg-teal-50 text-teal-800 border border-teal-200 font-semibold px-2 py-0.5 rounded-full">
+                  <span className="ml-2 text-[10px] bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 font-semibold px-2 py-0.5 rounded-full">
                     Primary
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between bg-white p-3 rounded-2xl border border-slate-100">
+              <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-3">
                   <img
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
@@ -427,14 +427,14 @@ export default async function HomePage() {
                     className="w-9 h-9 rounded-full object-cover"
                   />
                   <div>
-                    <p className="text-xs font-bold text-slate-900">Priya Sharma</p>
-                    <p className="text-[10px] text-slate-500">CSE • 12 Items Lent</p>
+                    <p className="text-xs font-bold text-slate-900 dark:text-white">Priya Sharma</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">CSE • 12 Items Lent</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 text-xs font-bold text-amber-500">
                   <Star className="w-3.5 h-3.5 fill-amber-400" />
                   <span>4.9 ★</span>
-                  <span className="ml-2 text-[10px] bg-teal-50 text-teal-800 border border-teal-200 font-semibold px-2 py-0.5 rounded-full">
+                  <span className="ml-2 text-[10px] bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 font-semibold px-2 py-0.5 rounded-full">
                     Primary
                   </span>
                 </div>
@@ -443,24 +443,24 @@ export default async function HomePage() {
           </div>
 
           {/* Trust & Safety Card */}
-          <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between space-y-4">
             <div>
-              <div className="flex items-center gap-2 text-teal-700 font-bold text-sm">
-                <ShieldCheck className="w-5 h-5 text-teal-600" />
+              <div className="flex items-center gap-2 text-teal-700 dark:text-teal-300 font-bold text-sm">
+                <ShieldCheck className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 <span>Campus Trust &amp; Safety Protocol</span>
               </div>
-              <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
                 BorrowBuddy verifies institutional identities (`@iiitnr.edu.in`) and uses a strict
                 two-step return confirmation. Items cannot be self-confirmed as returned without owner
                 inspection.
               </p>
-              <ul className="text-xs text-slate-500 space-y-1.5 mt-3 font-medium">
+              <ul className="text-xs text-slate-500 dark:text-slate-400 space-y-1.5 mt-3 font-medium">
                 <li className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
                   <span>Automated 5%/day overdue penalty tracking</span>
                 </li>
                 <li className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
                   <span>Direct handover chat &amp; designated hostel meetup spots</span>
                 </li>
               </ul>
@@ -468,7 +468,7 @@ export default async function HomePage() {
 
             <a
               href="/explore"
-              className="inline-flex items-center justify-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold px-5 py-2.5 rounded-full transition"
+              className="inline-flex items-center justify-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold px-5 py-2.5 rounded-full transition shadow-xs"
             >
               <span>Explore All Items</span>
               <ArrowRight className="w-3.5 h-3.5" />

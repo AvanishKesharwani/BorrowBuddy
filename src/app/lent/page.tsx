@@ -127,19 +127,19 @@ export default function MyLentItemsPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-10">
       {/* Top Header */}
-      <div className="flex items-center justify-between flex-wrap gap-4 bg-white p-6 sm:p-8 rounded-4xl border border-slate-200/80 shadow-xs">
+      <div className="flex items-center justify-between flex-wrap gap-4 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-4xl border border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-mint-100 text-teal-700 rounded-2xl">
+          <div className="p-3 bg-mint-100 dark:bg-teal-900/60 text-teal-700 dark:text-teal-300 rounded-2xl border border-teal-200/40 dark:border-teal-700/50">
             <Layers className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300">
               BorrowBuddy Peer Lending
             </span>
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900">
+            <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
               Lending &amp; Requests Management
             </h1>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Review borrow requests from students, approve transactions, and confirm safe returns.
             </p>
           </div>
@@ -147,13 +147,13 @@ export default function MyLentItemsPage() {
 
         <div className="flex items-center gap-2 flex-wrap">
           {/* Tabs */}
-          <div className="flex items-center gap-1 bg-slate-100 p-1.5 rounded-full text-xs font-bold">
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full text-xs font-bold">
             <button
               onClick={() => setActiveTab('requests')}
               className={`px-4 py-2 rounded-full transition flex items-center gap-1.5 ${
                 activeTab === 'requests'
-                  ? 'bg-white text-teal-800 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <span>Incoming Requests</span>
@@ -167,8 +167,8 @@ export default function MyLentItemsPage() {
               onClick={() => setActiveTab('active')}
               className={`px-4 py-2 rounded-full transition ${
                 activeTab === 'active'
-                  ? 'bg-white text-teal-800 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               Currently Lent ({activeLent.length})
@@ -177,8 +177,8 @@ export default function MyLentItemsPage() {
               onClick={() => setActiveTab('listings')}
               className={`px-4 py-2 rounded-full transition ${
                 activeTab === 'listings'
-                  ? 'bg-white text-teal-800 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               My Listings ({myItems.length})
@@ -212,10 +212,10 @@ export default function MyLentItemsPage() {
         /* Incoming Requests Section */
         <div className="space-y-4">
           {pendingRequests.length === 0 ? (
-            <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
-              <Clock className="w-10 h-10 text-slate-300 mx-auto" />
-              <h3 className="text-base font-bold text-slate-800">No Pending Requests</h3>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+            <div className="bg-white dark:bg-slate-900 rounded-4xl p-12 text-center border border-slate-200 dark:border-slate-800 shadow-xs space-y-2 transition-colors">
+              <Clock className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto" />
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">No Pending Requests</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                 When a student requests to borrow one of your listed items, it will appear here for your approval.
               </p>
             </div>
@@ -223,72 +223,72 @@ export default function MyLentItemsPage() {
             pendingRequests.map((req) => (
               <div
                 key={req.id}
-                className="bg-white rounded-3xl border border-amber-200 bg-amber-50/20 p-5 sm:p-6 shadow-xs space-y-4"
+                className="bg-white dark:bg-slate-900 rounded-3xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/20 dark:bg-amber-950/20 p-5 sm:p-6 shadow-xs space-y-4"
               >
                 <div className="flex items-start justify-between flex-wrap gap-4">
                   <div className="flex items-center gap-3.5">
                     <img
                       src={req.item.imageUrl}
                       alt={req.item.name}
-                      className="w-16 h-16 rounded-2xl object-cover border border-slate-200 shrink-0"
+                      className="w-16 h-16 rounded-2xl object-cover border border-slate-200 dark:border-slate-700 shrink-0"
                     />
                     <div>
-                      <span className="bg-amber-100 text-amber-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                      <span className="bg-amber-100 dark:bg-amber-950/70 text-amber-900 dark:text-amber-300 border border-amber-200/50 dark:border-amber-800/60 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                         New Borrow Request
                       </span>
-                      <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-1">
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mt-1">
                         {req.item.name}
                       </h3>
-                      <p className="text-xs text-slate-600 flex items-center gap-1 mt-0.5">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1 mt-0.5">
                         <span>Requested by:</span>
-                        <strong className="text-teal-800">{req.borrower.name}</strong>
+                        <strong className="text-teal-800 dark:text-teal-300">{req.borrower.name}</strong>
                         <span>({req.borrower.studentId || 'IIIT-NR'}, {req.borrower.branch})</span>
                       </p>
                     </div>
                   </div>
 
                   {/* Borrower trust snapshot */}
-                  <div className="flex items-center gap-3 bg-white p-2.5 rounded-2xl border border-slate-200">
+                  <div className="flex items-center gap-3 bg-white dark:bg-slate-800 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-700">
                     <div className="text-center px-2">
-                      <div className="flex items-center gap-1 text-amber-500 font-black text-xs">
+                      <div className="flex items-center gap-1 text-amber-500 dark:text-amber-400 font-black text-xs">
                         <Star className="w-3.5 h-3.5 fill-amber-400" />
                         {req.borrower.rating.toFixed(1)}
                       </div>
-                      <span className="text-[10px] text-slate-400 font-medium">Rating</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">Rating</span>
                     </div>
-                    <div className="border-l border-slate-200 h-6"></div>
+                    <div className="border-l border-slate-200 dark:border-slate-700 h-6"></div>
                     <div className="text-center px-2">
-                      <div className="flex items-center gap-1 text-teal-700 font-black text-xs">
+                      <div className="flex items-center gap-1 text-teal-700 dark:text-teal-300 font-black text-xs">
                         <ShieldCheck className="w-3.5 h-3.5" />
                         {req.borrower.reliabilityScore.toFixed(0)}%
                       </div>
-                      <span className="text-[10px] text-slate-400 font-medium">Reliability</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">Reliability</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Purpose & Handover note */}
-                <div className="p-3.5 bg-white border border-slate-200 rounded-2xl text-xs space-y-1">
-                  <p className="text-slate-500 font-semibold">Borrower&apos;s Meetup Note:</p>
-                  <p className="text-slate-800 italic">
+                <div className="p-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs space-y-1">
+                  <p className="text-slate-500 dark:text-slate-400 font-semibold">Borrower&apos;s Meetup Note:</p>
+                  <p className="text-slate-800 dark:text-slate-200 italic">
                     &ldquo;{req.borrowerNotes || 'Would like to borrow this item for academic coursework.'}&rdquo;
                   </p>
-                  <div className="pt-2 text-slate-500 flex items-center gap-4 text-[11px]">
+                  <div className="pt-2 text-slate-500 dark:text-slate-400 flex items-center gap-4 text-[11px]">
                     <span>
-                      Requested Return Deadline: <strong>{formatCustomDate(req.deadline)}</strong>
+                      Requested Return Deadline: <strong className="text-slate-800 dark:text-slate-200">{formatCustomDate(req.deadline)}</strong>
                     </span>
                     <span>
-                      Campus Handover Point: <strong>{req.item.campusLocation}</strong>
+                      Campus Handover Point: <strong className="text-slate-800 dark:text-slate-200">{req.item.campusLocation}</strong>
                     </span>
                   </div>
                 </div>
 
                 {/* Action Buttons: Accept / Reject */}
-                <div className="flex items-center justify-end gap-3 pt-2 border-t border-slate-100">
+                <div className="flex items-center justify-end gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
                   <button
                     onClick={() => handleRejectRequest(req.id)}
                     disabled={actionLoading === req.id}
-                    className="px-4 py-2 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-full transition flex items-center gap-1"
+                    className="px-4 py-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-full transition flex items-center gap-1"
                   >
                     <XCircle className="w-4 h-4" />
                     <span>Decline</span>
@@ -311,10 +311,10 @@ export default function MyLentItemsPage() {
         /* Currently Lent Section */
         <div className="space-y-4">
           {activeLent.length === 0 ? (
-            <div className="bg-white rounded-4xl p-12 text-center border border-slate-200 shadow-xs space-y-2">
-              <Layers className="w-10 h-10 text-slate-300 mx-auto" />
-              <h3 className="text-base font-bold text-slate-800">No Items Currently Lent Out</h3>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+            <div className="bg-white dark:bg-slate-900 rounded-4xl p-12 text-center border border-slate-200 dark:border-slate-800 shadow-xs space-y-2 transition-colors">
+              <Layers className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto" />
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">No Items Currently Lent Out</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                 Accepted transactions will show up here until the borrower returns the object and you confirm receipt.
               </p>
             </div>
@@ -329,12 +329,12 @@ export default function MyLentItemsPage() {
               return (
                 <div
                   key={tx.id}
-                  className={`bg-white rounded-3xl border p-5 sm:p-6 shadow-xs space-y-4 ${
+                  className={`bg-white dark:bg-slate-900 rounded-3xl border p-5 sm:p-6 shadow-xs space-y-4 ${
                     isReturnPending
-                      ? 'border-purple-300 bg-purple-50/20'
+                      ? 'border-purple-300 dark:border-purple-800/80 bg-purple-50/20 dark:bg-purple-950/20'
                       : isOverdue
-                      ? 'border-rose-300 bg-rose-50/20'
-                      : 'border-slate-200/80'
+                      ? 'border-rose-300 dark:border-rose-800/80 bg-rose-50/20 dark:bg-rose-950/20'
+                      : 'border-slate-200/80 dark:border-slate-800'
                   }`}
                 >
                   <div className="flex items-start justify-between flex-wrap gap-3">
@@ -342,7 +342,7 @@ export default function MyLentItemsPage() {
                       <img
                         src={tx.item.imageUrl}
                         alt={tx.item.name}
-                        className="w-16 h-16 rounded-2xl object-cover border border-slate-200 shrink-0"
+                        className="w-16 h-16 rounded-2xl object-cover border border-slate-200 dark:border-slate-700 shrink-0"
                       />
                       <div>
                         <div className="flex items-center gap-2">
@@ -352,19 +352,19 @@ export default function MyLentItemsPage() {
                             {tx.status}
                           </span>
                         </div>
-                        <h3 className="text-base font-bold text-slate-900 mt-1">{tx.item.name}</h3>
-                        <p className="text-xs text-slate-500">
-                          Possessed by: <strong className="text-slate-800">{tx.borrower.name}</strong> (
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{tx.item.name}</h3>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                          Possessed by: <strong className="text-slate-800 dark:text-slate-200">{tx.borrower.name}</strong> (
                           {tx.borrower.studentId || 'IIIT-NR'}, {tx.borrower.branch})
                         </p>
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <span className="text-[11px] text-slate-400 font-semibold block">Scheduled Deadline</span>
+                      <span className="text-[11px] text-slate-400 dark:text-slate-500 font-semibold block">Scheduled Deadline</span>
                       <span
                         className={`text-xs font-bold flex items-center justify-end gap-1 ${
-                          isOverdue ? 'text-rose-600' : 'text-slate-800'
+                          isOverdue ? 'text-rose-600 dark:text-rose-400' : 'text-slate-800 dark:text-slate-200'
                         }`}
                       >
                         <Clock className="w-3.5 h-3.5" />
@@ -375,9 +375,9 @@ export default function MyLentItemsPage() {
 
                   {/* Return Confirmation Prompt (Two-Step Return!) */}
                   {isReturnPending && (
-                    <div className="p-4 bg-purple-100/90 border border-purple-300 rounded-2xl text-xs text-purple-900 space-y-2">
-                      <span className="font-bold flex items-center gap-1.5 text-purple-950">
-                        <CheckCircle className="w-4 h-4 text-purple-700" />
+                    <div className="p-4 bg-purple-100/90 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-800 rounded-2xl text-xs text-purple-900 dark:text-purple-200 space-y-2">
+                      <span className="font-bold flex items-center gap-1.5 text-purple-950 dark:text-purple-300">
+                        <CheckCircle className="w-4 h-4 text-purple-700 dark:text-purple-400" />
                         Borrower Marked Item as Returned!
                       </span>
                       <p>
@@ -390,7 +390,7 @@ export default function MyLentItemsPage() {
 
                   {/* Overdue Warning */}
                   {isOverdue && (
-                    <div className="p-3 bg-rose-100 border border-rose-300 rounded-2xl text-xs text-rose-900 flex items-center justify-between">
+                    <div className="p-3 bg-rose-100 dark:bg-rose-950/50 border border-rose-300 dark:border-rose-800 rounded-2xl text-xs text-rose-900 dark:text-rose-200 flex items-center justify-between">
                       <span>
                         ⚠️ Item is <strong>{tx.overdueDays} day(s) overdue</strong>. Penalty of {formatINR(tx.penalty)} has been generated.
                       </span>
@@ -399,27 +399,27 @@ export default function MyLentItemsPage() {
 
                   {/* Dispute warning */}
                   {isDisputed && (
-                    <div className="p-3 bg-orange-50 border border-orange-200 rounded-2xl text-xs text-orange-900 flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4 text-orange-600 shrink-0" />
+                    <div className="p-3 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 rounded-2xl text-xs text-orange-900 dark:text-orange-200 flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-orange-600 dark:text-orange-400 shrink-0" />
                       <span>Dispute raised. Admin is currently reviewing transaction activity.</span>
                     </div>
                   )}
 
                   {/* Actions row */}
-                  <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setChatTx(tx)}
-                        className="inline-flex items-center gap-1 text-teal-800 bg-mint-100 hover:bg-mint-200 px-3.5 py-2 rounded-full font-bold transition"
+                        className="inline-flex items-center gap-1 text-teal-800 dark:text-teal-200 bg-mint-100 dark:bg-teal-900/60 hover:bg-mint-200 dark:hover:bg-teal-800 px-3.5 py-2 rounded-full font-bold transition border border-teal-200/40 dark:border-teal-700/50"
                       >
-                        <MessageCircle className="w-3.5 h-3.5 text-teal-600" />
+                        <MessageCircle className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                         <span>Chat with {tx.borrower.name.split(' ')[0]}</span>
                       </button>
 
                       {!isDisputed && (
                         <button
                           onClick={() => setDisputeTx(tx)}
-                          className="inline-flex items-center gap-1 text-slate-500 hover:text-rose-600 px-2 py-1.5 font-medium transition"
+                          className="inline-flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 px-2 py-1.5 font-medium transition"
                         >
                           <AlertTriangle className="w-3.5 h-3.5" />
                           <span>Raise Dispute</span>
@@ -462,28 +462,28 @@ export default function MyLentItemsPage() {
           {myItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-xs flex flex-col justify-between p-5"
+              className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-xs flex flex-col justify-between p-5 transition-colors"
             >
               <div>
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="w-full h-40 object-cover rounded-2xl mb-3"
+                  className="w-full h-40 object-cover rounded-2xl mb-3 border border-slate-100 dark:border-slate-800"
                 />
-                <span className="text-[10px] font-bold text-teal-700 uppercase tracking-wider block">
+                <span className="text-[10px] font-bold text-teal-700 dark:text-teal-300 uppercase tracking-wider block">
                   {item.category}
                 </span>
-                <h4 className="font-bold text-slate-900 text-sm mt-0.5 line-clamp-1">{item.name}</h4>
-                <p className="text-xs text-slate-500 line-clamp-2 mt-1">{item.description}</p>
+                <h4 className="font-bold text-slate-900 dark:text-white text-sm mt-0.5 line-clamp-1">{item.name}</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">{item.description}</p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="font-bold text-teal-800 bg-mint-100 px-2.5 py-0.5 rounded-full">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                <span className="font-bold text-teal-800 dark:text-teal-200 bg-mint-100 dark:bg-teal-900/60 border border-teal-200/40 dark:border-teal-700/50 px-2.5 py-0.5 rounded-full">
                   {item.availability}
                 </span>
                 <a
                   href={`/items/${item.id}`}
-                  className="text-teal-700 font-bold hover:underline"
+                  className="text-teal-700 dark:text-teal-400 font-bold hover:underline"
                 >
                   View Listing &rarr;
                 </a>

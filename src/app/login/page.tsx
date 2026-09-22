@@ -45,24 +45,24 @@ export default function LoginPage() {
 
   return (
     <div className="max-w-md mx-auto my-6 space-y-6 pb-12">
-      <div className="bg-white p-8 rounded-4xl border border-slate-200/80 shadow-xs space-y-6">
+      <div className="bg-white dark:bg-slate-900 p-8 rounded-4xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6 transition-colors">
         <div className="text-center space-y-3">
           <FancyLogoIcon className="w-14 h-14 mx-auto drop-shadow-md" />
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Institutional Login</h1>
-          <p className="text-xs text-slate-500">
+          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Institutional Login</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Sign in with your IIIT-Naya Raipur student email or Student ID to access BorrowBuddy
           </p>
         </div>
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl font-medium">
+          <div className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs rounded-xl font-medium">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
               Student ID or Institutional Email
             </label>
             <div className="relative">
@@ -73,13 +73,13 @@ export default function LoginPage() {
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="e.g. IIITNR-2026-001 or arjun@iiitnr.edu.in"
-                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 font-medium bg-slate-50 focus:bg-white transition"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 font-medium bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 transition"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
               Password
             </label>
             <div className="relative">
@@ -90,7 +90,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 focus:bg-white transition"
+                className="w-full pl-10 pr-3 py-3 text-xs border border-slate-300 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-600 bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 transition"
               />
             </div>
           </div>
@@ -98,62 +98,62 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-full shadow-md shadow-teal-700/20 transition active:scale-98 disabled:bg-slate-300 flex items-center justify-center gap-1.5"
+            className="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-full shadow-md shadow-teal-700/20 transition active:scale-98 disabled:bg-slate-300 dark:disabled:bg-slate-700 flex items-center justify-center gap-1.5"
           >
             <span>{loading ? 'Authenticating...' : 'Sign In to BorrowBuddy'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </form>
 
-        <div className="pt-2 text-center text-xs text-slate-500">
+        <div className="pt-2 text-center text-xs text-slate-500 dark:text-slate-400">
           New to campus?{' '}
-          <a href="/register" className="text-teal-700 font-bold hover:underline">
+          <a href="/register" className="text-teal-700 dark:text-teal-400 font-bold hover:underline">
             Register Student Profile
           </a>
         </div>
       </div>
 
       {/* 1-Click Fast Login for Presentation */}
-      <div className="bg-slate-50 p-5 rounded-3xl border border-slate-200 text-xs space-y-3">
-        <div className="flex items-center gap-1.5 text-teal-800 font-bold">
-          <Sparkles className="w-4 h-4 text-teal-600" />
+      <div className="bg-slate-50 dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 text-xs space-y-3 transition-colors">
+        <div className="flex items-center gap-1.5 text-teal-800 dark:text-teal-300 font-bold">
+          <Sparkles className="w-4 h-4 text-teal-600 dark:text-teal-400" />
           <span>Demo 1-Click Presentation Accounts:</span>
         </div>
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => handleQuickLogin('arjun@iiitnr.edu.in', 'password123')}
-            className="p-2.5 text-left bg-white hover:bg-mint-50 border border-slate-200 hover:border-teal-300 rounded-2xl transition shadow-2xs"
+            className="p-2.5 text-left bg-white dark:bg-slate-800 hover:bg-mint-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 rounded-2xl transition shadow-2xs"
           >
-            <p className="font-bold text-slate-900">Arjun Mehta (Student A)</p>
-            <p className="text-[10px] text-slate-500">DSAI 1st Year (Borrower)</p>
+            <p className="font-bold text-slate-900 dark:text-slate-100">Arjun Mehta (Student A)</p>
+            <p className="text-[10px] text-slate-500 dark:text-slate-400">DSAI 1st Year (Borrower)</p>
           </button>
 
           <button
             type="button"
             onClick={() => handleQuickLogin('priya@iiitnr.edu.in', 'password123')}
-            className="p-2.5 text-left bg-white hover:bg-mint-50 border border-slate-200 hover:border-teal-300 rounded-2xl transition shadow-2xs"
+            className="p-2.5 text-left bg-white dark:bg-slate-800 hover:bg-mint-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 rounded-2xl transition shadow-2xs"
           >
-            <p className="font-bold text-slate-900">Priya Sharma (Student B)</p>
-            <p className="text-[10px] text-slate-500">CSE 2nd Year (Calculator)</p>
+            <p className="font-bold text-slate-900 dark:text-slate-100">Priya Sharma (Student B)</p>
+            <p className="text-[10px] text-slate-500 dark:text-slate-400">CSE 2nd Year (Calculator)</p>
           </button>
 
           <button
             type="button"
             onClick={() => handleQuickLogin('rohan@iiitnr.edu.in', 'password123')}
-            className="p-2.5 text-left bg-white hover:bg-mint-50 border border-slate-200 hover:border-teal-300 rounded-2xl transition shadow-2xs"
+            className="p-2.5 text-left bg-white dark:bg-slate-800 hover:bg-mint-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 rounded-2xl transition shadow-2xs"
           >
-            <p className="font-bold text-slate-900">Rohan Verma (Student C)</p>
-            <p className="text-[10px] text-slate-500">ECE 3rd Year (Arduino)</p>
+            <p className="font-bold text-slate-900 dark:text-slate-100">Rohan Verma (Student C)</p>
+            <p className="text-[10px] text-slate-500 dark:text-slate-400">ECE 3rd Year (Arduino)</p>
           </button>
 
           <button
             type="button"
             onClick={() => handleQuickLogin('admin@iiitnr.edu.in', 'admin123')}
-            className="p-2.5 text-left bg-purple-50/70 hover:bg-purple-100 border border-purple-200 rounded-2xl transition shadow-2xs"
+            className="p-2.5 text-left bg-purple-50/70 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/60 border border-purple-200 dark:border-purple-800 rounded-2xl transition shadow-2xs"
           >
-            <p className="font-bold text-purple-900">Dr. S. K. Admin</p>
-            <p className="text-[10px] text-purple-600">Faculty In-Charge</p>
+            <p className="font-bold text-purple-900 dark:text-purple-200">Dr. S. K. Admin</p>
+            <p className="text-[10px] text-purple-600 dark:text-purple-400">Faculty In-Charge</p>
           </button>
         </div>
       </div>

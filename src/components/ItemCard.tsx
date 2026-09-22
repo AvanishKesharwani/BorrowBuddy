@@ -36,9 +36,9 @@ export default function ItemCard({ item }: ItemCardProps) {
   const badgeStyle = getStatusBadgeStyle(item.availability);
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-lg card-hover transition duration-200 flex flex-col group">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-lg dark:hover:shadow-teal-950/20 card-hover transition duration-200 flex flex-col group">
       {/* Image Container */}
-      <div className="relative h-48 sm:h-52 w-full bg-slate-100 overflow-hidden">
+      <div className="relative h-48 sm:h-52 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
         <img
           src={item.imageUrl}
           alt={item.name}
@@ -66,12 +66,12 @@ export default function ItemCard({ item }: ItemCardProps) {
           }}
           className={`absolute top-3 right-3 p-1.5 rounded-full backdrop-blur-xs transition ${
             bookmarked
-              ? 'bg-rose-50 text-rose-600 shadow-sm'
-              : 'bg-white/80 hover:bg-white text-slate-500 hover:text-rose-600'
+              ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 shadow-sm'
+              : 'bg-white/80 dark:bg-slate-900/80 hover:bg-white dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-rose-600'
           }`}
           title="Save item"
         >
-          <Heart className={`w-4 h-4 ${bookmarked ? 'fill-rose-600' : ''}`} />
+          <Heart className={`w-4 h-4 ${bookmarked ? 'fill-rose-600 text-rose-600' : ''}`} />
         </button>
 
         {/* Mode & Price Pill (signature teal/mint from mockup) */}
@@ -96,23 +96,23 @@ export default function ItemCard({ item }: ItemCardProps) {
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
         <div>
           {/* Category */}
-          <span className="text-[11px] font-bold text-teal-700 uppercase tracking-wider block">
+          <span className="text-[11px] font-bold text-teal-700 dark:text-teal-400 uppercase tracking-wider block">
             {item.category}
           </span>
 
           {/* Title */}
-          <h3 className="font-bold text-slate-900 text-base line-clamp-1 group-hover:text-teal-700 transition mt-0.5">
+          <h3 className="font-bold text-slate-900 dark:text-white text-base line-clamp-1 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition mt-0.5">
             {item.name}
           </h3>
 
           {/* Description */}
-          <p className="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">
+          <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
             {item.description}
           </p>
         </div>
 
         {/* Rating and Duration info */}
-        <div className="pt-2 border-t border-slate-100 space-y-2.5">
+        <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2.5">
           <div className="flex items-center justify-between text-xs">
             {/* Star Rating badge (matches mockup: ★★★★★ 4.8) */}
             <div className="flex items-center gap-1">
@@ -120,20 +120,20 @@ export default function ItemCard({ item }: ItemCardProps) {
                 <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 mr-0.5" />
                 <span>{item.owner.rating.toFixed(1)}</span>
               </div>
-              <span className="text-slate-400 text-[10px]">
+              <span className="text-slate-400 dark:text-slate-500 text-[10px]">
                 ({item.owner.reliabilityScore.toFixed(0)}% trust)
               </span>
             </div>
 
-            <span className="flex items-center gap-1 text-slate-500 text-[11px]">
-              <Clock className="w-3.5 h-3.5 text-slate-400" />
+            <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-[11px]">
+              <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
               Max {item.maxDuration}d
             </span>
           </div>
 
           {/* Location on campus */}
-          <div className="flex items-center gap-1 text-[11px] text-slate-500 truncate">
-            <MapPin className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+          <div className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400 truncate">
+            <MapPin className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
             <span className="truncate">{item.campusLocation}</span>
           </div>
 
@@ -146,13 +146,13 @@ export default function ItemCard({ item }: ItemCardProps) {
               <img
                 src={item.owner.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'}
                 alt={item.owner.name}
-                className="w-7 h-7 rounded-full object-cover border border-slate-200"
+                className="w-7 h-7 rounded-full object-cover border border-slate-200 dark:border-slate-700"
               />
               <div>
-                <p className="text-xs font-bold text-slate-800 leading-tight">
+                <p className="text-xs font-bold text-slate-800 dark:text-slate-200 leading-tight">
                   {item.owner.name.split(' ')[0]}
                 </p>
-                <span className="text-[10px] font-semibold text-teal-700 bg-mint-100 px-1.5 py-0.2 rounded-full">
+                <span className="text-[10px] font-semibold text-teal-700 dark:text-teal-300 bg-mint-100 dark:bg-teal-950/70 px-1.5 py-0.2 rounded-full border border-teal-200/40 dark:border-teal-800/60">
                   Verified
                 </span>
               </div>
@@ -163,7 +163,7 @@ export default function ItemCard({ item }: ItemCardProps) {
               className={`text-xs font-bold px-3.5 py-2 rounded-full transition ${
                 item.availability === 'AVAILABLE'
                   ? 'bg-teal-600 hover:bg-teal-700 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-400 cursor-not-allowed pointer-events-none'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed pointer-events-none'
               }`}
             >
               {item.availability === 'AVAILABLE' ? 'Borrow Item' : 'Borrowed'}
