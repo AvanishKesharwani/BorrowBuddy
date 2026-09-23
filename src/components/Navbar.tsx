@@ -68,7 +68,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 shadow-xs transition-colors duration-200">
+    <nav className="bg-white/75 dark:bg-slate-900/75 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/60 dark:border-white/10 sticky top-0 z-40 shadow-[0_4px_24px_rgba(0,0,0,0.03)] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Custom Fancy BorrowBuddy Logo (Books + Headphones) */}
@@ -176,7 +176,7 @@ export default function Navbar() {
             {/* List an Item CTA (strictly single line) */}
             <a
               href="/items/new"
-              className="inline-flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 active:scale-95 text-white text-xs sm:text-sm font-bold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-xs transition whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1.5 btn-teal active:scale-95 text-white text-xs sm:text-sm font-bold px-4 py-2 sm:py-2.5 rounded-full whitespace-nowrap shrink-0"
             >
               <PlusCircle className="w-4 h-4 shrink-0" />
               <span className="whitespace-nowrap">List an Item</span>

@@ -36,7 +36,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   const badgeStyle = getStatusBadgeStyle(item.availability);
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-lg dark:hover:shadow-teal-950/20 card-hover transition duration-200 flex flex-col group">
+    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl border border-white/80 dark:border-slate-800/80 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_16px_40px_rgba(13,122,117,0.14)] card-hover transition duration-300 flex flex-col group">
       {/* Image Container */}
       <div className="relative h-48 sm:h-52 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
         <img
@@ -160,10 +160,10 @@ export default function ItemCard({ item }: ItemCardProps) {
 
             <a
               href={`/items/${item.id}`}
-              className={`text-xs font-bold px-3.5 py-2 rounded-full transition ${
+              className={`text-xs font-bold px-4 py-2 rounded-full transition-all duration-200 ${
                 item.availability === 'AVAILABLE'
-                  ? 'bg-teal-600 hover:bg-teal-700 text-white shadow-xs'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed pointer-events-none'
+                  ? 'btn-teal'
+                  : 'bg-slate-100/80 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 cursor-not-allowed pointer-events-none'
               }`}
             >
               {item.availability === 'AVAILABLE' ? 'Borrow Item' : 'Borrowed'}

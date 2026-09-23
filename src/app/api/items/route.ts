@@ -12,38 +12,49 @@ export async function GET(req: NextRequest) {
     const minRating = parseFloat(searchParams.get('minRating') || '0');
     const maxDuration = parseInt(searchParams.get('maxDuration') || '0');
 
-    const where: any = {};
+    const andConditions: any[] = [];
 
     if (q.trim()) {
-      where.OR = [
-        { name: { contains: q.trim() } },
-        { description: { contains: q.trim() } },
-        { category: { contains: q.trim() } },
-        { campusLocation: { contains: q.trim() } },
-      ];
+      const tokens = q.trim().split(/\s+/).filter(Boolean);
+      for (const token of tokens) {
+        andConditions.push({
+          OR: [
+            { name: { contains: token } },
+            { description: { contains: token } },
+            { category: { contains: token } },
+            { campusLocation: { contains: token } },
+          ],
+        });
+      }
     }
 
     if (category && category !== 'All') {
-      where.category = category;
+      andConditions.push({ category });
     }
 
     if (mode && mode !== 'ALL') {
-      where.OR = [{ mode }, { mode: 'BOTH' }];
+      andConditions.push({
+        OR: [{ mode }, { mode: 'BOTH' }],
+      });
     }
 
     if (availability && availability !== 'ALL') {
-      where.availability = availability;
+      andConditions.push({ availability });
     }
 
     if (maxDuration > 0) {
-      where.maxDuration = { gte: maxDuration };
+      andConditions.push({ maxDuration: { gte: maxDuration } });
     }
 
     if (minRating > 0) {
-      where.owner = {
-        rating: { gte: minRating },
-      };
+      andConditions.push({
+        owner: {
+          rating: { gte: minRating },
+        },
+      });
     }
+
+    const where: any = andConditions.length > 0 ? { AND: andConditions } : {};
 
     const items = await prisma.item.findMany({
       where,

@@ -45,7 +45,7 @@ export default function LoginPage() {
 
   return (
     <div className="max-w-md mx-auto my-6 space-y-6 pb-12">
-      <div className="bg-white dark:bg-slate-900 p-8 rounded-4xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6 transition-colors">
+      <div className="bg-white/75 dark:bg-slate-900/75 backdrop-blur-2xl p-8 rounded-4xl border border-white/70 dark:border-slate-800/80 shadow-[0_16px_50px_rgba(0,0,0,0.06)] space-y-6 transition-colors">
         <div className="text-center space-y-3">
           <FancyLogoIcon className="w-14 h-14 mx-auto drop-shadow-md" />
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Institutional Login</h1>
@@ -98,7 +98,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-full shadow-md shadow-teal-700/20 transition active:scale-98 disabled:bg-slate-300 dark:disabled:bg-slate-700 flex items-center justify-center gap-1.5"
+            className="w-full py-3 btn-teal font-bold text-xs rounded-full disabled:bg-slate-300 dark:disabled:bg-slate-700 flex items-center justify-center gap-1.5"
           >
             <span>{loading ? 'Authenticating...' : 'Sign In to BorrowBuddy'}</span>
             <ArrowRight className="w-3.5 h-3.5" />

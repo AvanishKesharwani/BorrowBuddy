@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import DemoToolbar from '@/components/DemoToolbar';
 import Navbar from '@/components/Navbar';
 import BorrowBuddyLogo from '@/components/BorrowBuddyLogo';
 import { ThemeProvider } from '@/components/ThemeProvider';
@@ -9,6 +8,11 @@ export const metadata: Metadata = {
   title: 'BorrowBuddy — Campus Borrowing & Renting Marketplace | IIIT-Naya Raipur',
   description:
     'Borrow, lend, or rent items securely across the IIIT-NR campus community. Calculators, chargers, books, lab components, cycles, and more.',
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/favicon.ico',
+    apple: '/icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -34,9 +38,6 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen bg-slate-50/60 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-teal-600 selection:text-white transition-colors duration-200">
         <ThemeProvider>
-          {/* Sticky Demo Presentation Bar */}
-          <DemoToolbar />
-
           {/* Global Institutional Navbar */}
           <Navbar />
 
