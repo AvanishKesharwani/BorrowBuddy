@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
   Layers,
   CheckCircle,
@@ -146,43 +147,56 @@ export default function MyLentItemsPage() {
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
-          {/* Tabs */}
-          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full text-xs font-bold">
-            <button
-              onClick={() => setActiveTab('requests')}
-              className={`px-4 py-2 rounded-full transition flex items-center gap-1.5 ${
-                activeTab === 'requests'
-                  ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              <span>Incoming Requests</span>
-              {pendingRequests.length > 0 && (
-                <span className="bg-amber-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-black">
-                  {pendingRequests.length}
-                </span>
-              )}
-            </button>
-            <button
-              onClick={() => setActiveTab('active')}
-              className={`px-4 py-2 rounded-full transition ${
-                activeTab === 'active'
-                  ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              Currently Lent ({activeLent.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('listings')}
-              className={`px-4 py-2 rounded-full transition ${
-                activeTab === 'listings'
-                  ? 'bg-white dark:bg-slate-700 text-teal-800 dark:text-teal-200 shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              My Listings ({myItems.length})
-            </button>
+          {/* Tabs with sliding morph pill */}
+          <div className="relative flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full text-xs font-bold overflow-x-auto scrollbar-none">
+            {[
+              {
+                id: 'requests',
+                label: 'Incoming Requests',
+                badge: pendingRequests.length > 0 ? pendingRequests.length : null,
+              },
+              {
+                id: 'active',
+                label: `Currently Lent (${activeLent.length})`,
+                badge: null,
+              },
+              {
+                id: 'listings',
+                label: `My Listings (${myItems.length})`,
+                badge: null,
+              },
+            ].map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`relative px-4 py-2 rounded-full transition-colors duration-200 z-10 whitespace-nowrap flex items-center gap-1.5 ${
+                    isActive
+                      ? 'text-teal-900 dark:text-teal-200'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="lentTabPill"
+                      className="absolute inset-0 bg-white dark:bg-slate-700 rounded-full shadow-xs z-[-1]"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 500,
+                        damping: 35,
+                      }}
+                    />
+                  )}
+                  <span>{tab.label}</span>
+                  {tab.badge && (
+                    <span className="bg-amber-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-black">
+                      {tab.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           <a

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   Bell,
@@ -32,6 +32,31 @@ export default function Navbar() {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [navSearch, setNavSearch] = useState('');
+
+  const categoriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const profileTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleCategoriesMouseEnter = () => {
+    if (categoriesTimeoutRef.current) clearTimeout(categoriesTimeoutRef.current);
+    setCategoriesOpen(true);
+  };
+
+  const handleCategoriesMouseLeave = () => {
+    categoriesTimeoutRef.current = setTimeout(() => {
+      setCategoriesOpen(false);
+    }, 150);
+  };
+
+  const handleProfileMouseEnter = () => {
+    if (profileTimeoutRef.current) clearTimeout(profileTimeoutRef.current);
+    setProfileDropdownOpen(true);
+  };
+
+  const handleProfileMouseLeave = () => {
+    profileTimeoutRef.current = setTimeout(() => {
+      setProfileDropdownOpen(false);
+    }, 150);
+  };
 
   const fetchUser = async () => {
     try {
@@ -99,30 +124,36 @@ export default function Navbar() {
               Rent &amp; Lend
             </a>
 
-            {/* Categories Dropdown */}
-            <div className="relative shrink-0">
+            {/* Categories Dropdown (Hover & Click Supported) */}
+            <div
+              className="relative shrink-0"
+              onMouseEnter={handleCategoriesMouseEnter}
+              onMouseLeave={handleCategoriesMouseLeave}
+            >
               <button
                 onClick={() => setCategoriesOpen(!categoriesOpen)}
                 className="px-3 py-1.5 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition flex items-center gap-1 whitespace-nowrap shrink-0"
               >
                 <span className="whitespace-nowrap">Categories</span>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400 dark:text-slate-400" />
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 dark:text-slate-400 transition-transform duration-200 ${categoriesOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {categoriesOpen && (
                 <div
-                  className="absolute left-0 mt-2 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 py-2 z-50 animate-in fade-in"
+                  className="absolute left-0 top-full pt-1.5 w-56 z-50 animate-in fade-in zoom-in-95 duration-150"
                   onClick={() => setCategoriesOpen(false)}
                 >
-                  {CATEGORIES.map((cat) => (
-                    <a
-                      key={cat}
-                      href={`/explore?category=${encodeURIComponent(cat)}`}
-                      className="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-mint-50 dark:hover:bg-slate-800 hover:text-teal-700 dark:hover:text-teal-300 transition whitespace-nowrap"
-                    >
-                      {cat}
-                    </a>
-                  ))}
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 py-2">
+                    {CATEGORIES.map((cat) => (
+                      <a
+                        key={cat}
+                        href={`/explore?category=${encodeURIComponent(cat)}`}
+                        className="block px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-mint-50 dark:hover:bg-slate-800 hover:text-teal-700 dark:hover:text-teal-300 transition whitespace-nowrap"
+                      >
+                        {cat}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -196,9 +227,13 @@ export default function Navbar() {
               )}
             </a>
 
-            {/* User Profile / Account Trigger */}
+            {/* User Profile / Account Trigger (Hover & Click Supported) */}
             {currentUser ? (
-              <div className="relative">
+              <div
+                className="relative"
+                onMouseEnter={handleProfileMouseEnter}
+                onMouseLeave={handleProfileMouseLeave}
+              >
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                   className="flex items-center gap-2 p-1 rounded-full border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 transition"
@@ -211,15 +246,16 @@ export default function Navbar() {
                   <span className="hidden xl:block text-xs font-bold text-slate-800 dark:text-slate-200 pr-1">
                     {currentUser.name.split(' ')[0]}
                   </span>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden xl:block" />
+                  <ChevronDown className={`w-3.5 h-3.5 text-slate-400 hidden xl:block transition-transform duration-200 ${profileDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {profileDropdownOpen && (
                   <div
-                    className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 py-2 z-50 animate-in fade-in"
+                    className="absolute right-0 top-full pt-1.5 w-64 z-50 animate-in fade-in zoom-in-95 duration-150"
                     onClick={() => setProfileDropdownOpen(false)}
                   >
-                    <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 py-2">
+                      <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800">
                       <p className="text-sm font-bold text-slate-900 dark:text-white">{currentUser.name}</p>
                       <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">{currentUser.studentId || currentUser.email}</p>
                       <div className="mt-2 flex items-center gap-2 text-xs">
@@ -285,6 +321,7 @@ export default function Navbar() {
                       <LogOut className="w-4 h-4" />
                       Sign Out
                     </button>
+                    </div>
                   </div>
                 )}
               </div>

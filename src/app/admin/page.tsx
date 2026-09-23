@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
   Users,
@@ -172,40 +173,38 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* Tab switcher */}
-        <div className="flex items-center gap-1 bg-slate-800/80 p-1.5 rounded-full border border-slate-700 text-xs font-bold">
-          <button
-            onClick={() => setActiveTab('overview')}
-            className={`px-4 py-2 rounded-full transition ${
-              activeTab === 'overview' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
-            }`}
-          >
-            Overview &amp; KPIs
-          </button>
-          <button
-            onClick={() => setActiveTab('students')}
-            className={`px-4 py-2 rounded-full transition ${
-              activeTab === 'students' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
-            }`}
-          >
-            Students ({users.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('items')}
-            className={`px-4 py-2 rounded-full transition ${
-              activeTab === 'items' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
-            }`}
-          >
-            Items ({items.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('config')}
-            className={`px-4 py-2 rounded-full transition ${
-              activeTab === 'config' ? 'bg-teal-600 text-white' : 'text-slate-300 hover:text-white'
-            }`}
-          >
-            Penalty Rules
-          </button>
+        {/* Tab switcher with Framer Motion sliding morph pill */}
+        <div className="relative flex items-center gap-1 bg-slate-800/80 p-1.5 rounded-full border border-slate-700 text-xs font-bold w-full sm:w-auto overflow-x-auto scrollbar-none">
+          {[
+            { id: 'overview', label: 'Overview & KPIs' },
+            { id: 'students', label: `Students (${users.length})` },
+            { id: 'items', label: `Items (${items.length})` },
+            { id: 'config', label: 'Penalty Rules' },
+          ].map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`relative px-4 py-2 rounded-full transition-colors duration-200 z-10 whitespace-nowrap ${
+                  isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="adminActiveTabPill"
+                    className="absolute inset-0 bg-teal-600 rounded-full shadow-[0_2px_12px_rgba(13,122,117,0.5)] z-[-1]"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 500,
+                      damping: 35,
+                    }}
+                  />
+                )}
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -216,8 +215,17 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {/* Tab: Overview & KPIs */}
-      {activeTab === 'overview' && (
+      {/* Animated Tab Content with morphing blur crossfade */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 12, filter: 'blur(3px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: -12, filter: 'blur(3px)' }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {/* Tab: Overview & KPIs */}
+          {activeTab === 'overview' && (
         <div className="space-y-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-2xs">
@@ -522,6 +530,8 @@ export default function AdminDashboardPage() {
           </form>
         </div>
       )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

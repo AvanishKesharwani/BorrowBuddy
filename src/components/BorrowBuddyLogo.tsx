@@ -17,7 +17,7 @@ export function FancyLogoIcon({
     <img
       src="/logo.png"
       alt={alt}
-      className={`object-contain ${className} drop-shadow-[0_2px_8px_rgba(20,184,166,0.2)] dark:drop-shadow-[0_4px_16px_rgba(45,212,191,0.3)] transition-transform duration-200 select-none`}
+      className={`object-contain ${className} drop-shadow-[0_2px_8px_rgba(20,184,166,0.2)] dark:drop-shadow-[0_0_20px_rgba(45,212,191,0.35)] dark:brightness-105 transition-transform duration-200 select-none`}
     />
   );
 }

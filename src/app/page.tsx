@@ -92,11 +92,6 @@ export default async function HomePage() {
 
         {/* Centered Hero Content */}
         <div className="relative z-10 text-center space-y-6 max-w-4xl mx-auto my-auto pt-4 sm:pt-8">
-          {/* Institution Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 border border-teal-400/40 text-teal-200 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide backdrop-blur-md shadow-inner transition">
-            <Sparkles className="w-3.5 h-3.5 text-teal-300" />
-            <span>Dr. SPM IIIT-Naya Raipur Official Campus Network</span>
-          </div>
 
           {/* Big, Bold Typography (matching reference school hero) */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08] drop-shadow-md">
