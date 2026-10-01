@@ -3,6 +3,10 @@
 > **Student-to-Student Borrowing & Rental Platform for IIIT-Naya Raipur**  
 > Physical equipment, lab kits, calculators, and books shared across Raman and Shabri hostels.
 
+> 🎓 **Teacher Presentation & Code Architecture Guide:**  
+> For the complete file directory cheat sheet, live evaluation script, and viva Q&A, check out **[PRESENTATION_GUIDE.md](./PRESENTATION_GUIDE.md)**!  
+> Every source file across this codebase has been documented with teacher-ready explanation banners and step-by-step logic comments.
+
 ![BorrowBuddy Platform](public/logo.png)
 
 ---
