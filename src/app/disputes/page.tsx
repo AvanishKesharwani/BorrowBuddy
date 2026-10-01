@@ -1,3 +1,25 @@
+/**
+ * ============================================================================
+ * CAMPUS DISPUTE RESOLUTION PORTAL (src/app/disputes/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Allows students to view active and past conflict mediation cases:
+ * 1. Filters transactions where status is `DISPUTED` or a `Dispute` ticket was logged.
+ * 2. Displays dispute reason, filing timestamp, and administrative resolution findings.
+ * 3. Provides instant access to the transaction conversation thread via `TransactionChatModal`.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Filtered Client View: Automatically separates active conflict cases from
+ *    ordinary transactions, giving students visibility into faculty arbitration.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is the student's Dispute Center. If an item is reported damaged
+ * or missing, students track the status of the investigation and read faculty
+ * resolution decisions here."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

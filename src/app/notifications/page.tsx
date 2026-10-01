@@ -1,3 +1,27 @@
+/**
+ * ============================================================================
+ * CAMPUS NOTIFICATIONS & ALERTS CENTER (src/app/notifications/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Dedicated notification center showing all student updates:
+ * 1. Categorized alerts: Overdue Warnings (`OVERDUE`), Deadline Reminders (`DUE_SOON`),
+ *    Borrow Request Approvals (`ACCEPTED`), and New Ratings (`RATING`).
+ * 2. Unread Filter & "Mark All as Read" batch action calling `/api/notifications`.
+ * 3. Relative timestamps (e.g. "5 minutes ago", "yesterday") and direct navigation links.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Real-Time Activity Tracking: Surfaces all critical transaction state transitions
+ *    in an accessible timeline.
+ * 2. Selective Optimistic UI: Updates read status instantly upon user interaction.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our notification center. Students receive real-time alerts
+ * here whenever someone requests their item, when loans are approved, when return
+ * deadlines are approaching, or if an item becomes overdue."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

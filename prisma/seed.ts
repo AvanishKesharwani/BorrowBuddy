@@ -1,3 +1,29 @@
+/**
+ * ============================================================================
+ * DATABASE SEED SCRIPT (prisma/seed.ts)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Populates the SQLite database (`prisma/dev.db`) with realistic campus demo
+ * data: student accounts (Arjun, Priya, Rohan, Ananya), a Faculty Admin account,
+ * verified campus items (Calculators, Arduino Kits, DSLR cameras, textbooks),
+ * sample active/completed borrowing transactions, notifications, and reviews.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Database Reset & Seeding: Cleans existing test records and recreates fresh
+ *    data in a guaranteed state for demonstrations and testing.
+ * 2. Password Hashing: Uses `bcrypt.hash(password, 10)` to securely hash demo
+ *    passwords before writing them to the database.
+ * 3. Relational Linking: Establishes connections between users, items, and
+ *    transactions so you can immediately demo borrowing, returning, and ratings.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this seed script populates our database with sample IIIT-NR students,
+ * lab equipment, and demo transactions. We can run this anytime to reset the app
+ * to a clean, working demonstration state."
+ * ============================================================================
+ */
+
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
@@ -6,7 +32,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Seeding IIIT-Naya Raipur BorrowBuddy database...');
 
-  // Clear existing
+  // STEP 1: Purge existing records to prevent unique constraint conflicts
   await prisma.dispute.deleteMany();
   await prisma.message.deleteMany();
   await prisma.notification.deleteMany();

@@ -1,3 +1,30 @@
+/**
+ * ============================================================================
+ * BORROWBUDDY HOMEPAGE & DISCOVERY PORTAL (src/app/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Renders the main landing page of BorrowBuddy:
+ * 1. Hero banner with quick search bar and campus metrics counters.
+ * 2. Visual category cards (Electronics, Academic Textbooks, Lab Gear, Sports).
+ * 3. "Recently Listed on Campus" live marketplace grid.
+ * 4. "How BorrowBuddy Works" 3-step student guide (Search & Request -> Meet & Handover -> Return & Review).
+ * 5. Campus Trust & Reliability rules (Zero Lost Items, Student ID verification, Overdue alerts).
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. React Server Component (RSC): Notice there is NO 'use client' directive.
+ *    This component executes directly on the Node.js server.
+ * 2. Direct Server-Side DB Querying: Queries SQLite directly with `prisma.item.findMany()`
+ *    and `Promise.all` count queries. No client-side fetch waterfall or loading spinners!
+ * 3. Fast Zero-JS Payload: Sends pre-rendered HTML to the student's browser.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our homepage built as a Next.js React Server Component.
+ * It queries our SQLite database directly on the server to display live campus statistics
+ * and recently listed items with maximum performance."
+ * ============================================================================
+ */
+
 import React from 'react';
 import { prisma } from '@/lib/prisma';
 import ItemCard from '@/components/ItemCard';
@@ -21,10 +48,18 @@ import {
   ShieldAlert,
 } from 'lucide-react';
 
+// Tells Next.js to always fetch fresh data from SQLite on every visit (no stale cache)
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
+  // --------------------------------------------------------------------------
+  // PARALLEL DATA FETCHING (Using Promise.all)
+  // Instead of waiting for 4 queries one after another (Query 1 -> Query 2 -> Query 3),
+  // Promise.all fires all 4 queries concurrently to the SQLite database.
+  // This drastically reduces page load latency!
+  // --------------------------------------------------------------------------
   const [items, totalStudents, totalItems, completedTransactions] = await Promise.all([
+    // 1. Fetch latest 8 available items with their owner profiles
     prisma.item.findMany({
       where: { availability: 'AVAILABLE' },
       include: {
@@ -44,8 +79,11 @@ export default async function HomePage() {
       take: 8,
       orderBy: { createdAt: 'desc' },
     }),
+    // 2. Count registered student accounts
     prisma.user.count({ where: { role: 'STUDENT' } }),
+    // 3. Count total campus listings
     prisma.item.count(),
+    // 4. Count successful returned transactions
     prisma.transaction.count({ where: { status: 'RETURNED' } }),
   ]);
 

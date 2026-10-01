@@ -1,3 +1,32 @@
+/**
+ * ============================================================================
+ * MAIN APPLICATION NAVIGATION BAR (src/components/Navbar.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Renders the persistent responsive top navigation bar for BorrowBuddy:
+ * 1. Brand Logo linking to Homepage.
+ * 2. Instant Search Bar redirecting to `/explore?q=...`.
+ * 3. Categories Dropdown for fast departmental item discovery.
+ * 4. Navigation Links: Explore, My Borrowings, Lent Items.
+ * 5. Notifications Bell with unread counter badge.
+ * 6. Profile Dropdown showing current student reputation score and Logout option.
+ * 7. Dark/Light Theme Toggle (`ThemeToggle`).
+ * 8. Responsive Mobile Hamburger Menu for smartphone viewports.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Client Component ('use client'): Manages dropdowns, hover timeouts, search
+ *    inputs, and polls `/api/auth/me` to keep notifications and login state fresh.
+ * 2. Glassmorphism Design: Uses Apple-style backdrop blur (`backdrop-blur-md bg-white/90`)
+ *    for a clean, modern aesthetic.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our main navigation bar. It is fully responsive, provides
+ * quick access to search, displays the student's live notification badge and
+ * reliability rating, and allows switching between light and dark modes."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';

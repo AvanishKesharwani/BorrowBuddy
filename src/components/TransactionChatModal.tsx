@@ -1,3 +1,29 @@
+/**
+ * ============================================================================
+ * IN-TRANSACTION LIVE MESSAGING MODAL (src/components/TransactionChatModal.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Provides an in-app private chat window for the lender and borrower:
+ * 1. Loads chronological message history for the transaction.
+ * 2. Auto-scrolls to the newest message using React refs (`scrollIntoView`).
+ * 3. Polls `/api/transactions/[id]/messages` every 3 seconds while open.
+ * 4. Enables sending messages (e.g. "I am waiting outside Raman Hostel").
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Polling-Based Real-Time Chat: Uses `setInterval` while the modal is open,
+ *    achieving reliable real-time message delivery without requiring heavy WebSocket
+ *    infrastructure.
+ * 2. Automatic Scroll Anchoring: Uses `messagesEndRef` attached to a zero-height
+ *    div at the bottom of the list for smooth auto-scrolling when new messages arrive.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this component is our transaction chat modal. It lets borrower and lender
+ * message each other in real-time to coordinate physical handovers, pickup times,
+ * and meeting spots on campus."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -24,6 +50,12 @@ export default function TransactionChatModal({
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * --------------------------------------------------------------------------
+   * fetchMessages():
+   * Queries latest messages for this specific transaction from SQLite.
+   * --------------------------------------------------------------------------
+   */
   const fetchMessages = async () => {
     try {
       const res = await fetch(`/api/transactions/${transactionId}/messages`);
@@ -36,6 +68,7 @@ export default function TransactionChatModal({
     }
   };
 
+  // Poll for new messages every 3 seconds while modal is open
   useEffect(() => {
     if (isOpen) {
       fetchMessages();
@@ -44,10 +77,17 @@ export default function TransactionChatModal({
     }
   }, [isOpen, transactionId]);
 
+  // Smooth auto-scroll to latest message when messages array updates
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  /**
+   * --------------------------------------------------------------------------
+   * handleSendMessage():
+   * Posts message to `/api/transactions/[id]/messages` and refreshes feed.
+   * --------------------------------------------------------------------------
+   */
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!content.trim() || loading) return;
@@ -95,13 +135,13 @@ export default function TransactionChatModal({
           </button>
         </div>
 
-        {/* Info banner */}
+        {/* Coordination Banner */}
         <div className="bg-mint-50 dark:bg-teal-950/40 border-b border-teal-100 dark:border-teal-900/50 px-4 py-2 text-xs text-teal-900 dark:text-teal-300 flex items-center gap-2">
           <MapPin className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
           <span>Coordinate campus handover, meetups, and item return here safely.</span>
         </div>
 
-        {/* Message Log */}
+        {/* Chronological Message Log */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50 dark:bg-slate-950">
           {messages.length === 0 ? (
             <div className="text-center py-12 text-slate-400 dark:text-slate-500 text-xs">
@@ -125,7 +165,7 @@ export default function TransactionChatModal({
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Footer */}
+        {/* Input Form Footer */}
         <form onSubmit={handleSendMessage} className="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex gap-2">
           <input
             type="text"

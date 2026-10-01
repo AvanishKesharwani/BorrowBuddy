@@ -1,3 +1,29 @@
+/**
+ * ============================================================================
+ * STUDENT REPUTATION DOSSIER & PROFILE (src/app/profile/[id]/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Public campus profile showcasing a student's trustworthiness and listings:
+ * 1. Student Identity Header: Roll Number, Academic Department, Year, and Avatar.
+ * 2. Campus Reliability Score (out of 100%) and 5-Star Peer Rating with trust badges.
+ * 3. Lifetime Borrowing Statistics: Total borrowed, items returned on time, and total lent.
+ * 4. "Active Campus Listings" Tab: All items currently listed for sharing by this student.
+ * 5. "Reputation & Feedback" Tab: Authentic peer reviews with star ratings, criteria tags,
+ *    and comments left by campus peers after returning items.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Social Trust Architecture: Transparent reliability metrics discourage equipment
+ *    damage, late returns, and bad behavior across the campus community.
+ * 2. Dynamic Routing (`[id]`): Loads any student's public profile link seamlessly.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is the student's public reputation dossier. In peer-to-peer sharing,
+ * trust is essential. Before lending expensive equipment like a DSLR or calculator,
+ * students can inspect the borrower's reliability score and past peer reviews."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

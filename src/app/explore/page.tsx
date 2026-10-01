@@ -1,3 +1,31 @@
+/**
+ * ============================================================================
+ * CAMPUS MARKETPLACE & EXPLORE VIEW (src/app/explore/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Powers the interactive marketplace catalog:
+ * 1. Real-time debounced keyword search across titles, descriptions, and campus pickup locations.
+ * 2. Multi-filter sidebar/bar: Filter by Category (Electronics, Books, Sports),
+ *    Transaction Mode (Free Borrow vs Daily Rent), Availability (Available vs Borrowed),
+ *    and Minimum Owner Campus Rating (e.g. 4.5+ ⭐).
+ * 3. Responsive Item Grid rendering `ItemCard` components with live loading skeletons.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Debounced Client Querying: `useEffect` debounces user keystrokes by 200ms
+ *    to avoid sending unnecessary search requests on every character typed.
+ * 2. URL State Synchronization: Synchronizes with browser query parameters
+ *    (`?q=...&category=...`) so search links can be bookmarked and shared.
+ * 3. Next.js Suspense Boundary: Uses `<Suspense>` to safely wrap `useSearchParams()`
+ *    for client-side streaming and static optimization.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our Explore & Search page. It lets students find items across
+ * campus using instant debounced search and filters (category, rental mode, owner rating).
+ * It automatically updates URL query parameters so searches can be shared."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect, Suspense, useCallback } from 'react';

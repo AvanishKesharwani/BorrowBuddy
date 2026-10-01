@@ -1,3 +1,31 @@
+/**
+ * ============================================================================
+ * INSTITUTIONAL LOGIN VIEW (src/app/login/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Student authentication sign-in portal:
+ * 1. Accepts IIIT-NR institutional email or Student Roll Number + password.
+ * 2. Calls `/api/auth/login` to verify credentials against salted bcrypt hashes.
+ * 3. Provides instant one-click pre-filled buttons for presentation testing:
+ *    - Arjun (Borrower Demo)
+ *    - Priya (Lender Demo)
+ *    - Dr. S. K. Verma (Campus Administrator)
+ * 4. Stores session cookie and forwards user to `/explore`.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Client-Side Authentication Flow: Manages loading states, error boundaries,
+ *    and programmatic Next.js router redirection (`router.push('/explore')`).
+ * 2. Evaluator Convenience: Pre-filled credentials allow seamless login testing
+ *    during live teacher presentations.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our Institutional Login page. Students can sign in with their
+ * IIIT-NR email or Student ID. For quick evaluation, we also provide one-click
+ * demo credentials to instantly test borrower, lender, or admin roles."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState } from 'react';

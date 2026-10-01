@@ -1,3 +1,31 @@
+/**
+ * ============================================================================
+ * POST-TRANSACTION PEER RATING MODAL (src/components/RatingModal.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * An interactive feedback dialog presented when an item is returned:
+ * 1. Interactive 5-star selector with hover previews and dynamic descriptions
+ *    (e.g., "5.0 — Outstanding & Reliable!").
+ * 2. Multi-select campus feedback tags ("Returned On-Time", "Pristine Condition",
+ *    "Polite & Respectful").
+ * 3. Textual review comment input.
+ * 4. Dispatches the review payload to `/api/ratings`, automatically refreshing
+ *    the peer's campus trust score.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Interactive State Management: Handles hover state (`hoverRating`) vs locked
+ *    rating (`rating`) for smooth star highlighting.
+ * 2. Campus Reputation Building: Feeds directly into student trust profiles,
+ *    fostering respectful and responsible peer-to-peer exchanges.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our peer feedback modal. When a loan concludes, students use
+ * this dialog to rate each other out of 5 stars and select feedback tags. It directly
+ * recalculates the peer's campus reputation score."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState } from 'react';
@@ -12,6 +40,7 @@ interface RatingModalProps {
   onSuccess: () => void;
 }
 
+// Preset campus feedback criteria tags
 const CRITERIA_OPTIONS = [
   'Returned On-Time',
   'Mint / Pristine Condition',
@@ -29,6 +58,7 @@ export default function RatingModal({
   onClose,
   onSuccess,
 }: RatingModalProps) {
+  // Local state for star rating, hover preview, criteria tags, and review text
   const [rating, setRating] = useState(5);
   const [hoverRating, setHoverRating] = useState(0);
   const [selectedCriteria, setSelectedCriteria] = useState<string[]>(['Returned On-Time', 'Clear Communication']);
@@ -38,6 +68,7 @@ export default function RatingModal({
 
   if (!isOpen) return null;
 
+  // Toggle selection for feedback criteria tags
   const toggleCriteria = (item: string) => {
     if (selectedCriteria.includes(item)) {
       setSelectedCriteria(selectedCriteria.filter((c) => c !== item));
@@ -46,6 +77,12 @@ export default function RatingModal({
     }
   };
 
+  /**
+   * --------------------------------------------------------------------------
+   * handleSubmit():
+   * Posts rating to `/api/ratings` and triggers success callback.
+   * --------------------------------------------------------------------------
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -80,6 +117,7 @@ export default function RatingModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
       <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 transition-colors">
+        {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
           <div>
             <h3 className="font-bold text-slate-900 dark:text-white text-lg">Rate Your Experience</h3>
@@ -97,7 +135,7 @@ export default function RatingModal({
         )}
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          {/* Star Rating */}
+          {/* Interactive Star Rating Selector */}
           <div className="text-center py-2">
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
               How would you rate your peer, <span className="text-teal-600 dark:text-teal-400">{revieweeName}</span>?
@@ -173,6 +211,7 @@ export default function RatingModal({
             />
           </div>
 
+          {/* Submit Actions */}
           <div className="flex items-center justify-end gap-2 pt-2">
             <button
               type="button"

@@ -1,3 +1,26 @@
+/**
+ * ============================================================================
+ * THEME TOGGLE BUTTON COMPONENT (src/components/ThemeToggle.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * An animated toggle button that switches between Light Mode and Dark Mode:
+ * 1. Renders an animated Sun icon in dark mode and Moon icon in light mode.
+ * 2. Calls `toggleTheme()` from `ThemeProvider`.
+ * 3. Prevents layout shift (CLS) during client-side hydration.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Hydration Placeholder: Renders a dummy placeholder until `mounted === true`
+ *    so the server-rendered HTML and client-rendered DOM match perfectly.
+ * 2. Micro-interactions: Active scale transform (`active:scale-90`) and smooth
+ *    zoom-in animations provide crisp tactile user feedback.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this component is our light/dark mode switch button. It features
+ * smooth micro-animations and avoids layout shift while syncing with localStorage."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -18,7 +41,7 @@ export default function ThemeToggle({ showLabel = false, className = '' }: Theme
   }, []);
 
   if (!mounted) {
-    // Placeholder to avoid layout shift before hydration
+    // Placeholder to avoid layout shift before client hydration completes
     return (
       <div
         className={`w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 ${className}`}

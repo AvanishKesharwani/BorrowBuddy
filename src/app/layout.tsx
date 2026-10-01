@@ -1,6 +1,33 @@
+/**
+ * ============================================================================
+ * ROOT APPLICATION LAYOUT (src/app/layout.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * The foundational root layout wrapping every page in the Next.js application:
+ * 1. Configures HTML `<head>` metadata (page titles, descriptions, favicon).
+ * 2. Injects an inline anti-flash script ensuring dark mode preference is loaded
+ *    instantly before the DOM paints, preventing white flash on dark theme.
+ * 3. Wraps the page tree in `ThemeProvider` for campus dark/light mode.
+ * 4. Mounts the presentation `DemoToolbar` and global `Navbar`.
+ * 5. Injects the shared campus footer across all views.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Root Layout in App Router: In Next.js 13+, `app/layout.tsx` persists state
+ *    across route navigations without re-rendering the surrounding chrome.
+ * 2. Anti-FOUC (Flash of Unstyled Content) Script: Reads localStorage synchronously
+ *    before browser render to prevent theme flashing.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our root layout. It wraps every page in the app with our global
+ * ThemeProvider, persistent navigation bar, campus footer, and presentation demo toolbar."
+ * ============================================================================
+ */
+
 import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
+import DemoToolbar from '@/components/DemoToolbar';
 import BorrowBuddyLogo from '@/components/BorrowBuddyLogo';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
@@ -23,6 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Anti-FOUC theme hydration script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function() {
@@ -38,15 +66,18 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen bg-slate-50/60 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-teal-600 selection:text-white transition-colors duration-200">
         <ThemeProvider>
+          {/* Interactive Presentation Toolbar for Live Demonstrations */}
+          <DemoToolbar />
+
           {/* Global Institutional Navbar */}
           <Navbar />
 
-          {/* Page Content */}
+          {/* Main Dynamic Page Content */}
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
             {children}
           </main>
 
-          {/* Campus Footer (matches footer block in mockup) */}
+          {/* Campus Footer */}
           <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 text-xs text-slate-500 dark:text-slate-400 transition-colors duration-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">

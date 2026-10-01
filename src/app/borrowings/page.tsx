@@ -1,3 +1,30 @@
+/**
+ * ============================================================================
+ * STUDENT BORROWINGS MANAGEMENT DASHBOARD (src/app/borrowings/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * The personal dashboard where a student manages items they are borrowing:
+ * 1. Filterable tabs: Active Loans (including Overdue items with warning cards),
+ *    Pending Borrow Requests, and Returned History.
+ * 2. Real-Time Overdue & Penalty Alert Cards: Visualizes late days, daily 5% penalties,
+ *    and return deadline countdowns.
+ * 3. Return Action Button: Initiates return (`RETURN_PENDING`) for owner confirmation.
+ * 4. Interactive Modals: Opens In-Transaction Chat (`TransactionChatModal`),
+ *    Peer Review Form (`RatingModal`), and Campus Dispute Ticket (`DisputeModal`).
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Client State & Polling: Polls `/api/transactions?type=borrowed` every 5s,
+ *    instantly reflecting status changes when the owner accepts or confirms return.
+ * 2. Framer Motion Animations: Smooth transitions between tabs using `<AnimatePresence>`.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is the student's 'My Borrowings' dashboard. Here they track their
+ * active loans, see overdue penalty warnings, initiate item returns, and chat
+ * with the owner to arrange meetups."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

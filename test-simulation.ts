@@ -1,3 +1,25 @@
+/**
+ * ============================================================================
+ * SIMULATION ENGINE TEST SCRIPT (test-simulation.ts)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * An automated end-to-end verification script. It programmatically simulates
+ * the entire BorrowBuddy workflow:
+ * 1. Checks seeded student profiles and equipment items.
+ * 2. Simulates Arjun requesting Priya's calculator.
+ * 3. Priya approves the request (item status changes to BORROWED).
+ * 4. Fast-forwards time by 72 hours (+3 days) using the simulation engine.
+ * 5. Verifies that the automated sweep flags the item as OVERDUE, calculates
+ *    the 5%/day penalty, deducts Arjun's reliability score, and issues alerts.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is an automated testing script that runs through the complete
+ * lifecycle of a loan—from request to acceptance to time travel and overdue penalty
+ * calculation—verifying our platform's automated business logic."
+ * ============================================================================
+ */
+
 import { prisma } from './src/lib/prisma';
 import { advanceSimulationHours, resetSimulation, getSimulatedNow, runOverdueAndReminderSweep } from './src/lib/simulation';
 

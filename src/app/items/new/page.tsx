@@ -1,3 +1,30 @@
+/**
+ * ============================================================================
+ * NEW ITEM LISTING CREATION PAGE (src/app/items/new/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Allows students to publish a new item to the campus marketplace:
+ * 1. Collects title, category, description, and physical condition.
+ * 2. Provides curated high-resolution preset photos (Calculators, Arduino, Lab Gear)
+ *    or custom image URL input.
+ * 3. Configures transaction mode: Free Borrow vs Paid Daily Rental (₹/day).
+ * 4. Sets declared replacement value (used for automated overdue penalty calculations).
+ * 5. Selects official IIIT-NR campus handover location (Hostel Raman, SAC, Library, etc.).
+ * 6. Posts to `/api/items` and redirects to the newly created listing.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Form State Management: React controlled inputs with real-time validation.
+ * 2. Instant Preset Selector: Pre-loads verified campus imagery so students don't
+ *    have to manually find image URLs during presentations.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this page is where students list their equipment. They choose a category,
+ * pick from our pre-loaded photo presets, set whether it is free or rented, specify
+ * maximum borrowing days, and select a campus pickup spot."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState } from 'react';

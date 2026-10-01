@@ -1,3 +1,31 @@
+/**
+ * ============================================================================
+ * LENDER DASHBOARD & INCOMING REQUESTS (src/app/lent/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * The lender command center where students manage items they share with peers:
+ * 1. "Borrow Requests" Tab: Review incoming borrow requests with requester's
+ *    branch, roll number, and reputation score. Accept or Reject with one click.
+ * 2. "Active Loans" Tab: Monitor items currently with other students, inspect
+ *    return deadlines, and physically confirm returns (`Confirm Return` button).
+ * 3. "My Listed Inventory" Tab: Overview of all equipment published by this student,
+ *    availability status badges, and quick button to create new listings.
+ * 4. Modals: Opens In-Transaction Chat, Peer Ratings, or Dispute filing.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Two-Way Peer Verification: Protects lenders by giving them full authority
+ *    to accept requests and finalize physical return handovers.
+ * 2. Relational Profile Lookup: Fetches borrower trust scores to help lenders make
+ *    informed borrowing decisions.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is the 'Lent Items' dashboard. Lenders use this screen to approve
+ * or decline incoming borrow requests from peers, track who currently has their items,
+ * and confirm when items are safely returned."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

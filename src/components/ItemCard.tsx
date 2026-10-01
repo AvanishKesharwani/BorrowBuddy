@@ -1,9 +1,36 @@
+/**
+ * ============================================================================
+ * ITEM CARD REUSABLE COMPONENT (src/components/ItemCard.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * A reusable React UI card representing a single marketplace listing (e.g.
+ * "Casio Scientific Calculator", "Arduino Kit", "Lab Coat"):
+ * 1. Displays product photo, condition badge, and campus pickup location.
+ * 2. Visualizes owner reputation rating (e.g. 4.9 ⭐) and reliability score (98%).
+ * 3. Shows pricing badge (Free Borrow vs Daily Rent).
+ * 4. Links directly to the item details and request page (`/items/[id]`).
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Client Component ('use client'): Enables client interactivity such as bookmarking.
+ * 2. Component Props Interface: Strict TypeScript typing ensuring all parent components
+ *    pass compliant item models.
+ * 3. Conditional Pricing: Dynamically renders free vs rental pricing badges.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our reusable item card component. It displays key listing
+ * information at a glance—condition, campus location, pricing mode, and owner
+ * trust scores—used across the Homepage and Explore page."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState } from 'react';
 import { Star, MapPin, Clock, ShieldCheck, Heart, Bookmark } from 'lucide-react';
 import { formatINR, getStatusBadgeStyle } from '@/lib/utils';
 
+// TypeScript contract: Describes the shape of an Item object passed from the database
 interface ItemCardProps {
   item: {
     id: string;
@@ -32,10 +59,12 @@ interface ItemCardProps {
 }
 
 export default function ItemCard({ item }: ItemCardProps) {
+  // Local state for toggling bookmark heart icon on this individual card
   const [bookmarked, setBookmarked] = useState(false);
   const badgeStyle = getStatusBadgeStyle(item.availability);
 
   return (
+    // Outer Card Container with Apple Liquid Glass frosted effect
     <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl border border-white/80 dark:border-slate-800/80 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_16px_40px_rgba(13,122,117,0.14)] card-hover transition duration-300 flex flex-col group">
       {/* Image Container */}
       <div className="relative h-48 sm:h-52 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">

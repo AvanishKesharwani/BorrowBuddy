@@ -1,3 +1,28 @@
+/**
+ * ============================================================================
+ * STUDENT REGISTRATION VIEW (src/app/register/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Campus student signup interface:
+ * 1. Collects Full Name, Campus Roll Number (`studentId`), Institutional Email (`@iiitnr.edu.in`),
+ *    Password, Department/Branch (DSAI, CSE, ECE), and Year of Study.
+ * 2. Enforces campus-exclusive onboarding by validating the institutional domain.
+ * 3. Submits to `/api/auth/register` and redirects straight to the marketplace.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Form Validation: Validates institutional domain constraints client-side
+ *    before dispatching network requests.
+ * 2. Automatic Avatar & Onboarding: New accounts are automatically provisioned
+ *    with a generated avatar and 100% trust rating.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is our registration page. It enforces campus boundaries by requiring
+ * official `@iiitnr.edu.in` emails and collects academic department details (DSAI, CSE, ECE)
+ * for student profiles."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState } from 'react';

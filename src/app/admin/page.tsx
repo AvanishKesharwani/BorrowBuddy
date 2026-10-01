@@ -1,3 +1,31 @@
+/**
+ * ============================================================================
+ * CAMPUS FACULTY & ADMIN CONTROL PANEL (src/app/admin/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Administrative oversight dashboard for campus faculty in-charge:
+ * 1. "Overview" Tab: Live KPI summary cards showing active borrowings, overdue items,
+ *    total penalties accrued, open disputes, and campus-wide average reliability rating.
+ * 2. "Students" Tab: Directory of all students with activity counts, reputation scores,
+ *    and one-click instant account Suspension / Reinstatement toggles.
+ * 3. "Catalog Audit" Tab: Search and inspect all listed equipment with administrative
+ *    removal powers for prohibited items.
+ * 4. "Penalty Rules" Tab: Form to adjust the default daily late fee (5%/day) and
+ *    maximum safety penalty cap (50%).
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. RBAC (Role-Based Access Control): Restricted exclusively to users where `role === 'ADMIN'`.
+ * 2. Parallel Administrative Fetching: Loads stats, users, items, and config simultaneously
+ *    using `Promise.all` across four dedicated admin API endpoints.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is the Campus Admin Dashboard for college authorities. It provides
+ * institutional oversight over the entire system: monitoring active loans and disputes,
+ * moderating equipment listings, adjusting late fee rates, and suspending chronic defaulters."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

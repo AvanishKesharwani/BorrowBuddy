@@ -1,3 +1,24 @@
+/**
+ * ============================================================================
+ * DISPUTE FILING MODAL DIALOG (src/components/DisputeModal.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * A modal overlay allowing students to submit an official grievance to campus administration:
+ * 1. Collects a detailed explanation of the incident (e.g. damaged goods, missing accessories).
+ * 2. Calls `/api/transactions/[id]/dispute` on form submission.
+ * 3. Shows an administrative warning explaining that chat logs and timestamps will be audited.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Portal-Style Overlay: Renders on top of all page elements with backdrop blur (`z-50`).
+ * 2. Form Controlled State: Uses React `useState` for validation, loading states, and error handling.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this dialog appears when a student clicks 'Raise Dispute'. It collects
+ * the student's issue description and forwards it to campus faculty administrators for arbitration."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState } from 'react';
@@ -18,12 +39,20 @@ export default function DisputeModal({
   onClose,
   onSuccess,
 }: DisputeModalProps) {
+  // Local form state
   const [reason, setReason] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // If modal is not triggered, return nothing to keep DOM light
   if (!isOpen) return null;
 
+  /**
+   * --------------------------------------------------------------------------
+   * handleSubmit():
+   * Submits dispute report to `/api/transactions/[id]/dispute`.
+   * --------------------------------------------------------------------------
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!reason.trim()) return;
@@ -55,6 +84,7 @@ export default function DisputeModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
       <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 transition-colors">
+        {/* Modal Header */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400">
             <AlertTriangle className="w-5 h-5" />
@@ -65,6 +95,7 @@ export default function DisputeModal({
           </button>
         </div>
 
+        {/* Administrative Audit Warning */}
         <div className="mt-3 p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 rounded-xl text-xs text-rose-800 dark:text-rose-200 space-y-1">
           <p className="font-bold flex items-center gap-1.5 text-rose-900 dark:text-rose-300">
             <ShieldAlert className="w-4 h-4" />
@@ -76,12 +107,14 @@ export default function DisputeModal({
           </p>
         </div>
 
+        {/* Error message banner */}
         {error && (
           <div className="mt-3 p-3 bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 text-xs rounded-xl font-medium border border-rose-200 dark:border-rose-800">
             {error}
           </div>
         )}
 
+        {/* Form Body */}
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
@@ -97,6 +130,7 @@ export default function DisputeModal({
             />
           </div>
 
+          {/* Action Buttons */}
           <div className="flex items-center justify-end gap-2 pt-2">
             <button
               type="button"

@@ -1,3 +1,29 @@
+/**
+ * ============================================================================
+ * ITEM SPECIFICATIONS & BORROW REQUEST PAGE (src/app/items/[id]/page.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Displays full item specifications and handles the borrow request submission:
+ * 1. High-res product photo, condition badge, declared replacement value, and campus handover location.
+ * 2. Owner Trust Profile: Academic branch, roll number, 5-star rating, and reliability score.
+ * 3. Interactive Custom Calendar Picker: Select return deadline within the owner's `maxDuration`.
+ * 4. Submit Borrow Request Form: Submits request to `/api/requests`, creating an in-app
+ *    notification and initiating a private communication thread.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Dynamic Routing (`[id]`): Next.js App Router loads the item ID from URL path.
+ * 2. Interactive Custom Date Picker: Pure React state-driven calendar allowing
+ *    date selection while disabling dates past the maximum borrowing duration.
+ * 3. Client Validation: Prevents students from requesting their own listed items.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this is the item details view. A student views photos, verifies the
+ * owner's reputation, picks their return deadline on our custom interactive calendar,
+ * and submits a borrow request."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';

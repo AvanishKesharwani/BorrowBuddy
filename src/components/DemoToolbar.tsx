@@ -1,3 +1,31 @@
+/**
+ * ============================================================================
+ * INTERACTIVE DEMO PRESENTATION TOOLBAR (src/components/DemoToolbar.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Renders the top presentation bar designed specifically for live demonstrations:
+ * 1. Persona Switcher: One-click switching between Arjun (Borrower), Priya (Lender),
+ *    Rohan (Hardware owner), and Faculty Administrator.
+ * 2. Virtual Time-Travel Controls: Buttons to fast-forward time (+1 Day, +3 Days,
+ *    or "Past Deadline") to demonstrate overdue warnings, 5% penalties, and score
+ *    deductions without waiting for real time to pass.
+ * 3. Real-Time Status Polling: Periodically polls `/api/auth/me` and `/api/simulation/time`
+ *    to keep the active persona and simulated campus clock updated across all tabs.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Client Component ('use client'): Utilizes React Hooks (`useState`, `useEffect`,
+ *    `useRouter`) to dynamically trigger Next.js page refreshes without page reloads.
+ * 2. Multi-Perspective Demonstration: Allows an evaluator to observe both sides
+ *    of peer borrowing in real-time.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this top bar is our evaluator control center. It lets us switch between
+ * students to show both borrower and lender workflows, and lets us fast-forward campus
+ * time to test deadline expirations and automated penalties on the spot."
+ * ============================================================================
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -8,11 +36,19 @@ import { formatCustomDate } from '@/lib/utils';
 export default function DemoToolbar() {
   const router = useRouter();
   const pathname = usePathname();
+
+  // Local state for active student persona and virtual clock
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [simulatedTime, setSimulatedTime] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
 
+  /**
+   * --------------------------------------------------------------------------
+   * fetchStatus():
+   * Queries session info and current simulated time in parallel.
+   * --------------------------------------------------------------------------
+   */
   const fetchStatus = async () => {
     try {
       const [meRes, timeRes] = await Promise.all([
@@ -32,17 +68,25 @@ export default function DemoToolbar() {
     }
   };
 
+  // Poll status on route changes and every 8 seconds
   useEffect(() => {
     fetchStatus();
     const interval = setInterval(fetchStatus, 8000);
     return () => clearInterval(interval);
   }, [pathname]);
 
+  // Shows temporary floating confirmation toast
   const showToast = (msg: string) => {
     setFeedback(msg);
     setTimeout(() => setFeedback(null), 3500);
   };
 
+  /**
+   * --------------------------------------------------------------------------
+   * handleSwitchUser(identifier):
+   * Calls `/api/auth/switch` to instantly switch active login persona.
+   * --------------------------------------------------------------------------
+   */
   const handleSwitchUser = async (identifier: string) => {
     setLoading(true);
     try {
@@ -64,6 +108,12 @@ export default function DemoToolbar() {
     }
   };
 
+  /**
+   * --------------------------------------------------------------------------
+   * handleSimulateTime(action, hours):
+   * Calls `/api/simulation/time` to advance virtual clock or reset to local time.
+   * --------------------------------------------------------------------------
+   */
   const handleSimulateTime = async (action: 'advance' | 'advanceToDeadline' | 'reset', hours = 24) => {
     setLoading(true);
     try {
@@ -93,7 +143,7 @@ export default function DemoToolbar() {
   return (
     <header className="bg-slate-900 text-white border-b border-slate-800 text-xs py-2 px-3 sm:px-6 relative z-50">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-        {/* Left: Demo Badge & Current User */}
+        {/* Left: Demo Badge & Active User Indicator */}
         <div className="flex items-center gap-2 flex-wrap">
           <span className="inline-flex items-center gap-1.5 bg-teal-600 text-white px-2.5 py-1 rounded-full font-semibold tracking-wide text-[11px] shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
@@ -165,7 +215,7 @@ export default function DemoToolbar() {
           </div>
         </div>
 
-        {/* Right: Campus Clock & Fast-Forward Simulator */}
+        {/* Right: Campus Clock & Fast-Forward Simulator Buttons */}
         <div className="flex items-center gap-2 flex-wrap">
           <div className="flex items-center gap-1.5 text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700">
             <Clock className="w-3.5 h-3.5 text-amber-400" />

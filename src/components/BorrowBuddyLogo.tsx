@@ -1,3 +1,26 @@
+/**
+ * ============================================================================
+ * BRAND LOGO & EMBLEM COMPONENT (src/components/BorrowBuddyLogo.tsx)
+ * ============================================================================
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * Renders the official BorrowBuddy brand identity and campus subtitle
+ * ("BorrowBuddy — IIIT-Naya Raipur").
+ * Supports three responsive sizes (`sm`, `md`, `lg`) and dynamic light/dark styling.
+ * 
+ * 💡 KEY CONCEPTS / ARCHITECTURE:
+ * 1. Reusable Presentational Component: Isolates brand styling and typography
+ *    in one place, ensuring consistent visual identity across the Navbar, Footer,
+ *    and Auth screens.
+ * 2. Dark-Mode Adaptive Glow: Uses Tailwind drop shadows and glow filters that
+ *    adaptively shine in dark mode.
+ * 
+ * 🎓 TEACHER QUICK EXPLANATION:
+ * "Sir/Ma'am, this component renders our institutional logo. It supports multiple
+ * size configurations and automatically adjusts colors and glow effects for dark mode."
+ * ============================================================================
+ */
+
 import React from 'react';
 
 interface BorrowBuddyLogoProps {
@@ -6,6 +29,12 @@ interface BorrowBuddyLogoProps {
   className?: string;
 }
 
+/**
+ * ----------------------------------------------------------------------------
+ * FancyLogoIcon:
+ * Renders the isolated logo graphic with custom drop-shadow and hover scaling.
+ * ----------------------------------------------------------------------------
+ */
 export function FancyLogoIcon({
   className = 'w-10 h-10',
   alt = 'BorrowBuddy Emblem',
@@ -22,11 +51,18 @@ export function FancyLogoIcon({
   );
 }
 
+/**
+ * ----------------------------------------------------------------------------
+ * BorrowBuddyLogo:
+ * Main brand component combining emblem and responsive typography.
+ * ----------------------------------------------------------------------------
+ */
 export default function BorrowBuddyLogo({
   size = 'md',
   showSubtitle = true,
   className = '',
 }: BorrowBuddyLogoProps) {
+  // Sizing definitions for responsive display
   const sizeMap = {
     sm: {
       icon: 'w-8 h-8',
@@ -52,9 +88,12 @@ export default function BorrowBuddyLogo({
 
   return (
     <div className={`flex items-center ${currentSize.gap} shrink-0 group ${className}`}>
+      {/* Brand Icon Emblem */}
       <div className="shrink-0 relative transition-transform duration-200 group-hover:scale-105">
         <FancyLogoIcon className={currentSize.icon} />
       </div>
+
+      {/* Brand Typography */}
       <div className="flex flex-col justify-center">
         <div className="flex items-center gap-1 leading-none">
           <span className={`font-extrabold text-slate-900 dark:text-white ${currentSize.text} tracking-tight whitespace-nowrap transition-colors`}>
