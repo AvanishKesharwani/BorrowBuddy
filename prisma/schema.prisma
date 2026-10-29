@@ -1,109 +1,64 @@
-/**
- * ============================================================================
- * PRISMA DATABASE SCHEMA (prisma/schema.prisma)
- * ============================================================================
- * 
- * 🎯 WHAT THIS FILE DOES:
- * Defines the entire relational data model for the BorrowBuddy platform.
- * Prisma ORM reads this schema to automatically generate TypeScript database
- * client types and manage SQLite database migrations/tables (`prisma/dev.db`).
- * 
- * 💡 KEY CONCEPTS / ARCHITECTURE:
- * 1. Relational Modeling: Defines clear Foreign Key relationships (e.g., A
- *    Transaction links one Item, one Owner User, and one Borrower User).
- * 2. Cascading Deletes: `onDelete: Cascade` ensures that if a parent entity is
- *    deleted, related records (like ratings, messages, or notifications) are
- *    safely cleaned up without leaving orphaned records.
- * 3. Campus Trust Architecture: Directly stores `reliabilityScore` and `rating`
- *    on the `User` model, powering the reputation and penalty algorithms.
- * 
- * 🎓 TEACHER QUICK EXPLANATION:
- * "Sir/Ma'am, this is our complete database schema. We modeled 8 core tables:
- * Users, Items, Transactions, Ratings, Messages, Notifications, Disputes, and
- * PlatformConfig. Prisma uses this file to enforce strict relations and type safety."
- * ============================================================================
- */
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: User
- * Represents registered students and campus administrators at IIIT-NR.
- * Tracks institutional ID, academic branch, reputation score, and role.
- * ----------------------------------------------------------------------------
- */
+// User: Represents registered students and campus administrators at IIIT-NR.
 model User {
   id               String         @id @default(cuid())
-  studentId        String         @unique                  // Official campus roll number (e.g., 22100BT01)
-  name             String                                  // Student's full name
-  email            String         @unique                  // Institutional email address
-  passwordHash     String                                  // Salted bcrypt password hash (never plain text)
-  branch           String                                  // Academic branch: "DSAI", "CSE", "ECE"
-  year             String                                  // Year of study: "1st Year" to "Ph.D."
-  avatarUrl        String         @default("")             // Profile picture URL
-  rating           Float          @default(5.0)            // Average peer review rating (1.0 to 5.0)
-  reliabilityScore Float          @default(100.0)          // Campus reliability score (50.0 to 100.0)
-  role             String         @default("STUDENT")      // Access control: "STUDENT" | "ADMIN"
-  isSuspended      Boolean        @default(false)          // Administrative suspension toggle
+  studentId        String         @unique
+  name             String
+  email            String         @unique
+  passwordHash     String
+  branch           String
+  year             String
+  avatarUrl        String         @default("")
+  rating           Float          @default(5.0)
+  reliabilityScore Float          @default(100.0)
+  role             String         @default("STUDENT")
+  isSuspended      Boolean        @default(false)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
 
-  // Relational Fields
-  items                Item[]                              // Items owned by this user
-  lentTransactions     Transaction[]  @relation("OwnerTransactions")     // Items lent to others
-  borrowedTransactions Transaction[]  @relation("BorrowerTransactions")  // Items borrowed from others
-  ratingsGiven         Rating[]       @relation("ReviewerRatings")       // Reviews this user wrote
-  ratingsReceived      Rating[]       @relation("RevieweeRatings")       // Reviews written about this user
-  notifications        Notification[]                                    // System notifications
-  sentMessages         Message[]      @relation("SentMessages")          // Transaction chat messages sent
-  receivedMessages     Message[]      @relation("ReceivedMessages")      // Transaction chat messages received
-  raisedDisputes       Dispute[]      @relation("RaisedDisputes")        // Escalated disputes raised by this user
+  items                Item[]
+  lentTransactions     Transaction[]  @relation("OwnerTransactions")
+  borrowedTransactions Transaction[]  @relation("BorrowerTransactions")
+  ratingsGiven         Rating[]       @relation("ReviewerRatings")
+  ratingsReceived      Rating[]       @relation("RevieweeRatings")
+  notifications        Notification[]
+  sentMessages         Message[]      @relation("SentMessages")
+  receivedMessages     Message[]      @relation("ReceivedMessages")
+  raisedDisputes       Dispute[]      @relation("RaisedDisputes")
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Item
- * Represents equipment, books, and gadgets listed for peer borrowing or rental.
- * ----------------------------------------------------------------------------
- */
+// Item: Represents equipment, books, and gadgets listed for peer borrowing or rental.
 model Item {
   id              String        @id @default(cuid())
   ownerId         String
   owner           User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  name            String                                   // Item title (e.g. "Arduino Mega Starter Kit")
-  category        String                                   // Category (e.g. "Electronics & Tech", "Textbooks")
-  description     String                                   // Item details, usage rules, accessories
-  imageUrl        String                                   // Photo of the item
-  condition       String                                   // "Brand New", "Like New", "Good", "Fair"
-  mode            String        @default("BORROW")         // "BORROW" (Free) | "RENT" (Paid per day)
-  rentalPrice     Float?                                   // Daily fee in ₹ (if mode is RENT)
-  declaredValue   Float         @default(1000.0)           // Estimated market value for penalty calculations
-  securityDeposit Float?                                   // Optional security deposit
-  maxDuration     Int           @default(7)                // Maximum allowed borrowing duration (in days)
-  availability    String        @default("AVAILABLE")      // "AVAILABLE", "BORROWED", "RESERVED", "MAINTENANCE"
-  campusLocation  String        @default("Hostel Raman")   // Default pickup/handover location
+  name            String
+  category        String
+  description     String
+  imageUrl        String
+  condition       String
+  mode            String        @default("BORROW")
+  rentalPrice     Float?
+  declaredValue   Float         @default(1000.0)
+  securityDeposit Float?
+  maxDuration     Int           @default(7)
+  availability    String        @default("AVAILABLE")
+  campusLocation  String        @default("Hostel Raman")
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
-  transactions    Transaction[]                            // Borrowing transaction history for this item
+  transactions    Transaction[]
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Transaction
- * Represents the complete peer-to-peer exchange lifecycle of an item.
- * Tracks lifecycle status: REQUESTED -> ACTIVE -> RETURN_PENDING -> RETURNED.
- * Also monitors late deadlines, daily penalties, and overdue status.
- * ----------------------------------------------------------------------------
- */
+// Transaction: Represents the complete peer-to-peer exchange lifecycle of an item.
 model Transaction {
   id               String        @id @default(cuid())
   itemId           String
@@ -112,33 +67,28 @@ model Transaction {
   owner            User          @relation("OwnerTransactions", fields: [ownerId], references: [id], onDelete: Cascade)
   borrowerId       String
   borrower         User          @relation("BorrowerTransactions", fields: [borrowerId], references: [id], onDelete: Cascade)
-  requestDate      DateTime      @default(now())           // When the borrow request was sent
-  approvalDate     DateTime?                               // When owner approved the request
-  startDate        DateTime?                               // When physical handover occurred
-  deadline         DateTime                                // Return deadline timestamp
-  actualReturnDate DateTime?                               // When physical item was returned
-  mode             String        @default("BORROW")         // "BORROW" | "RENT"
-  status           String        @default("REQUESTED")      // "REQUESTED", "ACTIVE", "RETURN_PENDING", "RETURNED", "OVERDUE", "DISPUTED"
-  overdueDays      Int           @default(0)                // Days past return deadline
-  penalty          Float         @default(0.0)              // Accumulated late penalty in ₹
-  penaltyRate      Float         @default(0.05)             // Daily penalty rate (default: 5% per day)
-  maxPenaltyCap    Float         @default(0.50)             // Maximum penalty ceiling (50% of declared value)
-  ratingChange     Float         @default(0.0)              // Reputation adjustment applied
-  borrowerNotes    String?                                 // Custom message sent during borrow request
+  requestDate      DateTime      @default(now())
+  approvalDate     DateTime?
+  startDate        DateTime?
+  deadline         DateTime
+  actualReturnDate DateTime?
+  mode             String        @default("BORROW")
+  status           String        @default("REQUESTED")
+  overdueDays      Int           @default(0)
+  penalty          Float         @default(0.0)
+  penaltyRate      Float         @default(0.05)
+  maxPenaltyCap    Float         @default(0.50)
+  ratingChange     Float         @default(0.0)
+  borrowerNotes    String?
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
-  ratings          Rating[]                                // Post-transaction ratings
-  messages         Message[]                               // In-transaction coordination chat
-  disputes         Dispute[]                               // Any dispute filed regarding this transaction
+  ratings          Rating[]
+  messages         Message[]
+  disputes         Dispute[]
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Rating
- * Post-return peer feedback given by borrower to lender or lender to borrower.
- * ----------------------------------------------------------------------------
- */
+// Rating: Post-return peer feedback given by borrower to lender or lender to borrower.
 model Rating {
   id            String       @id @default(cuid())
   transactionId String
@@ -147,36 +97,26 @@ model Rating {
   reviewer      User         @relation("ReviewerRatings", fields: [reviewerId], references: [id], onDelete: Cascade)
   revieweeId    String
   reviewee      User         @relation("RevieweeRatings", fields: [revieweeId], references: [id], onDelete: Cascade)
-  rating        Int                                        // 1 to 5 stars
-  comment       String                                     // Written review text
-  criteria      String?                                    // Specific criteria tag (e.g. "Punctual", "Item Care")
+  rating        Int
+  comment       String
+  criteria      String?
   createdAt     DateTime     @default(now())
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Notification
- * Real-time campus alert dispatches (due soon, overdue, request received, etc.)
- * ----------------------------------------------------------------------------
- */
+// Notification: Real-time campus alert dispatches.
 model Notification {
   id        String    @id @default(cuid())
   userId    String
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  title     String                                         // Notification title (e.g. "⚠️ Overdue Notice")
-  message   String                                         // Notification description
-  type      String                                         // "REQUEST", "ACCEPTED", "DUE_SOON", "OVERDUE", etc.
-  link      String?                                        // Navigation URL in the application
-  read      Boolean   @default(false)                      // Read/unread toggle
+  title     String
+  message   String
+  type      String
+  link      String?
+  read      Boolean   @default(false)
   createdAt DateTime  @default(now())
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Message
- * Real-time private chat messages exchanged between lender and borrower.
- * ----------------------------------------------------------------------------
- */
+// Message: Real-time private chat messages exchanged between lender and borrower.
 model Message {
   id            String       @id @default(cuid())
   transactionId String
@@ -185,40 +125,29 @@ model Message {
   sender        User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
   receiverId    String
   receiver      User         @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
-  content       String                                     // Message text
+  content       String
   createdAt     DateTime     @default(now())
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Dispute
- * Escalation filed when an item is damaged, lost, or not returned.
- * Admin inspects and resolves the dispute through the Admin Dashboard.
- * ----------------------------------------------------------------------------
- */
+// Dispute: Escalation filed when an item is damaged, lost, or not returned.
 model Dispute {
   id              String       @id @default(cuid())
   transactionId   String
   transaction     Transaction  @relation(fields: [transactionId], references: [id], onDelete: Cascade)
   raisedById      String
   raisedBy        User         @relation("RaisedDisputes", fields: [raisedById], references: [id], onDelete: Cascade)
-  reason          String                                   // Explanation of the problem
-  status          String       @default("OPEN")            // "OPEN", "UNDER_REVIEW", "RESOLVED"
-  resolutionNotes String?                                  // Admin decision and actions taken
+  reason          String
+  status          String       @default("OPEN")
+  resolutionNotes String?
   createdAt       DateTime     @default(now())
-  resolvedAt      DateTime?                                // Timestamp when admin resolved the issue
+  resolvedAt      DateTime?
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: PlatformConfig
- * Global settings for penalty rates, penalty limits, and time-travel offset.
- * ----------------------------------------------------------------------------
- */
+// PlatformConfig: Global settings for penalty rates and time-travel simulation.
 model PlatformConfig {
-  id                       String   @id @default("global")  // Singleton key
-  penaltyRateDaily         Float    @default(0.05)          // Daily overdue rate (5% per day)
-  penaltyMaxPercent        Float    @default(0.50)          // Max penalty cap (50% of value)
-  simulatedTimeOffsetHours Int      @default(0)             // Virtual clock offset in hours
+  id                       String   @id @default("global")
+  penaltyRateDaily         Float    @default(0.05)
+  penaltyMaxPercent        Float    @default(0.50)
+  simulatedTimeOffsetHours Int      @default(0)
   updatedAt                DateTime @updatedAt
 }
