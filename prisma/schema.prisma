@@ -1,28 +1,26 @@
-/**
- * ============================================================================
- * PRISMA DATABASE SCHEMA (prisma/schema.prisma)
- * ============================================================================
- * 
- * 🎯 WHAT THIS FILE DOES:
- * Defines the entire relational data model for the BorrowBuddy platform.
- * Prisma ORM reads this schema to automatically generate TypeScript database
- * client types and manage SQLite database migrations/tables (`prisma/dev.db`).
- * 
- * 💡 KEY CONCEPTS / ARCHITECTURE:
- * 1. Relational Modeling: Defines clear Foreign Key relationships (e.g., A
- *    Transaction links one Item, one Owner User, and one Borrower User).
- * 2. Cascading Deletes: `onDelete: Cascade` ensures that if a parent entity is
- *    deleted, related records (like ratings, messages, or notifications) are
- *    safely cleaned up without leaving orphaned records.
- * 3. Campus Trust Architecture: Directly stores `reliabilityScore` and `rating`
- *    on the `User` model, powering the reputation and penalty algorithms.
- * 
- * 🎓 TEACHER QUICK EXPLANATION:
- * "Sir/Ma'am, this is our complete database schema. We modeled 8 core tables:
- * Users, Items, Transactions, Ratings, Messages, Notifications, Disputes, and
- * PlatformConfig. Prisma uses this file to enforce strict relations and type safety."
- * ============================================================================
- */
+// ============================================================================
+// PRISMA DATABASE SCHEMA (prisma/schema.prisma)
+// ============================================================================
+// 
+// 🎯 WHAT THIS FILE DOES:
+// Defines the entire relational data model for the BorrowBuddy platform.
+// Prisma ORM reads this schema to automatically generate TypeScript database
+// client types and manage SQLite database migrations/tables (`prisma/dev.db`).
+// 
+// 💡 KEY CONCEPTS / ARCHITECTURE:
+// 1. Relational Modeling: Defines clear Foreign Key relationships (e.g., A
+//    Transaction links one Item, one Owner User, and one Borrower User).
+// 2. Cascading Deletes: `onDelete: Cascade` ensures that if a parent entity is
+//    deleted, related records (like ratings, messages, or notifications) are
+//    safely cleaned up without leaving orphaned records.
+// 3. Campus Trust Architecture: Directly stores `reliabilityScore` and `rating`
+//    on the `User` model, powering the reputation and penalty algorithms.
+// 
+// 🎓 TEACHER QUICK EXPLANATION:
+// "Sir/Ma'am, this is our complete database schema. We modeled 8 core tables:
+// Users, Items, Transactions, Ratings, Messages, Notifications, Disputes, and
+// PlatformConfig. Prisma uses this file to enforce strict relations and type safety."
+// ============================================================================
 
 generator client {
   provider = "prisma-client-js"
@@ -33,13 +31,11 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: User
- * Represents registered students and campus administrators at IIIT-NR.
- * Tracks institutional ID, academic branch, reputation score, and role.
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: User
+// Represents registered students and campus administrators at IIIT-NR.
+// Tracks institutional ID, academic branch, reputation score, and role.
+// ----------------------------------------------------------------------------
 model User {
   id               String         @id @default(cuid())
   studentId        String         @unique                  // Official campus roll number (e.g., 22100BT01)
@@ -68,12 +64,10 @@ model User {
   raisedDisputes       Dispute[]      @relation("RaisedDisputes")        // Escalated disputes raised by this user
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Item
- * Represents equipment, books, and gadgets listed for peer borrowing or rental.
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: Item
+// Represents equipment, books, and gadgets listed for peer borrowing or rental.
+// ----------------------------------------------------------------------------
 model Item {
   id              String        @id @default(cuid())
   ownerId         String
@@ -96,14 +90,12 @@ model Item {
   transactions    Transaction[]                            // Borrowing transaction history for this item
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Transaction
- * Represents the complete peer-to-peer exchange lifecycle of an item.
- * Tracks lifecycle status: REQUESTED -> ACTIVE -> RETURN_PENDING -> RETURNED.
- * Also monitors late deadlines, daily penalties, and overdue status.
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: Transaction
+// Represents the complete peer-to-peer exchange lifecycle of an item.
+// Tracks lifecycle status: REQUESTED -> ACTIVE -> RETURN_PENDING -> RETURNED.
+// Also monitors late deadlines, daily penalties, and overdue status.
+// ----------------------------------------------------------------------------
 model Transaction {
   id               String        @id @default(cuid())
   itemId           String
@@ -133,12 +125,10 @@ model Transaction {
   disputes         Dispute[]                               // Any dispute filed regarding this transaction
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Rating
- * Post-return peer feedback given by borrower to lender or lender to borrower.
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: Rating
+// Post-return peer feedback given by borrower to lender or lender to borrower.
+// ----------------------------------------------------------------------------
 model Rating {
   id            String       @id @default(cuid())
   transactionId String
@@ -153,12 +143,10 @@ model Rating {
   createdAt     DateTime     @default(now())
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Notification
- * Real-time campus alert dispatches (due soon, overdue, request received, etc.)
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: Notification
+// Real-time campus alert dispatches (due soon, overdue, request received, etc.)
+// ----------------------------------------------------------------------------
 model Notification {
   id        String    @id @default(cuid())
   userId    String
@@ -171,12 +159,10 @@ model Notification {
   createdAt DateTime  @default(now())
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Message
- * Real-time private chat messages exchanged between lender and borrower.
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: Message
+// Real-time private chat messages exchanged between lender and borrower.
+// ----------------------------------------------------------------------------
 model Message {
   id            String       @id @default(cuid())
   transactionId String
@@ -189,13 +175,11 @@ model Message {
   createdAt     DateTime     @default(now())
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: Dispute
- * Escalation filed when an item is damaged, lost, or not returned.
- * Admin inspects and resolves the dispute through the Admin Dashboard.
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: Dispute
+// Escalation filed when an item is damaged, lost, or not returned.
+// Admin inspects and resolves the dispute through the Admin Dashboard.
+// ----------------------------------------------------------------------------
 model Dispute {
   id              String       @id @default(cuid())
   transactionId   String
@@ -209,12 +193,10 @@ model Dispute {
   resolvedAt      DateTime?                                // Timestamp when admin resolved the issue
 }
 
-/**
- * ----------------------------------------------------------------------------
- * MODEL: PlatformConfig
- * Global settings for penalty rates, penalty limits, and time-travel offset.
- * ----------------------------------------------------------------------------
- */
+// ----------------------------------------------------------------------------
+// MODEL: PlatformConfig
+// Global settings for penalty rates, penalty limits, and time-travel offset.
+// ----------------------------------------------------------------------------
 model PlatformConfig {
   id                       String   @id @default("global")  // Singleton key
   penaltyRateDaily         Float    @default(0.05)          // Daily overdue rate (5% per day)
