@@ -123,7 +123,9 @@ export default function AdminDashboardPage() {
       if (data.success) {
         setFeedback(`Student "${userName}" removed from campus directory.`);
         setTimeout(() => setFeedback(null), 3000);
-        fetchAdminData();
+        setTimeout(() => {
+          fetchAdminData();
+        }, 300);
       } else {
         alert(data.error || 'Failed to delete user');
       }
@@ -464,8 +466,8 @@ export default function AdminDashboardPage() {
                       </div>
                     </td>
                     <td className="p-3.5">
-                      <p className="font-bold text-slate-800">{it.owner.name}</p>
-                      <p className="text-[10px] text-slate-400 font-mono">{it.owner.studentId}</p>
+                      <p className="font-bold text-slate-800">{it.owner?.name || 'Deleted Student'}</p>
+                      <p className="text-[10px] text-slate-400 font-mono">{it.owner?.studentId || 'N/A'}</p>
                     </td>
                     <td className="p-3.5">{it.category}</td>
                     <td className="p-3.5">

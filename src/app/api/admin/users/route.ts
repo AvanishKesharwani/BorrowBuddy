@@ -188,12 +188,13 @@ export async function DELETE(req: NextRequest) {
       await tx.notification.deleteMany({ where: { userId } });
 
       // 7. Delete owned items
-      if (userItemIds.length > 0) {
-        await tx.item.deleteMany({ where: { id: { in: userItemIds } } });
-      }
+      await tx.item.deleteMany({ where: { ownerId: userId } });
 
       // 8. Delete user profile
       await tx.user.delete({ where: { id: userId } });
+    }, {
+      maxWait: 10000,
+      timeout: 20000,
     });
 
     return NextResponse.json({ success: true, message: 'User deleted successfully' });

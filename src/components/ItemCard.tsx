@@ -147,10 +147,10 @@ export default function ItemCard({ item }: ItemCardProps) {
             <div className="flex items-center gap-1">
               <div className="flex items-center text-amber-500 font-bold">
                 <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 mr-0.5" />
-                <span>{item.owner.rating.toFixed(1)}</span>
+                <span>{item.owner?.rating?.toFixed(1) || '5.0'}</span>
               </div>
               <span className="text-slate-400 dark:text-slate-500 text-[10px]">
-                ({item.owner.reliabilityScore.toFixed(0)}% trust)
+                ({item.owner?.reliabilityScore?.toFixed(0) || '100'}% trust)
               </span>
             </div>
 
@@ -169,17 +169,17 @@ export default function ItemCard({ item }: ItemCardProps) {
           {/* Owner & CTA Button */}
           <div className="flex items-center justify-between pt-1">
             <a
-              href={`/profile/${item.owner.id}`}
+              href={`/profile/${item.owner?.id || '#'}`}
               className="flex items-center gap-2 group/owner hover:opacity-85"
             >
               <img
-                src={item.owner.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'}
-                alt={item.owner.name}
+                src={item.owner?.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'}
+                alt={item.owner?.name || 'Student'}
                 className="w-7 h-7 rounded-full object-cover border border-slate-200 dark:border-slate-700"
               />
               <div>
                 <p className="text-xs font-bold text-slate-800 dark:text-slate-200 leading-tight">
-                  {item.owner.name.split(' ')[0]}
+                  {(item.owner?.name || 'Student').split(' ')[0]}
                 </p>
                 <span className="text-[10px] font-semibold text-teal-700 dark:text-teal-300 bg-mint-100 dark:bg-teal-950/70 px-1.5 py-0.2 rounded-full border border-teal-200/40 dark:border-teal-800/60">
                   Verified
