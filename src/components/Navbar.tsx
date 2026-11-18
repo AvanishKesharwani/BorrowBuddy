@@ -272,10 +272,10 @@ export default function Navbar() {
                     alt={currentUser.name}
                     className="w-8 h-8 rounded-full object-cover"
                   />
-                  <span className="hidden xl:block text-xs font-bold text-slate-800 dark:text-slate-200 pr-1">
+                  <span className="hidden sm:inline-block text-xs font-bold text-slate-800 dark:text-slate-200 pr-1">
                     {currentUser.name.split(' ')[0]}
                   </span>
-                  <ChevronDown className={`w-3.5 h-3.5 text-slate-400 hidden xl:block transition-transform duration-200 ${profileDropdownOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 text-slate-400 hidden sm:inline-block transition-transform duration-200 ${profileDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {profileDropdownOpen && (

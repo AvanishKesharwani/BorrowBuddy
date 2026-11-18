@@ -32,6 +32,8 @@ import { getSimulatedNow } from '@/lib/simulation';
  * Validates the cookie, retrieves user details & unread count, and returns JSON.
  * ----------------------------------------------------------------------------
  */
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     // Step 1: Validate session cookie and retrieve authenticated student

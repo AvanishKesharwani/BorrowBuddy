@@ -35,3 +35,4 @@ Thumbs.db
 
 # SQLite journal files
 *.db-journal
+*.db.bak

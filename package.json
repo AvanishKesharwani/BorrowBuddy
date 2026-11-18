@@ -9,6 +9,7 @@
     "start": "next start",
     "db:push": "prisma db push",
     "seed": "tsx prisma/seed.ts",
+    "seed:node": "node prisma/seed-runner.js",
     "test:demo": "tsx test-simulation.ts"
   },
   "prisma": {
