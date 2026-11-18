@@ -54,38 +54,50 @@ export const dynamic = 'force-dynamic';
 export default async function HomePage() {
   // --------------------------------------------------------------------------
   // PARALLEL DATA FETCHING (Using Promise.all)
-  // Instead of waiting for 4 queries one after another (Query 1 -> Query 2 -> Query 3),
-  // Promise.all fires all 4 queries concurrently to the SQLite database.
-  // This drastically reduces page load latency!
+  // Safely wrapped in try/catch to guarantee the homepage never crashes
   // --------------------------------------------------------------------------
-  const [items, totalStudents, totalItems, completedTransactions] = await Promise.all([
-    // 1. Fetch latest 8 available items with their owner profiles
-    prisma.item.findMany({
-      where: { availability: 'AVAILABLE' },
-      include: {
-        owner: {
-          select: {
-            id: true,
-            studentId: true,
-            name: true,
-            branch: true,
-            year: true,
-            avatarUrl: true,
-            rating: true,
-            reliabilityScore: true,
+  let items: any[] = [];
+  let totalStudents = 0;
+  let totalItems = 0;
+  let completedTransactions = 0;
+
+  try {
+    const results = await Promise.all([
+      // 1. Fetch latest 8 available items with their owner profiles
+      prisma.item.findMany({
+        where: { availability: 'AVAILABLE' },
+        include: {
+          owner: {
+            select: {
+              id: true,
+              studentId: true,
+              name: true,
+              branch: true,
+              year: true,
+              avatarUrl: true,
+              rating: true,
+              reliabilityScore: true,
+            },
           },
         },
-      },
-      take: 8,
-      orderBy: { createdAt: 'desc' },
-    }),
-    // 2. Count registered student accounts
-    prisma.user.count({ where: { role: 'STUDENT' } }),
-    // 3. Count total campus listings
-    prisma.item.count(),
-    // 4. Count successful returned transactions
-    prisma.transaction.count({ where: { status: 'RETURNED' } }),
-  ]);
+        take: 8,
+        orderBy: { createdAt: 'desc' },
+      }),
+      // 2. Count registered student accounts
+      prisma.user.count({ where: { role: 'STUDENT' } }),
+      // 3. Count total campus listings
+      prisma.item.count(),
+      // 4. Count successful returned transactions
+      prisma.transaction.count({ where: { status: 'RETURNED' } }),
+    ]);
+
+    items = results[0] || [];
+    totalStudents = results[1] || 0;
+    totalItems = results[2] || 0;
+    completedTransactions = results[3] || 0;
+  } catch (err) {
+    console.error('Database fetch error on HomePage:', err);
+  }
 
   const featuredCategories = [
     {

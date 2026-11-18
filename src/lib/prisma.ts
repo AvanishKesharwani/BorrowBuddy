@@ -45,8 +45,16 @@ function getPrismaClient(): PrismaClient {
     return globalForPrisma.prisma;
   }
 
-  // Instantiate the Prisma Client (reads DATABASE_URL from environment / .env)
+  // Ensure connection timeouts so serverless queries never hang
+  let dbUrl = process.env.DATABASE_URL;
+  if (dbUrl && !dbUrl.includes('connect_timeout')) {
+    const separator = dbUrl.includes('?') ? '&' : '?';
+    dbUrl = `${dbUrl}${separator}connect_timeout=30&pool_timeout=30`;
+  }
+
+  // Instantiate the Prisma Client
   const client = new PrismaClient({
+    datasources: dbUrl ? { db: { url: dbUrl } } : undefined,
     log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
   });
 
